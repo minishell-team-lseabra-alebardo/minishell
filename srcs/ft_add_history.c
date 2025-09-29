@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 21:46:59 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/09/29 22:11:07 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/09/30 00:30:42 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,18 @@ int	main(void)
 	while(1)
 	{
 		line = readline("Prompt: ");
-		if (line && *line)
-			add_history(line);
-		if (!strcmp(line, "clear"))
-			rl_clear_history();
-		if (!strcmp(line, "exit"))
+		if (line)
 		{
+			if (*line)
+				add_history(line);
+			if (!strcmp(line, "clear"))
+				rl_clear_history();
+			if (!strcmp(line, "exit"))
+			{
+				free(line);
+				exit(0);
+			}
 			free(line);
-			exit(0);
 		}
-		free(line);
 	}
 }
