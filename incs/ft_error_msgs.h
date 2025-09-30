@@ -1,35 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_add_history.c                                   :+:      :+:    :+:   */
+/*   ft_error_msgs.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/29 21:46:59 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/09/30 02:24:54 by alebarbo         ###   ########.fr       */
+/*   Created: 2025/09/30 01:46:14 by alebarbo          #+#    #+#             */
+/*   Updated: 2025/09/30 01:46:32 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/ft_minishell.h"
+#ifndef FT_ERROR_MSGS_H
+# define FT_ERROR_MSGS_H
 
-int	main(void)
-{
-	char	*line;
-
-	while(1)
-	{
-		line = readline("Prompt: ");
-		if (line && *line)
-		{
-			add_history(line);
-			if (!strcmp(line, "exit"))
-			{
-				free(line);
-				exit(0);
-			}
-			ft_built_ins(line);
-		}
-		if (line)
-			free(line);
-	}
-}
+#endif

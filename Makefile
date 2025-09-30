@@ -6,20 +6,20 @@
 #    By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/09/29 21:04:00 by alebarbo         ###   ########.fr        #
+#    Updated: 2025/09/30 02:04:46 by alebarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc -Wall -Wextra -Werror -ggdb -fsanitize=address
-INC = -Ilibft
+INC = -Ilibft -Iincs
 LIB = -Llibft -lft -lreadline
-SRC = ft_minishell.c
+SRC = srcs/ft_add_history.c srcs/ft_built_ins.c
 OBJ = $(SRC:.c=.o)
 
 PHONY: all libft re fclean clean
 
-all: libft $(NAME)
+all: $(NAME)
 
 re: fclean all
 
