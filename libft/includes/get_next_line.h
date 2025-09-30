@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell.h                                     :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/09/30 16:06:11 by lseabra-         ###   ########.fr       */
+/*   Created: 2025/05/14 11:39:44 by lseabra-          #+#    #+#             */
+/*   Updated: 2025/07/10 11:52:34 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MINISHELL_H
-# define FT_MINISHELL_H
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include "ft_error_msgs.h"
-# include "ft_esc_sequences.h"
-# include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-char	*ft_get_ps1(void);
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
+
+# include <unistd.h>
+
+char	*get_next_line(int fd);
+size_t	ft_linelen(char *s);
+char	*ft_bufferlinejoin(char *line, char *buffer);
+int		ft_haschr(char *s, int c);
+void	ft_cleanbuffer(char *buffer);
 
 #endif

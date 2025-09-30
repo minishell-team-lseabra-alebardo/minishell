@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell.h                                     :+:      :+:    :+:   */
+/*   ft_uintlen_base.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/09/30 16:06:11 by lseabra-         ###   ########.fr       */
+/*   Created: 2025/05/15 12:45:45 by lseabra-          #+#    #+#             */
+/*   Updated: 2025/07/10 10:31:56 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MINISHELL_H
-# define FT_MINISHELL_H
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include "ft_error_msgs.h"
-# include "ft_esc_sequences.h"
-# include "libft.h"
+#include "../includes/ft_printf.h"
+#include "../includes/libft.h"
+#include <stddef.h>
 
-char	*ft_get_ps1(void);
+size_t	ft_uintlen_base(unsigned int nbr, char *base)
+{
+	size_t	len;
+	size_t	base_len;
 
-#endif
+	len = 1;
+	base_len = ft_strlen(base);
+	while (nbr >= base_len)
+	{
+		len++;
+		nbr /= base_len;
+	}
+	return (len);
+}

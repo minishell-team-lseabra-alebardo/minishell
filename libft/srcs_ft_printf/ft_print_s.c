@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell.h                                     :+:      :+:    :+:   */
+/*   ft_print_s.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/09/30 16:06:11 by lseabra-         ###   ########.fr       */
+/*   Created: 2025/05/12 12:58:50 by lseabra-          #+#    #+#             */
+/*   Updated: 2025/07/10 10:31:56 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MINISHELL_H
-# define FT_MINISHELL_H
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include "ft_error_msgs.h"
-# include "ft_esc_sequences.h"
-# include "libft.h"
+#include "../includes/ft_printf.h"
+#include <stdarg.h>
 
-char	*ft_get_ps1(void);
+int	ft_print_s(va_list args)
+{
+	char	*arg;
 
-#endif
+	arg = va_arg(args, char *);
+	if (!arg)
+	{
+		return (ft_putstr_count("(null)"));
+	}
+	return (ft_putstr_count(arg));
+}

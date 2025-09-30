@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell.h                                     :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/09/30 16:06:11 by lseabra-         ###   ########.fr       */
+/*   Created: 2025/05/21 18:25:23 by lseabra-          #+#    #+#             */
+/*   Updated: 2025/08/11 14:25:31 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MINISHELL_H
-# define FT_MINISHELL_H
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include "ft_error_msgs.h"
-# include "ft_esc_sequences.h"
-# include "libft.h"
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
-char	*ft_get_ps1(void);
+# include <unistd.h>
+
+char	*get_next_line_bonus(int fd);
+char	*ft_readline(int fd, char *line, char *buffer);
+int		ft_findlinebreak(char	*str);
+size_t	ft_strlen_chr(char *str, char c);
+char	*ft_bufferlinejoin_bonus(char *line, char *buffer);
+void	ft_clean_buffer_bonus(char *buffer);
 
 #endif
