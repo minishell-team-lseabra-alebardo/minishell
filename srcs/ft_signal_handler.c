@@ -1,0 +1,57 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_signal_handler.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/30 14:59:53 by alebarbo          #+#    #+#             */
+/*   Updated: 2025/09/30 15:58:21 by alebarbo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../incs/ft_minishell.h"
+
+static void	ft_signal_handler(int sig)
+{
+	if (sig == SIGINT)
+		return ;
+	//CALL A NEW READLINE
+}
+
+static int	ft_sigint_listener(void)
+{
+	sigset_t			sig_set;
+	struct sigaction	sig_action;
+
+	sigemptyset(&sig_set);
+	sigaddset(&sig_set, SIGINT);
+	sig_action.sa_handler = ft_signal_handler;
+	sig_action.sa_mask = sig_set;
+	sig_action.sa_flags = 0;
+	if (sigaction(SIGINT, &sig_action, 0))
+		return (-1);
+	return (0);
+}
+
+static int	ft_sigquit_listener(void)
+{
+	sigset_t			sig_set;
+	struct sigaction	sig_action;
+
+	sigemptyset(&sig_set);
+	sigaddset(&sig_set, SIGQUIT);
+	sig_action.sa_handler = SIG_IGN;
+	sig_action.sa_mask = sig_set;
+	sig_action.sa_flags = 0;
+	if (sigaction(SIGQUIT, &sig_action, 0))
+		return (-1);
+	return (0);
+}
+
+int	ft_listener(void)
+{
+	if (ft_sigquit_listener() < 0 || ft_sigint_listener() < 0)
+		return (-1);
+	return (0);
+}

@@ -1,24 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_built_ins.c                                     :+:      :+:    :+:   */
+/*   ft_esc_sequences.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 01:43:42 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/09/30 15:58:12 by alebarbo         ###   ########.fr       */
+/*   Created: 2025/09/30 01:46:44 by alebarbo          #+#    #+#             */
+/*   Updated: 2025/09/30 16:01:17 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/ft_minishell.h"
-#include <string.h>
+#ifndef FT_MACROS_H
+# define FT_MACROS_H
 
-int	ft_built_ins(char *line)
-{
-	if (!strncmp(line, "echo -n", 7)
-		&& (!strncmp(line + 7, " ", 1) || !strncmp(line + 7, "\0", 1)))
-		return (printf("%s", line + 8));
-	else if (!strncmp(line, "echo ", 5))
-		return (printf("%s\n", line + 5));
-	return (-1);
-}
+#endif

@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_esc_sequences.h                                 :+:      :+:    :+:   */
+/*   ft_types.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 01:46:44 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/09/30 01:47:03 by alebarbo         ###   ########.fr       */
+/*   Created: 2025/09/30 15:56:36 by alebarbo          #+#    #+#             */
+/*   Updated: 2025/09/30 15:57:06 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_ESC_SEQUENCES_H
-# define FT_ESC_SEQUENCES_H
+#ifndef FT_TYPES_H
+# define FT_TYPES_H
+
+typedef struct sigaction	t_sigaction;
 
 #endif
