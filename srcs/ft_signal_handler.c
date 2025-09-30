@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:59:53 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/09/30 15:58:21 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/09/30 16:03:44 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static void	ft_signal_handler(int sig)
 
 static int	ft_sigint_listener(void)
 {
-	sigset_t			sig_set;
-	struct sigaction	sig_action;
+	sigset_t	sig_set;
+	t_sigaction	sig_action;
 
 	sigemptyset(&sig_set);
 	sigaddset(&sig_set, SIGINT);
@@ -36,8 +36,8 @@ static int	ft_sigint_listener(void)
 
 static int	ft_sigquit_listener(void)
 {
-	sigset_t			sig_set;
-	struct sigaction	sig_action;
+	sigset_t	sig_set;
+	t_sigaction	sig_action;
 
 	sigemptyset(&sig_set);
 	sigaddset(&sig_set, SIGQUIT);
