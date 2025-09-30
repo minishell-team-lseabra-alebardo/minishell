@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 21:46:59 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/09/30 15:57:47 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/09/30 16:09:04 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ int	main(void)
 {
 	char	*line;
 
+	ft_listener();
 	while (1)
 	{
-		ft_listener();
 		line = readline("Prompt: ");
 		if (!line)
 			exit(0);
