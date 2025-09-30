@@ -6,13 +6,14 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:03:27 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/09/29 18:39:49 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/09/30 14:21:41 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <unistd.h>
 
 static size_t	ft_strlen(const char *s)
 {
@@ -147,7 +148,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (ptr);
 }
 
-static char	*get_hostname(void)
+static char	*ft_get_hostname(void)
 {
 	char	*ref;
 	char	*hostname;
@@ -177,11 +178,12 @@ char	*get_ps1(void)
 {
 	char	*username;
 	char	*hostname;
-	char	*pwd;
+	char	*cwd;
 	char	*res;
 
 	username = getenv("USER");
 	hostname = get_hostname();
+	cwd = getcwd(0, 0);
 	res = "\0";
 	if (username)
 		res = ft_strjoin(res, username);
@@ -191,6 +193,9 @@ char	*get_ps1(void)
 		res = ft_strjoin(res, hostname);
 		res = ft_strjoin(res, " ");
 	}
+	res = ft_strjoin(res, cwd);
+	free(cwd);
+	res = ft_strjoin(res, "$ ");
 	return (res);
 }
 
