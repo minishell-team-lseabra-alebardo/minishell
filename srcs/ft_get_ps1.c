@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:03:27 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/09/30 16:30:48 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/01 12:11:01 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,20 @@ static char	*ft_get_hostname(void)
 	return (res);
 }
 
-// char	*ft_joinfree(char *s1, char *s2)
-// {
-// 	char	*res;
-// 	char	*temp;
+static char	*ft_join_free(char *malloc_str, char *str)
+{
+	char	*res;
 
-// 	temp = res;
-// 	res = ft_strjoin(res, "@");
-// 	free(temp);
-// }
+	res = ft_strjoin(malloc_str, str);
+	free(malloc_str);
+	return (res);
+}
+
 char	*ft_get_ps1(void)
 {
 	char	*username;
 	char	*hostname;
 	char	*cwd;
-	char	*temp;
 	char	*res;
 
 	username = getenv("USER");
@@ -63,22 +62,13 @@ char	*ft_get_ps1(void)
 		res = ft_strjoin(res, username);
 	if (hostname)
 	{
-		temp = res;
-		res = ft_strjoin(res, "@");
-		free(temp);
-		temp = res;
-		res = ft_strjoin(res, hostname);
-		free(temp);
-		temp = res;
-		res = ft_strjoin(res, " ");
-		free(temp);
+		res = ft_join_free(res, "@");
+		res = ft_join_free(res, hostname);
+		free(hostname);
+		res = ft_join_free(res, " ");
 	}
-	temp = res;
-	res = ft_strjoin(res, cwd);
-	free(temp);
+	res = ft_join_free(res, cwd);
 	free(cwd);
-	temp = res;
-	res = ft_strjoin(res, "$ ");
-	free(temp);
+	res = ft_join_free(res, "$ ");
 	return (res);
 }
