@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/01 03:09:53 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/10/01 23:00:55 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <signal.h>
+# include <libft.h>
 # include <ft_errors.h>
 # include <ft_macros.h>
 # include <ft_types.h>
