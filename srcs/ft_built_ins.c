@@ -6,12 +6,11 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:43:42 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/09/30 15:58:12 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/10/01 03:12:24 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/ft_minishell.h"
-#include <string.h>
+#include <ft_minishell.h>
 
 int	ft_built_ins(char *line)
 {

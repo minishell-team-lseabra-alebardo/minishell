@@ -6,11 +6,11 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:59:53 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/09/30 16:20:08 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/10/01 03:13:01 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/ft_minishell.h"
+#include <ft_minishell.h>
 
 static void	ft_signal_handler(int sig)
 {
@@ -21,7 +21,6 @@ static void	ft_signal_handler(int sig)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	//CALL A NEW READLINE
 }
 
 static int	ft_sigint_listener(void)

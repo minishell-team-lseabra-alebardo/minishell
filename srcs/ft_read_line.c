@@ -1,21 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_add_history.c                                   :+:      :+:    :+:   */
+/*   ft_read_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/29 21:46:59 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/01 03:09:56 by alebarbo         ###   ########.fr       */
+/*   Created: 2025/10/01 03:08:09 by alebarbo          #+#    #+#             */
+/*   Updated: 2025/10/01 03:10:25 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
 
-int	main(void)
+void	ft_read_line(void)
 {
-	ft_listener();
-	ft_read_line();
-	printf("exit\n");
-	exit(0);
+	char	*line;
+
+	while (1)
+	{
+		line = readline("Prompt: ");
+		if (!line)
+			break ;
+		if (line && *line)
+		{
+			add_history(line);
+			if (!strcmp(line, "exit"))
+			{
+				free(line);
+				break ;
+			}
+			ft_built_ins(line);
+		}
+		free(line);
+	}
 }
