@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 15:53:23 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/09/30 16:06:40 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/01 12:12:52 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,5 @@ int	main(int argc, char **argv, char **envp)
 	line = readline(ps1);
 	printf("%s\n", line);
 	free(line);
+	free(ps1);
 }
