@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+         #
+#    By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/10/01 11:24:44 by lseabra-         ###   ########.fr        #
+#    Updated: 2025/10/01 23:12:52 by alebarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,8 +34,10 @@ BUILD_PATH = .build
 
 # Source files
 SRC = $(addprefix $(SRC_PATH)/, \
-		ft_get_ps1.c \
 		ft_minishell.c \
+		ft_get_ps1.c \
+		ft_read_line.c \
+		ft_signal_handles.c \
 )
 
 # Object files
