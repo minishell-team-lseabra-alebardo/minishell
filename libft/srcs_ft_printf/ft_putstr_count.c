@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell.h                                     :+:      :+:    :+:   */
+/*   ft_putstr_count.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/09/30 16:06:11 by lseabra-         ###   ########.fr       */
+/*   Created: 2025/05/15 12:44:42 by lseabra-          #+#    #+#             */
+/*   Updated: 2025/07/10 10:31:56 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MINISHELL_H
-# define FT_MINISHELL_H
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include "ft_error_msgs.h"
-# include "ft_esc_sequences.h"
-# include "libft.h"
+#include "../includes/ft_printf.h"
 
-char	*ft_get_ps1(void);
+int	ft_putstr_count(const char *s)
+{
+	int	counter;
 
-#endif
+	counter = 0;
+	while (*s)
+	{
+		counter += ft_putchar_count(*s);
+		s++;
+	}
+	return (counter);
+}
