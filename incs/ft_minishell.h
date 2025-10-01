@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/01 23:05:26 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/10/01 23:43:23 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,5 @@
 int		ft_listener(void);
 void	ft_read_line(void);
 char	*ft_get_ps1(void);
-int		ft_built_ins(char *line);
 
 #endif
