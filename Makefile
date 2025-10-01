@@ -6,7 +6,7 @@
 #    By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/10/01 23:12:52 by alebarbo         ###   ########.fr        #
+#    Updated: 2025/10/01 23:23:00 by alebarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_minishell.c \
 		ft_get_ps1.c \
 		ft_read_line.c \
-		ft_signal_handles.c \
+		ft_signal_handler.c \
 )
 
 # Object files
