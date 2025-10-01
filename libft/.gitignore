@@ -1,0 +1,7 @@
+build/
+.vscode
+retry2.code-workspace
+a.out
+*.o
+libft.a
+.bonus
