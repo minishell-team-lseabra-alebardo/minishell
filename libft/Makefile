@@ -6,13 +6,14 @@
 #    By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/14 11:48:51 by lseabra-          #+#    #+#              #
-#    Updated: 2025/09/30 16:05:54 by lseabra-         ###   ########.fr        #
+#    Updated: 2025/10/01 11:23:46 by lseabra-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #==============================================================================#
 #                                 COLOR CODES                                  #
 #==============================================================================#
+RED   = \033[0;31m
 GREEN   = \033[0;32m
 YELLOW  = \033[0;33m
 BLUE    = \033[0;34m
@@ -89,7 +90,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(FT_PRINTF_OBJS) $(GNL_OBJS)
 	@$(AR) $(NAME) $(OBJS) $(FT_PRINTF_OBJS) $(GNL_OBJS)
-	@echo "$(GREEN)[$(PROJECT_NAME)] Library $(NAME) created.$(RESET)"
+	@echo "$(BLUE)[$(PROJECT_NAME)] Library $(NAME) created.$(RESET)"
 
 $(BUILD_PATH)/%.o: $(SRCS_PATH)/%.c | $(BUILD_PATH)
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -109,12 +110,12 @@ bonus: $(BONUS_MARK)
 $(BONUS_MARK): $(OBJS) $(FT_PRINTF_OBJS) $(GNL_OBJS) $(BONUS_OBJS) $(GNL_BONUS_OBJS) | $(BUILD_PATH)
 	@$(AR) $(NAME) $(OBJS) $(FT_PRINTF_OBJS) $(GNL_OBJS) $(BONUS_OBJS) $(GNL_BONUS_OBJS)
 	@$(TCH) $(BONUS_MARK)
-	@echo "$(GREEN)[$(PROJECT_NAME)] Bonus library $(NAME).]$(RESET)"
+	@echo "$(BLUE)[$(PROJECT_NAME)] Bonus library $(NAME).$(RESET)"
 
 clean:
 	@$(RM_DIR) $(BUILD_PATH)
 	@$(RM) $(BONUS_MARK)
-	@echo "$(RED)[$(PROJECT_NAME)] Clean: Cleaned build files.$(RESET)"
+	@echo "$(RED)[$(PROJECT_NAME)] Clean: Cleaned object files.$(RESET)"
 
 fclean: clean
 	@$(RM) $(NAME)
