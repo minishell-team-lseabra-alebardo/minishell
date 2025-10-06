@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:08:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/03 20:59:03 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/10/06 15:58:39 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 static void	ft_free_prompt_line(char *prompt, char *line)
 {
-	free(prompt);
-	free(line);
+	if (prompt)
+		free(prompt);
+	if (line)
+		free(line);
 }
 
 static void	ft_exiting(char *prompt, char *line)
