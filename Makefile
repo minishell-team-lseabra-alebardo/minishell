@@ -6,7 +6,7 @@
 #    By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/10/01 23:23:00 by alebarbo         ###   ########.fr        #
+#    Updated: 2025/10/06 15:47:56 by alebarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,9 +56,9 @@ INC     = -I$(INC_PATH) -I$(LIBFT_INC_PATH)
 LDFLAGS = -L$(LIBFT_PATH) -l$(LIBFT_LINK) -lreadline
 
 # Utility Commands
-RM      = rm
+RM      = rm -f
 MKDIR_P = mkdir -p
-RMDIR   = $(RM) -rf
+RMDIR   = $(RM) -r
 MAKE    = make --no-print-directory
 
 .PHONY: all clean fclean re
