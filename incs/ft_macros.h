@@ -6,12 +6,17 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:46:44 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/15 16:20:16 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/10/15 17:17:31 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_MACROS_H
 # define FT_MACROS_H
+
+// POSIX whitespaces
+# define WS_SPACE		' '
+# define WS_HTAB		'\t'
+# define WS_RETURN		'\r'
 
 // Shell command operators
 # define CMD_AND        "&&"
