@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:08:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/06 15:58:39 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/10/15 15:50:40 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	ft_read_line(void)
 			ft_exiting(prompt, line);
 		if (line && *line)
 			add_history(line);
+		ft_parser(line);
 		ft_free_prompt_line(prompt, line);
 	}
 }

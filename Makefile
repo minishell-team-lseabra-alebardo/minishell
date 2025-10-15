@@ -6,7 +6,7 @@
 #    By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/10/06 15:47:56 by alebarbo         ###   ########.fr        #
+#    Updated: 2025/10/15 15:51:52 by alebarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,8 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_get_ps1.c \
 		ft_read_line.c \
 		ft_signal_handler.c \
+		ft_check_unclosed.c \
+		ft_parser.c \
 )
 
 # Object files
