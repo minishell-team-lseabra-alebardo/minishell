@@ -5,46 +5,64 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/07 01:52:15 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/07 02:53:59 by alebarbo         ###   ########.fr       */
+/*   Created: 2025/10/14 14:13:51 by alebarbo          #+#    #+#             */
+/*   Updated: 2025/10/15 15:08:01 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_minishell.c>
+#include <ft_minishell.h>
 
-//CHECK WHITESPACES BEFORE FIRST ARGUMENT
-//CHECK FOR OPENING QUOTES (SINGLE AND DOUBLE)
-//CHECK FOR THE CLOSING QUOTES
-//IF INSIDE QUOTES, CHECK FOR WHITESPACES AGAIN
-//CHECK FOR OPERATORS
-//CHECK FOR VARIABLES
-//CHECK FOR ARGUMENTS
-//IF ARGUMENT IS INSIDE QUOTES, CHECK FOR VARIABLES
-//FIND A WAY TO ASSOCIATE INFILE/OUTFILE TO ITS RESPECTIVE OPERATORS
-//IMPLEMENT HERE_DOC
-
-static char	*ft_check_whitespaces(char *line)
+char	*ft_check_parentheses(char *line)
 {
-	while (*line == " " || (*line >= "\b" && *line <= "\r"))
+	while (*line)
+	{
+		if (*line == ')')
+			return (line);
+		else if (*line == '\'')
+			line = ft_check_single(line);
+		else if (*line == '\"')
+			line = ft_check_double(line);
 		line++;
-	return (line);
+	}
+	//RETURN ERROR HERE
+}
+
+char	*ft_check_single(char *line)
+{
+	while (*line)
+	{
+		if (*line == '\'')
+			return (line);
+		line++;
+	}
+	//RETURN ERROR HERE
+}
+
+char	*ft_check_double(char *line)
+{
+	while (*line)
+	{
+		if (*line == '\"')
+			return (line);
+		line++;
+	}
+	//RETURN ERROR HERE
 }
 
 void	ft_parser(char *line)
 {
-	char	*temp;
-
-	line = ft_check_whitespaces(line);
-	if (*line == SINGLE_QUOTE)
+	//CHECK FOR UNCLOSED QUOTES/PARENTHESES
+	/*
+	while (*line)
 	{
-		temp = line;
-		temp++;
-		while (*temp)
-		{
-			if (*temp == SINGLE_QUOTE)
-				return (temp);
-			temp++;
-		}
-		return (0);
+		if (*line == '(')
+			ft_check_parentheses(line);
+		else if (*line == '\'')
+			ft_check_single(line);
+		else if (*line == '\"')
+			ft_check_double(line);
+		line++;
 	}
+	*/
+	
 }
