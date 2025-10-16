@@ -3,7 +3,7 @@
 /**
  * @brief Calculates the length of a quoted string segment.
  *
- * The ft_quote_len function determines the length of a quoted segment
+ * The ft_quote_length function determines the length of a quoted segment
  * starting from the given position in the string. It counts from the
  * opening quote character until it finds the matching closing quote, or
  * reaches the end of the string. The returned length includes both the
@@ -15,7 +15,7 @@
  *         the end of string if no closing quote is found, or 0 if the
  *         string does not start with a quote character.
  */
-static size_t	ft_quote_len(const char *s)
+static size_t	ft_quote_length(const char *s)
 {
 	size_t	len;
 	char	quote;
@@ -27,41 +27,6 @@ static size_t	ft_quote_len(const char *s)
 	while (s[len] && quote != s[len])
 		len++;
 	return (len + 1);
-}
-
-/**
- * @brief Calculates the length of a string enclosed by parentheses.
- *
- * The ft_parenthesis_len function determines the length of a segment enclosed
- * by parentheses starting from the given position in the string. It counts from
- * the opening parenthesis character until it finds the matching closing 
- * parenthesis, or reaches the end of the string. The returned length includes
- * both the opening and closing parenthesis characters. If the string does not 
- * start with an opening parenthesis character '(', the function returns 0.
- *
- * @param s Pointer to the string to be evaluated.
- * @return The total length including both parenthesis characters, length until
- *         the end of string if no closing parenthesis is found, or 0 if the
- *         string does not start with an opening parenthesis character.
- */
-static size_t	ft_parenthesis_len(const char *s)
-{
-	size_t	len;
-	size_t	counter;
-
-	if (s[0] != '(')
-		return (0);
-	len = 1;
-	counter = 1;
-	while (s[len] && counter > 0)
-	{
-		if (s[len] == '(')
-			counter++;
-		else if (s[len] == ')')
-			counter--;
-		len++;
-	}
-	return (len);
 }
 
 /**
@@ -91,9 +56,7 @@ static size_t	count_words(const char *s, char *seps)
 	while (s[i])
 	{
 		if (s[i] && ft_strchr("\'\"", s[i]))
-			i += ft_quote_len(&s[i]);
-		else if (s[i] == '(')
-			i += ft_parenthesis_len(&s[i]);
+			i += ft_quote_length(&s[i]);
 		else
 		{
 			if (i > 0 && ft_strchr(seps, s[i]))
@@ -109,7 +72,7 @@ static size_t	count_words(const char *s, char *seps)
 /**
  * @brief Frees a partially allocated array of strings.
  *
- * The free_strarr function deallocates memory for an array of strings up to a
+ * The free_arr function deallocates memory for an array of strings up to a
  * specified position. It iterates through the array, freeing each individual
  * string pointer, and then frees the array itself. This is typically used for
  * cleanup when an allocation fails during array construction.
@@ -118,7 +81,7 @@ static size_t	count_words(const char *s, char *seps)
  * @param position The number of elements to free (0-indexed).
  * @return Always returns NULL (0) for convenient error handling.
  */
-static char	**free_strarr(char **arr, size_t position)
+static char	**free_arr(char **arr, size_t position)
 {
 	size_t	i;
 
@@ -157,9 +120,7 @@ static char	*process_word(const char **s, char *seps)
 	while ((*s)[i] && (!ft_strchr(seps, (*s)[i]) || ft_strchr("\'\"", (*s)[i])))
 	{
 		if ((*s)[i] && ft_strchr("\'\"", (*s)[i]))
-			i += ft_quote_len(&(*s)[i]);
-		else if ((*s)[i] == '(')
-			i += ft_parenthesis_len(&(*s)[i]);
+			i += ft_quote_length(&(*s)[i]);
 		else
 			i++;
 	}
@@ -207,7 +168,7 @@ char	**ft_split_prompt(const char *s, char *seps)
 			s++;
 		arr[i] = process_word(&s, seps);
 		if (!arr[i])
-			return (free_strarr(arr, i));
+			return (free_arr(arr, i));
 	}
 	if (arr[0] != NULL)
 		arr[word_count] = NULL;
@@ -223,8 +184,8 @@ char	**ft_split_prompt(const char *s, char *seps)
 // 	char	**arr;
 // 	int		i;
 
-// 	s = "e'cho\" 	lalala\"\' arg1	arg2 (lu (ca) || cm1)";
-// 	seps = " \t\r";
+// 	s = "e'cho\" 	lalala\"\' arg1	arg2";
+// 	seps = " 	";
 // 	arr = ft_split_prompt(s, seps);
 // 	i = 0;
 // 	while (arr[i])
