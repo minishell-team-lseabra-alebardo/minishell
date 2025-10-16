@@ -6,29 +6,34 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:13:51 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/16 22:41:08 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/10/16 22:54:22 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
 
-void	ft_parser(char *line)
+static void	ft_temp_split_test(char *line)
 {
-	char	**broken_line;
+	char	**split_line;
 	int		i;
 
-	if (ft_check_unclosed(line) < 0)
-	{
-		write(2, "Syntax error\n", 13);
-		return ;
-	}
-	broken_line = ft_split_prompt(line, WS_POSIX);
+	split_line = ft_split_prompt(line, WS_POSIX);
 	i = 0;
-	while (broken_line[i])
+	while (split_line[i])
 	{
-		printf("%s\n", broken_line[i]);
-		free(broken_line[i]);
+		printf("%s\n", split_line[i]);
+		free(split_line[i]);
 		i++;
 	}
-	free(broken_line);
+	free(split_line);
+}
+
+void	ft_parser(char *line)
+{
+	if (ft_check_unclosed(line) < 0)
+	{
+		write(2, ERR_SYNTAX, 13);
+		return ;
+	}
+	ft_temp_split_test(line);
 }
