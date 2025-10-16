@@ -72,7 +72,7 @@ static size_t	count_words(const char *s, char *seps)
 /**
  * @brief Frees a partially allocated array of strings.
  *
- * The free_arr function deallocates memory for an array of strings up to a
+ * The free_strarr function deallocates memory for an array of strings up to a
  * specified position. It iterates through the array, freeing each individual
  * string pointer, and then frees the array itself. This is typically used for
  * cleanup when an allocation fails during array construction.
@@ -81,7 +81,7 @@ static size_t	count_words(const char *s, char *seps)
  * @param position The number of elements to free (0-indexed).
  * @return Always returns NULL (0) for convenient error handling.
  */
-static char	**free_arr(char **arr, size_t position)
+static char	**free_strarr(char **arr, size_t position)
 {
 	size_t	i;
 
@@ -168,7 +168,7 @@ char	**ft_split_prompt(const char *s, char *seps)
 			s++;
 		arr[i] = process_word(&s, seps);
 		if (!arr[i])
-			return (free_arr(arr, i));
+			return (free_strarr(arr, i));
 	}
 	if (arr[0] != NULL)
 		arr[word_count] = NULL;
