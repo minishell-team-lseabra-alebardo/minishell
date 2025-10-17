@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:46:44 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/17 17:39:12 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/17 21:37:13 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define CMD_IN         "<"
 # define CMD_OUT        ">"
 # define CMD_OUT_APPEND ">>"
-# define CMD_ALL_CHARS "&|<>"
+# define CMD_ALL "&|<>"
 
 // Error messages
 # define ERR_SYNTAX "Syntax error\n"

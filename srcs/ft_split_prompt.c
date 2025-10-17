@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 15:10:56 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/10/17 19:21:59 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/17 23:25:32 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static int	ft_isop(const char *s)
 {
+	if (!ft_strchr(CMD_ALL, *s))
+		return (0);
 	if (ft_strncmp(s, CMD_AND, ft_strlen(CMD_AND)) == 0)
 		return ((int)ft_strlen(CMD_AND));
 	else if (ft_strncmp(s, CMD_OR, ft_strlen(CMD_OR)) == 0)
@@ -118,7 +120,7 @@ static size_t	ft_count_words(const char *s, char *seps)
 	i = 0;
 	if (!s)
 		return (0);
-	while (s[i] && !ft_strchr("\'\"", s[i]) && ft_strchr(seps, s[i]))
+	while (s[i] && ft_strchr(seps, s[i]))
 		i++;
 	while (s[i])
 	{
@@ -126,21 +128,18 @@ static size_t	ft_count_words(const char *s, char *seps)
 			i += ft_quote_len(s + i);
 		else if (s[i] == '(')
 			i += ft_parenthesis_len(s + i);
-		else if (ft_strchr((const char *)CMD_ALL_CHARS, s[i]) && ft_isop(s + i) > 0)
+		else if (ft_isop(s + i) > 0)
 		{
+			counter += (i > 0 && !ft_strchr(seps, s[i - 1]));
 			i += ft_isop(s + i);
-			counter += 1 + !ft_strchr(seps, s[i]);
+			counter += (s[i] && !ft_strchr(seps, s[i]));
 		}
-		else
-		{
-			if (i > 0 && ft_strchr(seps, s[i]))
+		else if (i > 0 && ft_strchr(seps, s[i]) && !ft_strchr(seps, s[i++ - 1]))
 				counter++;
+		else
 			i++;
-		}
 	}
-	if (i > 0 && (!ft_strchr(seps, s[i - 1]) || ft_strchr("\'\"", s[i])))
-		counter++;
-	return (counter);
+	return (counter + (i > 0 && (!ft_strchr(seps, s[i - 1]))));
 }
 
 /**
@@ -187,31 +186,28 @@ static char	**ft_free_strarr(char **arr, size_t position)
 static char	*ft_process_word(const char **s, char *seps)
 {
 	int		i;
-	int		len;
 	char	*word;
 
 	i = 0;
-	while ((*s)[i] && (!ft_strchr(seps, (*s)[i]) || ft_strchr("\'\"", (*s)[i])))
+	if (ft_isop(*s + i) > 0)
+		i += ft_isop(*s + i);
+	else
 	{
-		if (ft_strchr(CMD_ALL_CHARS, (*s)[i]) && ft_isop(*s + i) > 0)
+		while ((*s)[i] && (!ft_strchr(seps, (*s)[i])) && ft_isop(*s + i) == 0)
 		{
-			i += ft_isop(*s + i);
-			break ;
-		}
-		else if ((*s)[i] && ft_strchr("\'\"", (*s)[i]))
-			i += ft_quote_len((*s) + i);
-		else if ((*s)[i] == '(')
-			i += ft_parenthesis_len((*s) + i);
-		else
-			i++;
+			if ((*s)[i] && ft_strchr("\'\"", (*s)[i]))
+				i += ft_quote_len((*s) + i);
+			else if ((*s)[i] == '(')
+				i += ft_parenthesis_len((*s) + i);
+			else
+				i++;
+		}	
 	}
 	word = ft_calloc((i + 1), sizeof(char));
 	if (!word)
 		return (NULL);
-	len = i;
-	while (--i >= 0)
-		word[i] = (*s)[i];
-	*s += len;
+	ft_memmove(word, *s, i);
+	*s += i;
 	return (word);
 }
 
