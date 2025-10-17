@@ -6,11 +6,18 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 15:10:56 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/10/17 15:11:06 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/17 17:29:09 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
+
+// int	ft_is_operator(char *s)
+// {
+// 	if (ft_strncmp())
+
+
+// }
 
 /**
  * @brief Calculates the length of a quoted string segment.
@@ -170,8 +177,8 @@ static char	*process_word(const char **s, char *seps)
 	{
 		if ((*s)[i] && ft_strchr("\'\"", (*s)[i]))
 			i += ft_quote_len(&(*s)[i]);
-		else if (s[i] == '(')
-			i += ft_parenthesis_len(&s[i]);
+		else if ((*s)[i] == '(')
+			i += ft_parenthesis_len(&(*s)[i]);
 		else
 			i++;
 	}
