@@ -6,18 +6,31 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 15:10:56 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/10/17 17:29:09 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/17 19:21:59 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
 
-// int	ft_is_operator(char *s)
-// {
-// 	if (ft_strncmp())
-
-
-// }
+static int	ft_isop(const char *s)
+{
+	if (ft_strncmp(s, CMD_AND, ft_strlen(CMD_AND)) == 0)
+		return ((int)ft_strlen(CMD_AND));
+	else if (ft_strncmp(s, CMD_OR, ft_strlen(CMD_OR)) == 0)
+		return ((int)ft_strlen(CMD_OR));
+	else if (ft_strncmp(s, CMD_PIPE, ft_strlen(CMD_PIPE)) == 0)
+		return ((int)ft_strlen(CMD_PIPE));
+	else if (ft_strncmp(s, CMD_HEREDOC, ft_strlen(CMD_HEREDOC)) == 0)
+		return ((int)ft_strlen(CMD_HEREDOC));
+	else if (ft_strncmp(s, CMD_IN, ft_strlen(CMD_IN)) == 0)
+		return ((int)ft_strlen(CMD_IN));
+	else if (ft_strncmp(s, CMD_OUT_APPEND, ft_strlen(CMD_OUT_APPEND)) == 0)
+		return ((int)ft_strlen(CMD_OUT_APPEND));
+	else if (ft_strncmp(s, CMD_OUT, ft_strlen(CMD_OUT)) == 0)
+		return ((int)ft_strlen(CMD_OUT));
+	else
+		return (0);
+}
 
 /**
  * @brief Calculates the length of a quoted string segment.
@@ -86,7 +99,7 @@ static size_t	ft_parenthesis_len(const char *s)
 /**
  * @brief Counts the number of words in a string, respecting quoted segments.
  *
- * The count_words function parses a string and counts the number of words
+ * The ft_count_words function parses a string and counts the number of words
  * separated by delimiter characters specified in seps. Quoted segments (using
  * single or double quotes) are treated as single units regardless of delimiters
  * inside them. Leading delimiters are skipped, and the function properly 
@@ -96,7 +109,7 @@ static size_t	ft_parenthesis_len(const char *s)
  * @param seps Pointer to a string containing delimiter characters.
  * @return The total number of words found in the string.
  */
-static size_t	count_words(const char *s, char *seps)
+static size_t	ft_count_words(const char *s, char *seps)
 {
 	size_t	counter;
 	size_t	i;
@@ -110,9 +123,14 @@ static size_t	count_words(const char *s, char *seps)
 	while (s[i])
 	{
 		if (s[i] && ft_strchr("\'\"", s[i]))
-			i += ft_quote_len(&s[i]);
+			i += ft_quote_len(s + i);
 		else if (s[i] == '(')
-			i += ft_parenthesis_len(&s[i]);
+			i += ft_parenthesis_len(s + i);
+		else if (ft_strchr((const char *)CMD_ALL_CHARS, s[i]) && ft_isop(s + i) > 0)
+		{
+			i += ft_isop(s + i);
+			counter += 1 + !ft_strchr(seps, s[i]);
+		}
 		else
 		{
 			if (i > 0 && ft_strchr(seps, s[i]))
@@ -128,7 +146,7 @@ static size_t	count_words(const char *s, char *seps)
 /**
  * @brief Frees a partially allocated array of strings.
  *
- * The free_strarr function deallocates memory for an array of strings up to a
+ * The ft_free_strarr function deallocates memory for an array of strings up to a
  * specified position. It iterates through the array, freeing each individual
  * string pointer, and then frees the array itself. This is typically used for
  * cleanup when an allocation fails during array construction.
@@ -137,7 +155,7 @@ static size_t	count_words(const char *s, char *seps)
  * @param position The number of elements to free (0-indexed).
  * @return Always returns NULL (0) for convenient error handling.
  */
-static char	**free_strarr(char **arr, size_t position)
+static char	**ft_free_strarr(char **arr, size_t position)
 {
 	size_t	i;
 
@@ -154,8 +172,8 @@ static char	**free_strarr(char **arr, size_t position)
 /**
  * @brief Extracts and allocates a single word from the string.
  *
- * The process_word function extracts one word from the current position in the
- * string, treating quoted segments as single units regardless of delimiters
+ * The ft_process_word function extracts one word from the current position in 
+ * the string, treating quoted segments as single units regardless of delimiters
  * inside them. It allocates memory for the extracted word and advances the
  * string pointer past the processed word. The extraction stops when a delimiter
  * character (not inside quotes) is encountered.
@@ -166,7 +184,7 @@ static char	**free_strarr(char **arr, size_t position)
  * @return A newly allocated string containing the extracted word, or NULL if
  *         memory allocation fails.
  */
-static char	*process_word(const char **s, char *seps)
+static char	*ft_process_word(const char **s, char *seps)
 {
 	int		i;
 	int		len;
@@ -175,10 +193,15 @@ static char	*process_word(const char **s, char *seps)
 	i = 0;
 	while ((*s)[i] && (!ft_strchr(seps, (*s)[i]) || ft_strchr("\'\"", (*s)[i])))
 	{
-		if ((*s)[i] && ft_strchr("\'\"", (*s)[i]))
-			i += ft_quote_len(&(*s)[i]);
+		if (ft_strchr(CMD_ALL_CHARS, (*s)[i]) && ft_isop(*s + i) > 0)
+		{
+			i += ft_isop(*s + i);
+			break ;
+		}
+		else if ((*s)[i] && ft_strchr("\'\"", (*s)[i]))
+			i += ft_quote_len((*s) + i);
 		else if ((*s)[i] == '(')
-			i += ft_parenthesis_len(&(*s)[i]);
+			i += ft_parenthesis_len((*s) + i);
 		else
 			i++;
 	}
@@ -188,7 +211,7 @@ static char	*process_word(const char **s, char *seps)
 	len = i;
 	while (--i >= 0)
 		word[i] = (*s)[i];
-	(*s) += len;
+	*s += len;
 	return (word);
 }
 
@@ -215,7 +238,7 @@ char	**ft_split_prompt(const char *s, char *seps)
 	size_t	i;
 	char	**arr;
 
-	word_count = count_words(s, seps);
+	word_count = ft_count_words(s, seps);
 	arr = ft_calloc((word_count + 1), sizeof(char *));
 	if (!arr)
 		return (NULL);
@@ -224,11 +247,21 @@ char	**ft_split_prompt(const char *s, char *seps)
 	{
 		while (ft_strchr(seps, *s) && !ft_strchr("\'\"", *s))
 			s++;
-		arr[i] = process_word(&s, seps);
+		arr[i] = ft_process_word(&s, seps);
 		if (!arr[i])
-			return (free_strarr(arr, i));
+			return (ft_free_strarr(arr, i));
 	}
 	if (arr[0] != NULL)
 		arr[word_count] = NULL;
 	return (arr);
 }
+
+// int	main(int argc, char **argv)
+// {
+// 	int	counter;
+
+// 	if (argc != 2)
+// 		return (1);
+// 	counter = ft_count_words(argv[1], WS_POSIX);
+// 	ft_printf("%s\nwords: %d\n", argv[1], counter);
+// }
