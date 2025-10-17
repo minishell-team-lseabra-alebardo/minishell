@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:08:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/15 15:50:40 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/10/17 16:48:11 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,28 @@ static void	ft_free_prompt_line(char *prompt, char *line)
 		free(line);
 }
 
-static void	ft_exiting(char *prompt, char *line)
+static void	ft_free_ms_envp(char **ms_envp)
+{
+	int		i;
+
+	i = 0;
+	while (ms_envp[i])
+	{
+		free(ms_envp[i]);
+		i++;
+	}
+	free(ms_envp);
+}
+
+static void	ft_exiting(char *prompt, char *line, char **ms_envp)
 {
 	ft_free_prompt_line(prompt, line);
+	ft_free_ms_envp(ms_envp);
 	printf("exit\n");
 	exit(0);
 }
 
-void	ft_read_line(void)
+void	ft_read_line(char **ms_envp)
 {
 	char	*prompt;
 	char	*line;
@@ -37,7 +51,7 @@ void	ft_read_line(void)
 		prompt = ft_get_ps1();
 		line = readline(prompt);
 		if (!line)
-			ft_exiting(prompt, line);
+			ft_exiting(prompt, line, ms_envp);
 		if (line && *line)
 			add_history(line);
 		ft_parser(line);
