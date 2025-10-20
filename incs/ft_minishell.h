@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/17 16:43:44 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/10/20 00:23:32 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_read_line(char **ms_envp);
 char	*ft_get_ps1(void);
 void	ft_parser(char *line);
 int		ft_check_unclosed(char *line);
+int		ft_check_commands(char *line);
 char	**ft_split_prompt(const char *s, char *seps);
 char	**ft_strarr_dup(char **strarr);
 

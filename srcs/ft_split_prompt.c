@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_prompt.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 15:10:56 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/10/17 23:25:32 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/20 02:00:11 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ static size_t	ft_count_words(const char *s, char *seps)
 			counter += (s[i] && !ft_strchr(seps, s[i]));
 		}
 		else if (i > 0 && ft_strchr(seps, s[i]) && !ft_strchr(seps, s[i++ - 1]))
-				counter++;
+			counter++;
 		else
 			i++;
 	}
@@ -201,7 +201,7 @@ static char	*ft_process_word(const char **s, char *seps)
 				i += ft_parenthesis_len((*s) + i);
 			else
 				i++;
-		}	
+		}
 	}
 	word = ft_calloc((i + 1), sizeof(char));
 	if (!word)

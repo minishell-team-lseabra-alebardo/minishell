@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 21:46:59 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/17 16:47:15 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/10/20 01:59:35 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	(void) argc;
-	(void) argv;
 	char	**ms_envp;
 
+	(void) argc;
+	(void) argv;
 	if (ft_listener() < 0)
 	{
 		perror(strerror(errno));
