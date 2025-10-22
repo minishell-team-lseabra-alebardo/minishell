@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+         #
+#    By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/10/20 00:23:46 by alebarbo         ###   ########.fr        #
+#    Updated: 2025/10/22 14:18:23 by lseabra-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_signal_handler.c \
 		ft_check_unclosed.c \
 		ft_check_commands.c \
+		ft_split_prompt_utils.c \
 		ft_split_prompt.c \
 		ft_strarr_dup.c \
 		ft_parser.c \

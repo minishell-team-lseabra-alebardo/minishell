@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/20 00:23:32 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/10/22 14:19:45 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ char	*ft_get_ps1(void);
 void	ft_parser(char *line);
 int		ft_check_unclosed(char *line);
 int		ft_check_commands(char *line);
+int		ft_isop(const char *s);
+size_t	ft_quote_len(const char *s);
+size_t	ft_parenthesis_len(const char *s);
+char	**ft_free_strarr(char **arr, size_t position);
 char	**ft_split_prompt(const char *s, char *seps);
 char	**ft_strarr_dup(char **strarr);
 
