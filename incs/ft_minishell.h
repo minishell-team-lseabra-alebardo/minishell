@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/27 10:12:34 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/27 10:13:23 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,11 @@ int		ft_listener(void);
 void	ft_read_line(t_data *dt);
 char	*ft_get_ps1(void);
 void	ft_parser(t_data *dt);
+void	ft_parser(t_data *dt);
 int		ft_check_unclosed(char *line);
 int		ft_check_commands(char *line);
+bool	ft_is_op(const char *s, const char *op);
+int		ft_get_op_len(const char *s);
 bool	ft_is_op(const char *s, const char *op);
 int		ft_get_op_len(const char *s);
 size_t	ft_quote_len(const char *s);
