@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:46:44 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/17 21:37:13 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/23 18:02:20 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@
 # define CMD_OUT        ">"
 # define CMD_OUT_APPEND ">>"
 # define CMD_ALL "&|<>"
+
+// HEREDOC
+# define HEREDOC_PREFIX "> "
+# define HERE_DOC_WARNING "warning: here-document delimited by end-of-file"
 
 // Error messages
 # define ERR_SYNTAX "Syntax error\n"

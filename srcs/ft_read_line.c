@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:08:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/24 19:11:38 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/27 10:00:49 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,16 @@ static void	ft_free_ms_envp(char **ms_envp)
 	free(ms_envp);
 }
 
-static void	ft_exiting(char *prompt, char *line, char **ms_envp)
+static void	ft_exiting(char *prompt, char *line, t_data *dt)
 {
 	ft_free_prompt_line(prompt, line);
-	ft_free_ms_envp(ms_envp);
+	ft_free_ms_envp(dt->ms_envp);
+	free(dt);
 	printf("exit\n");
 	exit(0);
 }
 
-void	ft_read_line(char **ms_envp)
+void	ft_read_line(t_data *dt)
 {
 	char	*prompt;
 	char	*line;
@@ -51,11 +52,17 @@ void	ft_read_line(char **ms_envp)
 		prompt = ft_get_ps1();
 		line = readline(prompt);
 		if (!line)
-			ft_exiting(prompt, line, ms_envp);
+			ft_exiting(prompt, line, dt->ms_envp);
 		if (line && *line)
 		{
 			add_history(line);
-			ft_parser(line);
+			if (ft_check_unclosed(line) < 0 || ft_check_commands(line) < 0)
+				write(2, ERR_SYNTAX, 13);
+			else
+			{
+				dt->split_line = ft_split_prompt(line, WS_POSIX);
+				ft_parser(dt);
+			}
 		}
 		ft_free_prompt_line(prompt, line);
 	}

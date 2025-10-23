@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_types.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:56:36 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/15 16:21:13 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/10/23 17:00:32 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,21 @@ typedef struct sigaction	t_sigaction;
 typedef struct s_cmd
 {
 	char			**ms_envp;
-	char			*cmd;
-	char			**args;
-	char			*infile;
-	char			*outfile;
+	int				*lst_stat;
 	char			*prev_op;
-	int				lst_stat;
+	char			**args;
+	int				infile;
+	int				outfile;
 	int				level;
+	char			*error;
 	struct s_cmd	*next;
 }					t_cmd;
 
+typedef struct s_data
+{
+	char	**ms_envp;
+	int		lst_stat;
+	char	**split_line;
+	t_cmd	*list;
+}			t_data;
 #endif

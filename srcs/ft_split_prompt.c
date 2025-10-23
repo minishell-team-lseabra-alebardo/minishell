@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 15:10:56 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/10/24 19:24:27 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/27 10:08:37 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static size_t	ft_count_words(const char *s, char *seps)
 	{
 		if ((s[i] && ft_strchr("\'\"", s[i])) || (s[i] == '('))
 			i += ft_calc_jump(s + i);
-		else if (ft_isop(s + i) > 0)
+		else if (ft_get_op_len(s + i) > 0)
 		{
 			counter += (i > 0 && !ft_strchr(seps, s[i - 1]) && !ft_check_n_back(s + i));
 			i += ft_isop(s + i);
@@ -103,8 +103,8 @@ static char	*ft_process_word(const char **s, char *seps)
 	i = 0;
 	while (ft_isdigit((*s)[i]))
 		i++;
-	if (ft_isop(*s + i) > 0)
-		i += ft_isop(*s + i);
+	if (ft_get_op_len(*s + i) > 0)
+		i += ft_get_op_len(*s + i);
 	else
 	{
 		while ((*s)[i] && (!ft_strchr(seps, (*s)[i])) && (!ft_isop(*s + i)))
