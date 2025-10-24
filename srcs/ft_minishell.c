@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 21:46:59 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/23 15:53:35 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/24 12:22:30 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	main(int argc, char *argv[], char *envp[])
 	if (!dt)
 		return (EXIT_FAILURE);
 	dt->ms_envp = ft_strarr_dup(envp);
+	if (!dt->ms_envp)
+		return (EXIT_FAILURE);
 	dt->lst_stat = 0;
 	dt->list = NULL;
 	ft_read_line(dt);
