@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/22 14:19:45 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/24 17:27:45 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <libft.h>
 # include <ft_macros.h>
 # include <ft_types.h>
+# include <stdbool.h>
 
 int		ft_listener(void);
 void	ft_read_line(char **ms_envp);
