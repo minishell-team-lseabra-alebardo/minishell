@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:13:51 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/23 18:47:27 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/27 10:57:11 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ t_cmd	*ft_init_cmd(char ***split_arr, t_cmd *prev, t_data *dt)
 
 	if (!split_arr || !*split_arr || !dt)
 		return (NULL);
-	cur = ft_calloc(1, sizeof(t_cmd *));
+	cur = ft_calloc(1, sizeof(t_cmd));
 	if (!cur)
 		return (NULL);
 	cur->ms_envp = dt->ms_envp;
@@ -143,8 +143,6 @@ t_cmd	*ft_init_cmd(char ***split_arr, t_cmd *prev, t_data *dt)
 		cur->prev_op = *split_arr;
 		*split_arr++;
 	}
-	cur->infile = -2;
-	cur->outfile = -2;
 	while (**split_arr)
 	{
 		if (cur->error || ft_is_logic_or_pipe_op(**split_arr))

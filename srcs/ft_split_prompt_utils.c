@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 14:16:59 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/10/23 18:10:26 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/27 11:02:53 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 bool	ft_is_op(const char *s, const char *op)
 {
-	if (ft_strncmp(s, CMD_AND, ft_strlen(CMD_AND)) == 0)
+	if (!s || !*s || !op)
+		return (false);
+	while (ft_isdigit(*s))
+		s++;
+	if (ft_strncmp(s, op, ft_strlen(op)) == 0)
 		return (true);
 	else
 		return (false);
@@ -22,7 +26,7 @@ bool	ft_is_op(const char *s, const char *op)
 
 int	ft_get_op_len(const char *s)
 {
-	if (!ft_strchr(CMD_ALL, *s))
+	if (!s || !ft_strchr(CMD_ALL, *s))
 		return (0);
 	else if (ft_is_op(s, CMD_AND))
 		return ((int)ft_strlen(CMD_AND));
