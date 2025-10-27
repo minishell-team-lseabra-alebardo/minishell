@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 14:16:59 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/10/27 11:02:53 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/27 11:05:05 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool	ft_is_op(const char *s, const char *op)
 
 int	ft_get_op_len(const char *s)
 {
-	if (!s || !ft_strchr(CMD_ALL, *s))
+	if (!s)
 		return (0);
 	else if (ft_is_op(s, CMD_AND))
 		return ((int)ft_strlen(CMD_AND));
