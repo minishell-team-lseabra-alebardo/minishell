@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/24 17:27:45 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/28 15:56:45 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@
 # include <libft.h>
 # include <ft_macros.h>
 # include <ft_types.h>
+# include <ft_skips.h>
+# include <ft_checks.h>
 # include <stdbool.h>
 
 int		ft_listener(void);
 void	ft_read_line(char **ms_envp);
 char	*ft_get_ps1(void);
 void	ft_parser(char *line);
-int		ft_check_unclosed(char *line);
-int		ft_check_commands(char *line);
 int		ft_isop(const char *s);
 size_t	ft_quote_len(const char *s);
 size_t	ft_parenthesis_len(const char *s);

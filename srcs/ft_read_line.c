@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_read_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:08:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/24 19:11:38 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/28 15:59:08 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ void	ft_read_line(char **ms_envp)
 		if (line && *line)
 		{
 			add_history(line);
-			ft_parser(line);
+			if (ft_check_syntax(line) < 0)
+				write(2, ERR_SYNTAX, 13);
+			else
+				ft_parser(line);
 		}
 		ft_free_prompt_line(prompt, line);
 	}

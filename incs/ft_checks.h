@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parser.c                                        :+:      :+:    :+:   */
+/*   ft_checks.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/14 14:13:51 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/28 16:00:51 by alebarbo         ###   ########.fr       */
+/*   Created: 2025/10/28 15:53:17 by alebarbo          #+#    #+#             */
+/*   Updated: 2025/10/28 15:56:26 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_minishell.h>
+#ifndef FT_CHECKS_H
+# define FT_CHECKS_H
 
-static void	ft_temp_split_test(char *line)
-{
-	char	**split_line;
-	int		i;
+int	ft_check_empty_line(char *line);
+int	ft_check_operators(char *line);
+int	ft_check_empty_parentheses(char *line);
+int	ft_check_invalid_parentheses(char *line);
+int	ft_check_unclosed(char *line);
+int	ft_check_syntax(char *line);
 
-	split_line = ft_split_prompt(line, WS_POSIX);
-	i = 0;
-	while (split_line[i])
-	{
-		printf("%s\n", split_line[i]);
-		free(split_line[i]);
-		i++;
-	}
-	free(split_line);
-}
-
-void	ft_parser(char *line)
-{
-	ft_temp_split_test(line);
-}
+#endif
