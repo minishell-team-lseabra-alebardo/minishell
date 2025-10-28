@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:13:51 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/27 10:57:11 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/28 18:37:07 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static bool	ft_is_redir_op(char *str)
 {
 	bool	res;
 
+	while (ft_isdigit(*str))
+		str++;
 	res = false;
 	if (ft_is_op(str, CMD_HEREDOC))
 		res = true;
@@ -42,15 +44,29 @@ static bool	ft_is_redir_op(char *str)
 	return (res);
 }
 
-static void	ft_exec_heredoc(t_cmd *cur, char *limiter)
+static bool	ft_is_strline_equal(char *str, char *line)
+{
+	size_t	len;
+
+	if (ft_strlen(str) > (ft_linelen(line) - 1))
+		len = ft_strlen(str);
+	else
+		len = (ft_linelen(line) - 1);
+	if (ft_strncmp(str, line, len) == 0)
+		return (true);
+	else
+		return (false);
+}
+
+static int	ft_exec_heredoc(char *limiter)
 {
 	char	*line;
 	int		pipefd[2];
 
 	if (pipe(pipefd) < 0)
 	{
-		perror(strerror(errno));
-		return ;
+		perror("pipe");
+		return (-1);
 	}
 	while (true)
 	{
@@ -61,7 +77,7 @@ static void	ft_exec_heredoc(t_cmd *cur, char *limiter)
 			ft_printf("\n%s (wanted `%s')\n", HERE_DOC_WARNING, limiter);
 			break ;
 		}
-		else if (is_strline_equal(limiter, line))
+		else if (ft_is_strline_equal(limiter, line))
 			break ;
 		ft_putstr_fd(line, pipefd[1]);
 		free(line);
@@ -69,37 +85,7 @@ static void	ft_exec_heredoc(t_cmd *cur, char *limiter)
 	if (line)
 		free(line);
 	close(pipefd[1]);
-	cur->infile = pipefd[0];
-}
-
-void	ft_init_file(char **arr, t_cmd *cmd)
-{
-	if (ft_is_op(*arr, CMD_HEREDOC))
-		ft_exec_heredoc(cmd, arr + 1);
-	else if (ft_is_op(*arr, CMD_IN))
-	{
-		if (cmd->infile > 2)
-			close(cmd->infile);
-		cmd->infile = open(arr + 1, O_RDONLY);
-		if (cmd->infile == -1)
-			cmd->error = ft_strdup(strerror(errno));
-	}
-	else if (ft_is_op(*arr, CMD_OUT))
-	{
-		if (cmd->outfile > 2)
-			close(cmd->outfile);
-		cmd->outfile = open(arr + 1, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (cmd->outfile == -1)
-			cmd->error = ft_strdup(strerror(errno));
-	}
-	else if (ft_is_op(*arr, CMD_OUT_APPEND))
-	{
-		if (cmd->outfile > 2)
-			close(cmd->outfile);
-		cmd->outfile = open(arr + 1, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		if (cmd->outfile == -1)
-			cmd->error = ft_strdup(strerror(errno));
-	}
+	return (pipefd[0]);
 }
 
 void	ft_add_arg(t_cmd *cmd, char *new_arg)
@@ -127,9 +113,39 @@ void	ft_add_arg(t_cmd *cmd, char *new_arg)
 	}
 }
 
+void	ft_init_redir(t_cmd *cmd, char ***s_arr)
+{
+	t_redir	*new_redir;
+	t_redir	*cur_redir;
+
+	new_redir = ft_calloc(1, sizeof(t_redir));
+	if (!new_redir)
+		return ;
+	if (ft_isdigit(***s_arr))
+	{
+		new_redir->fd_from = ft_atoi(**s_arr);
+		while (ft_isdigit(***s_arr))
+			**s_arr++;
+	}
+	new_redir->type = **s_arr;
+	if (ft_is_op(new_redir->type, CMD_HEREDOC))
+		new_redir->fd_to = ft_exec_heredoc(++(**s_arr));
+	else
+		new_redir->filename = ++(*s_arr);
+	**s_arr++;
+	cur_redir = cmd->redir_ll;
+	while (cmd->redir_ll && cmd->redir_ll->next)
+		cur_redir = cmd->redir_ll->next;
+	if (!cur_redir)
+		cmd->redir_ll = new_redir;
+	else
+		cur_redir->next = new_redir;
+}
+
 t_cmd	*ft_init_cmd(char ***split_arr, t_cmd *prev, t_data *dt)
 {
 	t_cmd	*cur;
+	int		pipefd[2];
 
 	if (!split_arr || !*split_arr || !dt)
 		return (NULL);
@@ -138,20 +154,29 @@ t_cmd	*ft_init_cmd(char ***split_arr, t_cmd *prev, t_data *dt)
 		return (NULL);
 	cur->ms_envp = dt->ms_envp;
 	cur->lst_stat = dt->lst_stat;
+	cur->infile = STDIN_FILENO;
+	cur->outfile = STDOUT_FILENO;
 	if (ft_is_logic_or_pipe_op(**split_arr))
 	{
 		cur->prev_op = *split_arr;
 		*split_arr++;
 	}
+	if (ft_is_op(cur->prev_op, CMD_PIPE))
+	{
+		if (pipe(pipefd) < 0)
+		{
+			perror("pipe");
+			return (NULL);
+		}
+		prev->outfile = pipefd[1];
+		cur->infile = pipefd[0];
+	}
 	while (**split_arr)
 	{
-		if (cur->error || ft_is_logic_or_pipe_op(**split_arr))
+		if (ft_is_logic_or_pipe_op(**split_arr))
 			break ;
 		else if (ft_is_redir_op(**split_arr))
-		{
-			ft_init_file(*split_arr, cur);
-			*split_arr += 2;
-		}
+			ft_init_redir(cur, split_arr);
 		else
 		{
 			ft_add_arg(cur, *split_arr);

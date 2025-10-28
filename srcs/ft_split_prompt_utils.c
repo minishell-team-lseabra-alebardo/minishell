@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 14:16:59 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/10/27 11:05:05 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/28 15:45:49 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ bool	ft_is_op(const char *s, const char *op)
 {
 	if (!s || !*s || !op)
 		return (false);
-	while (ft_isdigit(*s))
-		s++;
-	if (ft_strncmp(s, op, ft_strlen(op)) == 0)
+	if (ft_strncmp(s, op, ft_strlen(op) + 1) == 0)
 		return (true);
 	else
 		return (false);

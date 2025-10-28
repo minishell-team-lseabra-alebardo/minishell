@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:56:36 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/23 17:00:32 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/28 15:58:45 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,16 @@ typedef struct sigaction	t_sigaction;
  * @var s_cmd::next
  *   Pointer to the next command in the linked list.
  */
+
+typedef struct s_redir
+{
+	char	*type;
+	char	*filename;
+	int		fd_from;
+	int		fd_to;
+	t_redir	*next;
+}			t_redir;
+
 typedef struct s_cmd
 {
 	char			**ms_envp;
@@ -55,7 +65,7 @@ typedef struct s_cmd
 	char			**args;
 	int				infile;
 	int				outfile;
-	int				level;
+	t_redir			*redir_ll;
 	char			*error;
 	struct s_cmd	*next;
 }					t_cmd;
