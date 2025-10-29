@@ -6,10 +6,9 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:08:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/29 15:16:57 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/29 18:50:19 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include <ft_minishell.h>
 
@@ -47,34 +46,54 @@ static void	ft_print_cmds(t_data *dt)
 {
 	int		i;
 	t_cmd	*cmd;
+	t_cmd	*head;
+	t_cmd	*save_cmd;
 	t_redir	*redir;
+	t_redir	*save_redir;
 
-	cmd = dt->list;
-
+	head = dt->list;
+	cmd = head;
 	while (cmd)
 	{
-		printf("-----------------------\n");
+		printf("-----------CMD[%d]------------\n", (int)(cmd - head));
 		i = 0;
 		while (cmd->args[i])
 		{
-			printf("arg%d: %s\n", i, cmd->args[i]);
+			printf("arg[%d]: %s\n", i, cmd->args[i]);
 			i++;
 		}
+		free(cmd->args);
 		printf("infile: %d\n", cmd->infile);
 		printf("outfile: %d\n", cmd->outfile);
 		redir = cmd->redir_ll;
 		i = 0;
 		while (redir)
 		{
-			printf("redir%d\n", i);
+			printf("redir[%d]\n", i);
 			printf("\ttype: %s\n", redir->type);
 			printf("\tfilename: %s\n", redir->filename);
 			printf("\tfd_from: %d\n", redir->fd_from);
 			printf("\tfd_to: %d\n", redir->fd_to);
+			save_redir = redir;
 			redir = redir->next;
+			free(save_redir);
+			save_redir = NULL;
 		}
+		printf("------------------------------\n\n");
+		save_cmd = cmd;
 		cmd = cmd->next;
+		free(save_cmd);
+		save_cmd = NULL;
 	}
+	i = 0;
+	while (dt->split_line[i])
+	{
+		free(dt->split_line[i]);
+		dt->split_line[i] = NULL;
+		i++;
+	}
+	free(dt->split_line);
+	dt->split_line = NULL;
 }
 
 void	ft_read_line(t_data *dt)

@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:13:51 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/29 15:13:47 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/29 18:50:05 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ static bool	ft_is_redir_op(char *str)
 		res = true;
 	else if (ft_is_op(str, CMD_IN))
 		res = true;
-	else if (ft_is_op(str, CMD_OUT))
-		res = true;
 	else if (ft_is_op(str, CMD_OUT_APPEND))
+		res = true;
+	else if (ft_is_op(str, CMD_OUT))
 		res = true;
 	return (res);
 }
@@ -100,7 +100,7 @@ void	ft_add_arg(t_cmd *cmd, char *new_arg)
 	}
 	else
 	{
-		size = 0; 
+		size = 0;
 		while (cmd->args[size])
 			size++;
 		new_arr = ft_calloc(size + 2, sizeof(char *));
@@ -113,7 +113,7 @@ void	ft_add_arg(t_cmd *cmd, char *new_arg)
 	}
 }
 
-void	ft_init_redir(t_cmd *cmd, char ***s_arr)
+void	ft_init_redir(t_cmd *cmd, char ***s_arr, char *redir)
 {
 	t_redir	*new_redir;
 	t_redir	*cur_redir;
@@ -121,18 +121,18 @@ void	ft_init_redir(t_cmd *cmd, char ***s_arr)
 	new_redir = ft_calloc(1, sizeof(t_redir));
 	if (!new_redir)
 		return ;
-	if (ft_isdigit(***s_arr))
+	if (ft_isdigit(*redir))
 	{
-		new_redir->fd_from = ft_atoi(**s_arr);
-		while (ft_isdigit(***s_arr))
-			(**s_arr)++;
+		new_redir->fd_from = ft_atoi(redir);
+		while (ft_isdigit(*redir))
+			redir++;
 	}
-	new_redir->type = **s_arr;
+	new_redir->type = redir;
 	if (ft_is_op(new_redir->type, CMD_HEREDOC))
-		new_redir->fd_to = ft_exec_heredoc(++(**s_arr));
+		new_redir->fd_to = ft_exec_heredoc(*(++*s_arr));
 	else
-		new_redir->filename = ++(**s_arr);
-	**s_arr += 1;
+		new_redir->filename = *(++*s_arr);
+	*s_arr += 1;
 	cur_redir = cmd->redir_ll;
 	while (cmd->redir_ll && cmd->redir_ll->next)
 		cur_redir = cmd->redir_ll->next;
@@ -161,7 +161,7 @@ t_cmd	*ft_init_cmd(char ***split_arr, t_cmd *prev, t_data *dt)
 		cur->prev_op = **split_arr;
 		*split_arr += 1;
 	}
-	if (prev && ft_is_op(cur->prev_op, CMD_PIPE))
+	if (prev && !ft_strncmp(cur->prev_op, CMD_PIPE, ft_strlen(CMD_PIPE) + 1))
 	{
 		if (pipe(pipefd) < 0)
 		{
@@ -176,7 +176,7 @@ t_cmd	*ft_init_cmd(char ***split_arr, t_cmd *prev, t_data *dt)
 		if (ft_is_logic_or_pipe_op(**split_arr))
 			break ;
 		else if (ft_is_redir_op(**split_arr))
-			ft_init_redir(cur, split_arr);
+			ft_init_redir(cur, split_arr, **split_arr);
 		else
 		{
 			ft_add_arg(cur, **split_arr);
@@ -193,11 +193,17 @@ void	ft_parser(t_data *dt)
 
 	split_tmp = dt->split_line;
 	cur = NULL;
-	
 	while (split_tmp && *split_tmp)
 	{
-		cur = ft_init_cmd(&split_tmp, cur, dt);
-		if (!dt->list)
+		if (!dt->list && !cur)
+		{
+			cur = ft_init_cmd(&split_tmp, cur, dt);
 			dt->list = cur;
+		}
+		else
+		{
+			cur->next = ft_init_cmd(&split_tmp, cur, dt);
+			cur = cur->next;
+		}
 	}
 }
