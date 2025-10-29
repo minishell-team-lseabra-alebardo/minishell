@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:56:36 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/28 15:58:45 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/29 14:26:38 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ typedef struct sigaction	t_sigaction;
 
 typedef struct s_redir
 {
-	char	*type;
-	char	*filename;
-	int		fd_from;
-	int		fd_to;
-	t_redir	*next;
+	char			*type;
+	char			*filename;
+	int				fd_from;
+	int				fd_to;
+	struct s_redir	*next;
 }			t_redir;
 
 typedef struct s_cmd

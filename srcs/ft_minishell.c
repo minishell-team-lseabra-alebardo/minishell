@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 21:46:59 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/27 09:44:53 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/29 14:56:26 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char *argv[], char *envp[])
 		perror(strerror(errno));
 		exit(EXIT_FAILURE);
 	}
-	dt = ft_calloc(1, sizeof(t_data *));
+	dt = ft_calloc(1, sizeof(t_data));
 	if (!dt)
 		return (EXIT_FAILURE);
 	dt->ms_envp = ft_strarr_dup(envp);

@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:13:51 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/28 18:37:07 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/29 15:13:47 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,14 +125,14 @@ void	ft_init_redir(t_cmd *cmd, char ***s_arr)
 	{
 		new_redir->fd_from = ft_atoi(**s_arr);
 		while (ft_isdigit(***s_arr))
-			**s_arr++;
+			(**s_arr)++;
 	}
 	new_redir->type = **s_arr;
 	if (ft_is_op(new_redir->type, CMD_HEREDOC))
 		new_redir->fd_to = ft_exec_heredoc(++(**s_arr));
 	else
-		new_redir->filename = ++(*s_arr);
-	**s_arr++;
+		new_redir->filename = ++(**s_arr);
+	**s_arr += 1;
 	cur_redir = cmd->redir_ll;
 	while (cmd->redir_ll && cmd->redir_ll->next)
 		cur_redir = cmd->redir_ll->next;
@@ -153,15 +153,15 @@ t_cmd	*ft_init_cmd(char ***split_arr, t_cmd *prev, t_data *dt)
 	if (!cur)
 		return (NULL);
 	cur->ms_envp = dt->ms_envp;
-	cur->lst_stat = dt->lst_stat;
+	cur->lst_stat = &dt->lst_stat;
 	cur->infile = STDIN_FILENO;
 	cur->outfile = STDOUT_FILENO;
 	if (ft_is_logic_or_pipe_op(**split_arr))
 	{
-		cur->prev_op = *split_arr;
-		*split_arr++;
+		cur->prev_op = **split_arr;
+		*split_arr += 1;
 	}
-	if (ft_is_op(cur->prev_op, CMD_PIPE))
+	if (prev && ft_is_op(cur->prev_op, CMD_PIPE))
 	{
 		if (pipe(pipefd) < 0)
 		{
@@ -179,8 +179,8 @@ t_cmd	*ft_init_cmd(char ***split_arr, t_cmd *prev, t_data *dt)
 			ft_init_redir(cur, split_arr);
 		else
 		{
-			ft_add_arg(cur, *split_arr);
-			*split_arr++;
+			ft_add_arg(cur, **split_arr);
+			*split_arr += 1;
 		}
 	}
 	return (cur);
@@ -189,10 +189,15 @@ t_cmd	*ft_init_cmd(char ***split_arr, t_cmd *prev, t_data *dt)
 void	ft_parser(t_data *dt)
 {
 	char	**split_tmp;
-	t_data	*cur;
+	t_cmd	*cur;
 
 	split_tmp = dt->split_line;
-	cur = dt->list;
+	cur = NULL;
+	
 	while (split_tmp && *split_tmp)
+	{
 		cur = ft_init_cmd(&split_tmp, cur, dt);
+		if (!dt->list)
+			dt->list = cur;
+	}
 }
