@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 15:30:54 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/10/24 12:21:43 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/30 11:34:24 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
  */
 char	**ft_strarr_dup(char **strarr)
 {
-	size_t	i;
+	int		i;
 	char	**new_arr;
 
 	i = 0;

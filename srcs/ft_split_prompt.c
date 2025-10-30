@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 15:10:56 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/10/29 15:05:40 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/30 11:44:38 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,6 @@ static char	*ft_process_word(const char **s, char *seps)
 	char	*word;
 
 	i = 0;
-	while (ft_isdigit((*s)[i]))
-		i++;
-	if (ft_get_op_len(*s + i) > 0)
-		i += ft_get_op_len(*s + i);
 	while (ft_isdigit((*s)[i]))
 		i++;
 	if (ft_get_op_len(*s + i) > 0)

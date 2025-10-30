@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:13:51 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/29 18:50:05 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/30 11:30:39 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ static bool	ft_is_redir_op(char *str)
 	return (res);
 }
 
-static bool	ft_is_strline_equal(char *str, char *line)
+static bool	ft_is_limiter(char *lim, char *line)
 {
 	size_t	len;
 
-	if (ft_strlen(str) > (ft_linelen(line) - 1))
-		len = ft_strlen(str);
+	if (ft_strlen(lim) > (ft_linelen(line) - 1))
+		len = ft_strlen(lim);
 	else
 		len = (ft_linelen(line) - 1);
-	if (ft_strncmp(str, line, len) == 0)
+	if (ft_strncmp(lim, line, len) == 0)
 		return (true);
 	else
 		return (false);
@@ -77,7 +77,7 @@ static int	ft_exec_heredoc(char *limiter)
 			ft_printf("\n%s (wanted `%s')\n", HERE_DOC_WARNING, limiter);
 			break ;
 		}
-		else if (ft_is_strline_equal(limiter, line))
+		else if (ft_is_limiter(limiter, line))
 			break ;
 		ft_putstr_fd(line, pipefd[1]);
 		free(line);
