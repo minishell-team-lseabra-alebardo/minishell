@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 15:29:12 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/28 16:11:52 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/10/30 19:22:56 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	ft_check_invalid_parentheses(char *line)
 {
 	char	*temp;
 
-	temp = ft_skip_whitespaces(line);
+	temp = ft_skip_open_parentheses(line);
 	while (*temp)
 	{
 		if (*temp == '\'' || *temp == '\"')
