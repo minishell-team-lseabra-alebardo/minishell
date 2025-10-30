@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:08:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/29 18:50:19 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/30 13:13:58 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,17 @@ static void	ft_exiting(char *prompt, char *line, t_data *dt)
 static void	ft_print_cmds(t_data *dt)
 {
 	int		i;
+	int		cmd_counter;
 	t_cmd	*cmd;
-	t_cmd	*head;
 	t_cmd	*save_cmd;
 	t_redir	*redir;
 	t_redir	*save_redir;
 
-	head = dt->list;
-	cmd = head;
+	cmd = dt->list;
+	cmd_counter = 0;
 	while (cmd)
 	{
-		printf("-----------CMD[%d]------------\n", (int)(cmd - head));
+		printf("-----------CMD[%d]------------\n", cmd_counter);
 		i = 0;
 		while (cmd->args[i])
 		{
@@ -84,6 +84,7 @@ static void	ft_print_cmds(t_data *dt)
 		cmd = cmd->next;
 		free(save_cmd);
 		save_cmd = NULL;
+		cmd_counter++;
 	}
 	i = 0;
 	while (dt->split_line[i])
@@ -94,6 +95,7 @@ static void	ft_print_cmds(t_data *dt)
 	}
 	free(dt->split_line);
 	dt->split_line = NULL;
+	dt->list = NULL;
 }
 
 void	ft_read_line(t_data *dt)
