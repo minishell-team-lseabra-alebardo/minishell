@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:08:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/28 15:59:08 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/10/30 19:14:55 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,72 @@ static void	ft_free_ms_envp(char **ms_envp)
 	free(ms_envp);
 }
 
-static void	ft_exiting(char *prompt, char *line, char **ms_envp)
+static void	ft_exiting(char *prompt, char *line, t_data *dt)
 {
 	ft_free_prompt_line(prompt, line);
-	ft_free_ms_envp(ms_envp);
+	ft_free_ms_envp(dt->ms_envp);
+	free(dt);
 	printf("exit\n");
 	exit(0);
 }
 
-void	ft_read_line(char **ms_envp)
+static void	ft_print_cmds(t_data *dt)
+{
+	int		i;
+	int		cmd_counter;
+	t_cmd	*cmd;
+	t_cmd	*save_cmd;
+	t_redir	*redir;
+	t_redir	*save_redir;
+
+	cmd = dt->list;
+	cmd_counter = 0;
+	while (cmd)
+	{
+		printf("-----------CMD[%d]------------\n", cmd_counter);
+		i = 0;
+		while (cmd->args[i])
+		{
+			printf("arg[%d]: %s\n", i, cmd->args[i]);
+			i++;
+		}
+		free(cmd->args);
+		printf("infile: %d\n", cmd->infile);
+		printf("outfile: %d\n", cmd->outfile);
+		redir = cmd->redir_ll;
+		i = 0;
+		while (redir)
+		{
+			printf("redir[%d]\n", i);
+			printf("\ttype: %s\n", redir->type);
+			printf("\tfilename: %s\n", redir->filename);
+			printf("\tfd_from: %d\n", redir->fd_from);
+			printf("\tfd_to: %d\n", redir->fd_to);
+			save_redir = redir;
+			redir = redir->next;
+			free(save_redir);
+			save_redir = NULL;
+		}
+		printf("------------------------------\n\n");
+		save_cmd = cmd;
+		cmd = cmd->next;
+		free(save_cmd);
+		save_cmd = NULL;
+		cmd_counter++;
+	}
+	i = 0;
+	while (dt->split_line[i])
+	{
+		free(dt->split_line[i]);
+		dt->split_line[i] = NULL;
+		i++;
+	}
+	free(dt->split_line);
+	dt->split_line = NULL;
+	dt->list = NULL;
+}
+
+void	ft_read_line(t_data *dt)
 {
 	char	*prompt;
 	char	*line;
@@ -51,14 +108,18 @@ void	ft_read_line(char **ms_envp)
 		prompt = ft_get_ps1();
 		line = readline(prompt);
 		if (!line)
-			ft_exiting(prompt, line, ms_envp);
+			ft_exiting(prompt, line, dt);
 		if (line && *line)
 		{
 			add_history(line);
 			if (ft_check_syntax(line) < 0)
 				write(2, ERR_SYNTAX, 13);
 			else
-				ft_parser(line);
+			{
+				dt->split_line = ft_split_prompt(line, WS_POSIX);
+				ft_parser(dt);
+				ft_print_cmds(dt);
+			}
 		}
 		ft_free_prompt_line(prompt, line);
 	}
