@@ -1,16 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_errors.h                                        :+:      :+:    :+:   */
+/*   ft_checks.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 01:46:14 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/09/30 16:11:08 by alebarbo         ###   ########.fr       */
+/*   Created: 2025/10/28 15:53:17 by alebarbo          #+#    #+#             */
+/*   Updated: 2025/10/28 15:56:26 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_ERRORS_H
-# define FT_ERRORS_H
+#ifndef FT_CHECKS_H
+# define FT_CHECKS_H
+
+int	ft_check_empty_line(char *line);
+int	ft_check_operators(char *line);
+int	ft_check_empty_parentheses(char *line);
+int	ft_check_invalid_parentheses(char *line);
+int	ft_check_unclosed(char *line);
+int	ft_check_syntax(char *line);
 
 #endif
