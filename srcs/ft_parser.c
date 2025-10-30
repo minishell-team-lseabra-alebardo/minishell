@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:13:51 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/30 11:30:39 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/30 17:42:55 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,9 +133,9 @@ void	ft_init_redir(t_cmd *cmd, char ***s_arr, char *redir)
 	else
 		new_redir->filename = *(++*s_arr);
 	*s_arr += 1;
-	cur_redir = cmd->redir_ll;
 	while (cmd->redir_ll && cmd->redir_ll->next)
-		cur_redir = cmd->redir_ll->next;
+		cmd->redir_ll = cmd->redir_ll->next;
+	cur_redir = cmd->redir_ll;
 	if (!cur_redir)
 		cmd->redir_ll = new_redir;
 	else
