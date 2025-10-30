@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_commands.c                                :+:      :+:    :+:   */
+/*   ft_skips.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/17 15:29:12 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/20 15:10:06 by alebarbo         ###   ########.fr       */
+/*   Created: 2025/10/28 15:44:28 by alebarbo          #+#    #+#             */
+/*   Updated: 2025/10/28 16:00:36 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
 
-static char	*ft_skip_whitespaces(char *line)
+char	*ft_skip_whitespaces(char *line)
 {
 	char	*temp;
 
@@ -22,7 +22,7 @@ static char	*ft_skip_whitespaces(char *line)
 	return (temp);
 }
 
-static char	*ft_skip_quotes(char *line, char c)
+char	*ft_skip_quotes(char *line, char c)
 {
 	char	*temp;
 
@@ -33,28 +33,41 @@ static char	*ft_skip_quotes(char *line, char c)
 	return (temp);
 }
 
-int	ft_check_commands(char *line)
+char	*ft_skip_open_parentheses(char *line)
 {
 	char	*temp;
 
 	temp = ft_skip_whitespaces(line);
-	if (!*temp || (*temp == '&' && *(temp + 1) == '&') || *temp == '|')
-		return (-1);
-	while (*temp)
+	while (*temp == '(')
 	{
-		if (*temp == '&')
-			temp++;
-		if (*temp == '&' || *temp == '|')
-		{
-			temp++;
-			if (*temp == '|')
-				temp++;
-			return (ft_check_commands(temp));
-		}
-		if (*temp == '\"' || *temp == '\'')
-			temp = ft_skip_quotes(temp, *temp);
-		if (*temp)
-			temp++;
+		temp++;
+		temp = ft_skip_whitespaces(temp);
 	}
-	return (0);
+	return (temp);
+}
+
+char	*ft_skip_and(char *line)
+{
+	char	*temp;
+
+	temp = line;
+	temp += 2;
+	temp = ft_skip_whitespaces(temp);
+	if (*temp == '(')
+		temp++;
+	return (temp);
+}
+
+char	*ft_skip_pipe_or(char *line)
+{
+	char	*temp;
+
+	temp = line;
+	temp++;
+	if (*temp == '|')
+		temp++;
+	temp = ft_skip_whitespaces(temp);
+	if (*temp == '(')
+		temp++;
+	return (temp);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_read_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:08:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/30 13:13:58 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/10/30 19:14:55 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	ft_read_line(t_data *dt)
 		if (line && *line)
 		{
 			add_history(line);
-			if (ft_check_unclosed(line) < 0 || ft_check_commands(line) < 0)
+			if (ft_check_syntax(line) < 0)
 				write(2, ERR_SYNTAX, 13);
 			else
 			{
