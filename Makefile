@@ -6,7 +6,7 @@
 #    By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/10/30 19:15:56 by alebarbo         ###   ########.fr        #
+#    Updated: 2025/11/04 17:12:12 by alebarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_split_prompt.c \
 		ft_strarr_dup.c \
 		ft_parser.c \
+		ft_remove_quotes.c \
 )
 
 # Object files
