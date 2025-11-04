@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:56:36 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/29 14:26:38 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/04 16:59:06 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ typedef struct s_data
 	int		lst_stat;
 	char	**split_line;
 	t_cmd	*list;
+	pid_t	pid_arr[MAX_PROCESSES];
 }			t_data;
 #endif

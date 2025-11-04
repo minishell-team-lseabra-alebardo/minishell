@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:46:44 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/23 18:02:20 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/04 16:58:33 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@
 
 // Error messages
 # define ERR_SYNTAX "Syntax error\n"
+
+# define MAX_PROCESSES 1024
 
 #endif
