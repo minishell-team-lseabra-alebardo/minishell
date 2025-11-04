@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 14:16:59 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/10/29 16:20:36 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/04 17:05:51 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,15 @@
 
 bool	ft_is_op(const char *s, const char *op)
 {
+	size_t	len;
+
 	if (!s || !*s || !op)
 		return (false);
-	if (ft_strncmp(s, op, ft_strlen(op)) == 0)
+	if (ft_strlen(s) > ft_strlen(op))
+		len = ft_strlen(s);
+	else
+		len = ft_strlen(op);
+	if (ft_strncmp(s, op, len) == 0)
 		return (true);
 	else
 		return (false);
