@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:13:51 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/30 17:42:55 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/05 11:30:56 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,10 +195,10 @@ void	ft_parser(t_data *dt)
 	cur = NULL;
 	while (split_tmp && *split_tmp)
 	{
-		if (!dt->list && !cur)
+		if (!dt->cmd_ll && !cur)
 		{
 			cur = ft_init_cmd(&split_tmp, cur, dt);
-			dt->list = cur;
+			dt->cmd_ll = cur;
 		}
 		else
 		{
