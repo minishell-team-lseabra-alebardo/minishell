@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:56:36 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/04 16:59:06 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/05 17:21:53 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ typedef struct s_cmd
 	int				infile;
 	int				outfile;
 	t_redir			*redir_ll;
-	char			*error;
 	struct s_cmd	*next;
 }					t_cmd;
 
@@ -75,7 +74,7 @@ typedef struct s_data
 	char	**ms_envp;
 	int		lst_stat;
 	char	**split_line;
-	t_cmd	*list;
+	t_cmd	*cmd_ll;
 	pid_t	pid_arr[MAX_PROCESSES];
 }			t_data;
 #endif

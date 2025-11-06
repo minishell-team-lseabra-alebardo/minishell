@@ -6,95 +6,61 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/04 18:29:01 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/06 18:13:21 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
 
-static void	ft_apply_infile(t_cmd *cmd, t_redir *redir)
+static void	ft_exec_child(t_cmd *cmd)
 {
-	if (ft_is_op(redir->type, CMD_HEREDOC))
-	{
-		if (cmd->infile > STDERR_FILENO)
-			close(cmd->infile);
-		cmd->infile = redir->fd_to;
-	}
-	else if (ft_is_op(redir->type, CMD_IN))
-	{
-		if (cmd->infile > STDERR_FILENO)
-			close(cmd->infile);
-		cmd->infile = open(redir->filename, O_RDONLY);
-		if (cmd->infile < 0)
-		{
-			perror(strerror(errno));
-			exit(127);
-		}
-	}
+	ft_close_unused_fds(cmd->next);
+	ft_apply_redirs(cmd);
 }
 
-static void	ft_apply_outfile(t_cmd *cmd, t_redir *redir)
+static void	ft_skip_based_on_stat(t_cmd **cmd, pid_t prev_pid)
 {
-	if (ft_is_op(redir->type, CMD_OUT))
+	pid_t	lst_blk_st;
+
+	waitpid(prev_pid, &lst_blk_st, 0);
+	if (WIFEXITED(lst_blk_st))
 	{
-		if (cmd->infile > STDERR_FILENO)
-			close(cmd->infile);
-		cmd->infile = open(redir->filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (cmd->infile < 0)
+		if ((WEXITSTATUS(lst_blk_st) == 0
+				&& ft_is_op((*cmd)->prev_op, CMD_OR))
+			|| (WEXITSTATUS(lst_blk_st) != 0
+				&& ft_is_op((*cmd)->prev_op, CMD_AND)))
 		{
-			perror(strerror(errno));
-			exit(EXIT_FAILURE);
+			while (*cmd && ft_is_op((*cmd)->prev_op, CMD_PIPE))
+			{
+				if ((*cmd)->infile > STDERR_FILENO)
+					close((*cmd)->infile);
+				if ((*cmd)->outfile > STDERR_FILENO)
+					close((*cmd)->outfile);
+				*cmd = (*cmd)->next;
+			}
 		}
 	}
-	else if (ft_is_op(redir->type, CMD_OUT_APPEND))
-	{
-		if (cmd->infile > STDERR_FILENO)
-			close(cmd->infile);
-		cmd->infile = open(redir->filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		if (cmd->infile < 0)
-		{
-			perror(strerror(errno));
-			exit(EXIT_FAILURE);
-		}
-	}
-}
-
-static void	ft_apply_redirs(t_cmd *cmd)
-{
-	t_redir	*cur_redir;
-
-	cur_redir = cmd->redir_ll;
-	while (cur_redir)
-	{
-		ft_apply_outfile(cmd, cur_redir);
-		ft_apply_outfile(cmd, cur_redir);
-		cur_redir = cur_redir->next;
-	}
-}
-
-static int	ft_exec_child(t_cmd *cur_cmd)
-{
-	ft_apply_redirs(cur_cmd);
 }
 
 void	ft_exec_line(t_data *dt)
 {
 	t_cmd	*cur_cmd;
-	int		i;
+	int	i;
 
+	cur_cmd = dt->cmd_ll;
 	i = 0;
 	while (cur_cmd)
 	{
 		dt->pid_arr[i] = fork();
 		if (dt->pid_arr[i] == 0)
 			ft_exec_child(cur_cmd);
+		if (cur_cmd->infile > STDERR_FILENO)
+			close(cur_cmd->infile);
+		if (cur_cmd->outfile > STDERR_FILENO)
+			close(cur_cmd->outfile);
 		cur_cmd = cur_cmd->next;
-		if (!ft_is_op(cur_cmd->prev_op, CMD_PIPE))
-			waitpid(dt->pid_arr[i]);
+		if (cur_cmd && !ft_is_op(cur_cmd->prev_op, CMD_PIPE))
+			ft_skip_based_on_stat(&cur_cmd, dt->pid_arr[i]);
 		i++;
 	}
 }
-
-// MS_PATH
-// args[0] = "minishell"
-// args[1] = "()"

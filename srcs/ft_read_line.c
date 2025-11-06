@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_read_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:08:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/30 19:14:55 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/06 18:13:49 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	ft_print_cmds(t_data *dt)
 	t_redir	*redir;
 	t_redir	*save_redir;
 
-	cmd = dt->list;
+	cmd = dt->cmd_ll;
 	cmd_counter = 0;
 	while (cmd)
 	{
@@ -95,7 +95,7 @@ static void	ft_print_cmds(t_data *dt)
 	}
 	free(dt->split_line);
 	dt->split_line = NULL;
-	dt->list = NULL;
+	dt->cmd_ll = NULL;
 }
 
 void	ft_read_line(t_data *dt)
@@ -119,6 +119,7 @@ void	ft_read_line(t_data *dt)
 				dt->split_line = ft_split_prompt(line, WS_POSIX);
 				ft_parser(dt);
 				ft_print_cmds(dt);
+				ft_exec_line(dt);
 			}
 		}
 		ft_free_prompt_line(prompt, line);

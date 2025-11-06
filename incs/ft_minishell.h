@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/04 17:10:57 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/06 18:23:12 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <ft_skips.h>
 # include <ft_checks.h>
 # include <stdbool.h>
+# include <sys/wait.h>
 
 int		ft_listener(void);
 void	ft_read_line(t_data *dt);
@@ -38,5 +39,10 @@ size_t	ft_parenthesis_len(const char *s);
 char	**ft_free_strarr(char **arr, size_t position);
 char	**ft_split_prompt(const char *s, char *seps);
 char	**ft_strarr_dup(char **strarr);
+void	ft_apply_redirs(t_cmd *cmd);
+void	ft_exec_line(t_data *dt);
+void	ft_dup2_close(int oldfd, int newfd);
+void	ft_perror_exit(char *msg, int status);
+void	ft_close_unused_fds(t_cmd *cmd);
 
 #endif
