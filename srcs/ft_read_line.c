@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:08:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/06 18:13:49 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/07 16:28:05 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,61 +42,61 @@ static void	ft_exiting(char *prompt, char *line, t_data *dt)
 	exit(0);
 }
 
-static void	ft_print_cmds(t_data *dt)
-{
-	int		i;
-	int		cmd_counter;
-	t_cmd	*cmd;
-	t_cmd	*save_cmd;
-	t_redir	*redir;
-	t_redir	*save_redir;
+// static void	ft_print_cmds(t_data *dt)
+// {
+// 	int		i;
+// 	int		cmd_counter;
+// 	t_cmd	*cmd;
+// 	t_cmd	*save_cmd;
+// 	t_redir	*redir;
+// 	t_redir	*save_redir;
 
-	cmd = dt->cmd_ll;
-	cmd_counter = 0;
-	while (cmd)
-	{
-		printf("-----------CMD[%d]------------\n", cmd_counter);
-		i = 0;
-		while (cmd->args[i])
-		{
-			printf("arg[%d]: %s\n", i, cmd->args[i]);
-			i++;
-		}
-		free(cmd->args);
-		printf("infile: %d\n", cmd->infile);
-		printf("outfile: %d\n", cmd->outfile);
-		redir = cmd->redir_ll;
-		i = 0;
-		while (redir)
-		{
-			printf("redir[%d]\n", i);
-			printf("\ttype: %s\n", redir->type);
-			printf("\tfilename: %s\n", redir->filename);
-			printf("\tfd_from: %d\n", redir->fd_from);
-			printf("\tfd_to: %d\n", redir->fd_to);
-			save_redir = redir;
-			redir = redir->next;
-			free(save_redir);
-			save_redir = NULL;
-		}
-		printf("------------------------------\n\n");
-		save_cmd = cmd;
-		cmd = cmd->next;
-		free(save_cmd);
-		save_cmd = NULL;
-		cmd_counter++;
-	}
-	i = 0;
-	while (dt->split_line[i])
-	{
-		free(dt->split_line[i]);
-		dt->split_line[i] = NULL;
-		i++;
-	}
-	free(dt->split_line);
-	dt->split_line = NULL;
-	dt->cmd_ll = NULL;
-}
+// 	cmd = dt->cmd_ll;
+// 	cmd_counter = 0;
+// 	while (cmd)
+// 	{
+// 		printf("-----------CMD[%d]------------\n", cmd_counter);
+// 		i = 0;
+// 		while (cmd->args[i])
+// 		{
+// 			printf("arg[%d]: %s\n", i, cmd->args[i]);
+// 			i++;
+// 		}
+// 		free(cmd->args);
+// 		printf("infile: %d\n", cmd->infile);
+// 		printf("outfile: %d\n", cmd->outfile);
+// 		redir = cmd->redir_ll;
+// 		i = 0;
+// 		while (redir)
+// 		{
+// 			printf("redir[%d]\n", i);
+// 			printf("\ttype: %s\n", redir->type);
+// 			printf("\tfilename: %s\n", redir->filename);
+// 			printf("\tfd_from: %d\n", redir->fd_from);
+// 			printf("\tfd_to: %d\n", redir->fd_to);
+// 			save_redir = redir;
+// 			redir = redir->next;
+// 			free(save_redir);
+// 			save_redir = NULL;
+// 		}
+// 		printf("------------------------------\n\n");
+// 		save_cmd = cmd;
+// 		cmd = cmd->next;
+// 		free(save_cmd);
+// 		save_cmd = NULL;
+// 		cmd_counter++;
+// 	}
+// 	i = 0;
+// 	while (dt->split_line[i])
+// 	{
+// 		free(dt->split_line[i]);
+// 		dt->split_line[i] = NULL;
+// 		i++;
+// 	}
+// 	free(dt->split_line);
+// 	dt->split_line = NULL;
+// 	dt->cmd_ll = NULL;
+// }
 
 void	ft_read_line(t_data *dt)
 {
@@ -118,7 +118,7 @@ void	ft_read_line(t_data *dt)
 			{
 				dt->split_line = ft_split_prompt(line, WS_POSIX);
 				ft_parser(dt);
-				ft_print_cmds(dt);
+				// ft_print_cmds(dt);
 				ft_exec_line(dt);
 			}
 		}

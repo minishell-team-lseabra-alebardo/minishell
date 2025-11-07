@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 12:45:27 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/07 14:00:52 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/07 16:24:28 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	ft_search_in_path(char *cmd, char **path_addr, char **path_arr)
 	while (path_arr[i])
 	{
 		dir_path = ft_strjoin(path_arr[i], "/");
-		complete_path = ft_strjoin(*dir_path, cmd);
+		complete_path = ft_strjoin(dir_path, cmd);
 		free(dir_path);
 		if (access(complete_path, F_OK | X_OK) == 0)
 		{

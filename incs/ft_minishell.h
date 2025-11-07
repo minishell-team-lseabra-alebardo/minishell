@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/07 13:57:26 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/07 16:23:43 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool	ft_is_op(const char *s, const char *op);
 int		ft_get_op_len(const char *s);
 size_t	ft_quote_len(const char *s);
 size_t	ft_parenthesis_len(const char *s);
-char	**ft_free_strarr(char **arr, size_t position);
+char	**ft_free_strarr_until(char **arr, size_t position);
 char	**ft_split_prompt(const char *s, char *seps);
 char	**ft_strarr_dup(char **strarr);
 void	ft_apply_redirs(t_cmd *cmd);
@@ -44,6 +44,7 @@ void	ft_exec_line(t_data *dt);
 void	ft_dup2_close(int oldfd, int newfd);
 void	ft_perror_exit(char *msg, int status);
 void	ft_close_unused_fds(t_cmd *cmd);
+void	ft_close_cmd_files(t_cmd *cmd);
 int		ft_resolve_cmd_path(char *cmd, char **path_addr);
 
 #endif

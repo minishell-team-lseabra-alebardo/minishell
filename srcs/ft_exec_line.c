@@ -6,27 +6,45 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/07 14:12:13 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/07 16:44:23 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
 
-void	ft_exec_cmd(t_cmd *cmd)
+void	ft_exec_cmd(t_cmd *cmd, char **ms_envp)
 {
 	char	*path;
+	char	*msg;
 	int		status;
 
 	path = NULL;
 	status = ft_resolve_cmd_path(cmd->args[0], &path);
 	if (status != EXIT_SUCCESS)
-		perror_exit(cmd->args[0], status);
+	{
+		ft_close_cmd_files(cmd);
+		if (status == EXIT_NOT_FOUND)
+			msg = ERR_CMD_NOT_FOUND;
+		else if (status == EXIT_CANNOT_EXEC)
+			msg = ERR_NO_PERMISSION;
+		else
+			msg = ERR_GENERIC;
+		dup2(STDERR_FILENO, STDOUT_FILENO);
+		printf("%s: %s: %s", PROGRAM_NAME, cmd->args[0], msg);
+		exit(status);
+	}
+	ft_dup2_close(cmd->infile, STDIN_FILENO);
+	ft_dup2_close(cmd->outfile, STDOUT_FILENO);
+	execve(path, cmd->args, ms_envp);
+	free(path);
+	perror("execve");
 }
 
-static void	ft_exec_child(t_cmd *cmd)
+static void	ft_exec_child(t_cmd *cmd, char **ms_envp)
 {
 	ft_close_unused_fds(cmd->next);
 	ft_apply_redirs(cmd);
+	ft_exec_cmd(cmd, ms_envp);
 }
 
 static void	ft_skip_based_on_stat(t_cmd **cmd, pid_t prev_pid)
@@ -43,10 +61,7 @@ static void	ft_skip_based_on_stat(t_cmd **cmd, pid_t prev_pid)
 		{
 			while (*cmd && ft_is_op((*cmd)->prev_op, CMD_PIPE))
 			{
-				if ((*cmd)->infile > STDERR_FILENO)
-					close((*cmd)->infile);
-				if ((*cmd)->outfile > STDERR_FILENO)
-					close((*cmd)->outfile);
+				ft_close_cmd_files(*cmd);
 				*cmd = (*cmd)->next;
 			}
 		}
@@ -64,11 +79,8 @@ void	ft_exec_line(t_data *dt)
 	{
 		dt->pid_arr[i] = fork();
 		if (dt->pid_arr[i] == 0)
-			ft_exec_child(cur_cmd);
-		if (cur_cmd->infile > STDERR_FILENO)
-			close(cur_cmd->infile);
-		if (cur_cmd->outfile > STDERR_FILENO)
-			close(cur_cmd->outfile);
+			ft_exec_child(cur_cmd, dt->ms_envp);
+		ft_close_cmd_files(cur_cmd);
 		cur_cmd = cur_cmd->next;
 		if (cur_cmd && !ft_is_op(cur_cmd->prev_op, CMD_PIPE))
 			ft_skip_based_on_stat(&cur_cmd, dt->pid_arr[i]);

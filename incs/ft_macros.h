@@ -6,12 +6,14 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:46:44 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/07 14:14:04 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/07 15:42:20 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_MACROS_H
 # define FT_MACROS_H
+
+# define PROGRAM_NAME "minishell"
 
 // POSIX whitespaces
 # define WS_SPACE		' '
@@ -37,7 +39,10 @@
 # define HERE_DOC_WARNING	"warning: here-document delimited by end-of-file"
 
 // Error messages
-# define ERR_SYNTAX	"Syntax error\n"
+# define ERR_GENERIC		"Error\n"
+# define ERR_SYNTAX			"Syntax error\n"
+# define ERR_NO_PERMISSION	"Permission denied\n"
+# define ERR_CMD_NOT_FOUND	"command not found\n"
 
 // Exit status code
 # define EXIT_CANNOT_EXEC	126

@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 15:10:56 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/10/30 11:44:38 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/07 16:23:50 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ char	**ft_split_prompt(const char *s, char *seps)
 			s++;
 		arr[i] = ft_process_word(&s, seps);
 		if (!arr[i])
-			return (ft_free_strarr(arr, i));
+			return (ft_free_strarr_until(arr, i));
 	}
 	if (arr[0] != NULL)
 		arr[word_count] = NULL;

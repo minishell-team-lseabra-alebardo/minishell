@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 14:16:59 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/04 17:05:51 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/07 16:23:46 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ size_t	ft_parenthesis_len(const char *s)
 /**
  * @brief Frees a partially allocated array of strings.
  *
- * The ft_free_strarr function deallocates memory for an array of strings up to a
+ * The ft_free_strarr_until function deallocates memory for an array of strings up to a
  * specified position. It iterates through the array, freeing each individual
  * string pointer, and then frees the array itself. This is typically used for
  * cleanup when an allocation fails during array construction.
@@ -126,7 +126,7 @@ size_t	ft_parenthesis_len(const char *s)
  * @param position The number of elements to free (0-indexed).
  * @return Always returns NULL (0) for convenient error handling.
  */
-char	**ft_free_strarr(char **arr, size_t position)
+char	**ft_free_strarr_until(char **arr, size_t position)
 {
 	size_t	i;
 
