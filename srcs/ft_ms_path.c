@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 14:15:30 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/07 17:31:33 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/07 19:30:28 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char	**ft_expand_envp(char **ms_envp)
 	i = 0;
 	while (ms_envp[i])
 		i++;
-	expanded_envp = (char **) ft_calloc(i + 1, sizeof(char *));
+	expanded_envp = (char **) ft_calloc(i + 2, sizeof(char *));
 	if (!expanded_envp)
 		return (0);
 	i = 0;
@@ -53,11 +53,10 @@ int	ft_ms_path(t_data *dt)
 	pwd = ft_get_pwd(dt->ms_envp);
 	while (dt->ms_envp[i])
 		i++;
-	dt->ms_envp[i] = (char *) ft_calloc(ft_strlen(pwd) + 9, 1);
+	dt->ms_envp[i] = (char *) ft_calloc(ft_strlen(pwd) + 10, 1);
 	if (!dt->ms_envp[i])
 		return (-1);
-	ft_strlcpy(dt->ms_envp[i], "MS_PATH=", 8);
-	ft_strlcat(dt->ms_envp[i], pwd, ft_strlen(pwd) + 9);
-	printf("%s\n", dt->ms_envp[i]);
+	ft_strlcpy(dt->ms_envp[i], "MS_PATH=", 9);
+	ft_strlcat(dt->ms_envp[i], pwd, ft_strlen(pwd) + 10);
 	return (0);
 }
