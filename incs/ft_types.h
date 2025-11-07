@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_types.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:56:36 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/05 17:21:53 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/07 14:15:07 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_cmd
 typedef struct s_data
 {
 	char	**ms_envp;
+	char	*ms_path;
 	int		lst_stat;
 	char	**split_line;
 	t_cmd	*cmd_ll;

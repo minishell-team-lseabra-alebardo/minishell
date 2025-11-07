@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell.c                                     :+:      :+:    :+:   */
+/*   ft_ms_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/29 21:46:59 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/07 14:55:08 by alebarbo         ###   ########.fr       */
+/*   Created: 2025/11/07 14:15:30 by alebarbo          #+#    #+#             */
+/*   Updated: 2025/11/07 14:54:17 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
 
-int	main(int argc, char *argv[], char *envp[])
+static char	*ft_get_pwd(char **ms_envp)
 {
-	t_data	*dt;
+	int		i;
 
-	(void) argc;
-	(void) argv;
-	if (ft_listener() < 0)
-	{
-		perror(strerror(errno));
-		exit(EXIT_FAILURE);
-	}
-	dt = ft_calloc(1, sizeof(t_data));
-	if (!dt)
-		return (EXIT_FAILURE);
-	dt->ms_envp = ft_strarr_dup(envp);
-	if (!dt->ms_envp)
-		return (EXIT_FAILURE);
-	dt->ms_path = ft_ms_path(dt->ms_envp);
-	dt->lst_stat = 0;
-	dt->cmd_ll = NULL;
-	ft_read_line(dt);
+	i = 0;
+	while (ft_strncmp(ms_envp[i], "PWD=", 4))
+		i++;
+	return (ms_envp[i] + 4);
+}
+
+char	*ft_ms_path(char **ms_envp)
+{
+	char	*pwd;
+	char	*ms_path;
+
+	pwd = ft_get_pwd(ms_envp);
+	ms_path	= (char *) ft_calloc(ft_strlen(pwd) + 12, sizeof(char));
+	ft_strlcpy(ms_path, pwd, ft_strlen(pwd) + 1);
+	ft_strlcat(ms_path, "/minishell", ft_strlen(pwd) + 11);
+	return (ms_path);
 }
