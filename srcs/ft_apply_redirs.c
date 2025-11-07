@@ -6,13 +6,13 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:07:14 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/06 18:11:34 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/07 14:01:16 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
 
-static void ft_apply_heredoc(t_cmd *cmd, t_redir *rdr)
+static void	ft_apply_heredoc(t_cmd *cmd, t_redir *rdr)
 {
 	if (ft_is_op(rdr->type, CMD_HEREDOC))
 	{
