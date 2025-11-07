@@ -6,7 +6,7 @@
 #    By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/11/06 18:24:04 by lseabra-         ###   ########.fr        #
+#    Updated: 2025/11/07 14:00:03 by lseabra-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,20 +36,20 @@ BUILD_PATH = .build
 SRC = $(addprefix $(SRC_PATH)/, \
 		ft_minishell.c \
 		ft_apply_redirs.c \
-		ft_check_syntax.c \
 		ft_check_syntax_utils.c \
+		ft_check_syntax.c \
 		ft_exec_line.c \
 		ft_exec_utils.c \
 		ft_get_ps1.c \
 		ft_parser.c \
 		ft_read_line.c \
+		ft_remove_quotes.c \
+		ft_resolve_cmd_path.c \
 		ft_signal_handler.c \
 		ft_skips.c \
 		ft_split_prompt_utils.c \
 		ft_split_prompt.c \
 		ft_strarr_dup.c \
-		ft_parser.c \
-		ft_remove_quotes.c \
 )
 
 # Object files

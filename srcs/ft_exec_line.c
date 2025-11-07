@@ -6,11 +6,22 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/06 18:13:21 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/07 14:12:13 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
+
+void	ft_exec_cmd(t_cmd *cmd)
+{
+	char	*path;
+	int		status;
+
+	path = NULL;
+	status = ft_resolve_cmd_path(cmd->args[0], &path);
+	if (status != EXIT_SUCCESS)
+		perror_exit(cmd->args[0], status);
+}
 
 static void	ft_exec_child(t_cmd *cmd)
 {
@@ -45,7 +56,7 @@ static void	ft_skip_based_on_stat(t_cmd **cmd, pid_t prev_pid)
 void	ft_exec_line(t_data *dt)
 {
 	t_cmd	*cur_cmd;
-	int	i;
+	int		i;
 
 	cur_cmd = dt->cmd_ll;
 	i = 0;
