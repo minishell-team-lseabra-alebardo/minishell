@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 21:46:59 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/07 15:43:04 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/07 17:30:55 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ int	main(int argc, char *argv[], char *envp[])
 	dt->ms_envp = ft_strarr_dup(envp);
 	if (!dt->ms_envp)
 		return (EXIT_FAILURE);
-	ft_ms_path(dt->ms_envp);
-	if (!dt->ms_envp)
+	if (ft_ms_path(dt) < 0)
 		return (EXIT_FAILURE);
 	dt->lst_stat = 0;
 	dt->cmd_ll = NULL;
