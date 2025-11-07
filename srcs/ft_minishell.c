@@ -6,11 +6,24 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 21:46:59 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/07 17:30:55 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/07 21:50:43 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
+
+static void	ft_free_ms_envp(char **ms_envp)
+{
+	int		i;
+
+	i = 0;
+	while (ms_envp[i])
+	{
+		free(ms_envp[i]);
+		i++;
+	}
+	free(ms_envp);
+}
 
 int	main(int argc, char *argv[], char *envp[])
 {
@@ -30,7 +43,11 @@ int	main(int argc, char *argv[], char *envp[])
 	if (!dt->ms_envp)
 		return (EXIT_FAILURE);
 	if (ft_ms_path(dt) < 0)
+	{
+		ft_free_ms_envp(dt->ms_envp);
+		free(dt);
 		return (EXIT_FAILURE);
+	}
 	dt->lst_stat = 0;
 	dt->cmd_ll = NULL;
 	ft_read_line(dt);
