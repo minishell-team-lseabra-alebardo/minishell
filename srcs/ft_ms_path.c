@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 14:15:30 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/07 14:54:17 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/07 15:45:38 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,49 @@ static char	*ft_get_pwd(char **ms_envp)
 	return (ms_envp[i] + 4);
 }
 
-char	*ft_ms_path(char **ms_envp)
+static int	ft_get_path(char **ms_envp)
+{
+	int		i;
+
+	i = 0;
+	while (ft_strncmp(ms_envp[i], "PATH=", 5))
+		i++;
+	return (i);
+}
+
+static char	*ft_expand_path(char *pwd, char *path)
+{
+	char	*new_path;
+	int		i;
+	int		j;
+
+	new_path = (char *) ft_calloc(ft_strlen(pwd) + ft_strlen(path) + 2, 1);
+	if (!new_path)
+		return (0);
+	i = 0;
+	while (path[i])
+	{
+		new_path[i] = path[i];
+		i++;
+	}
+	new_path[i] = ':';
+	i++;
+	j = 0;
+	while (pwd[j])
+	{
+		new_path[i] = pwd[j];
+		i++;
+		j++;
+	}
+	return (new_path);
+}
+
+void	ft_ms_path(char **ms_envp)
 {
 	char	*pwd;
-	char	*ms_path;
+	int		path;
 
 	pwd = ft_get_pwd(ms_envp);
-	ms_path	= (char *) ft_calloc(ft_strlen(pwd) + 12, sizeof(char));
-	ft_strlcpy(ms_path, pwd, ft_strlen(pwd) + 1);
-	ft_strlcat(ms_path, "/minishell", ft_strlen(pwd) + 11);
-	return (ms_path);
+	path = ft_get_path(ms_envp);
+	ms_envp[path] = ft_expand_path(pwd, ms_envp[path]);
 }

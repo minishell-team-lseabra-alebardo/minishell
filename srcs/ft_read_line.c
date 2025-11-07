@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:08:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/07 14:39:30 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/07 15:36:54 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void	ft_exiting(char *prompt, char *line, t_data *dt)
 {
 	ft_free_prompt_line(prompt, line);
 	ft_free_ms_envp(dt->ms_envp);
-	free(dt->ms_path);
 	free(dt);
 	printf("exit\n");
 	exit(0);
