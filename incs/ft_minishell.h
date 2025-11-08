@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/07 16:23:43 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/08 23:50:54 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	ft_read_line(t_data *dt);
 char	*ft_get_ps1(void);
 void	ft_parser(t_data *dt);
 void	ft_remove_quotes(char **args);
+int		ft_ms_path(t_data *dt);
 bool	ft_is_op(const char *s, const char *op);
 int		ft_get_op_len(const char *s);
 size_t	ft_quote_len(const char *s);
