@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/10 17:20:55 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/10 18:43:44 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static void	ft_skip_based_on_stat(t_cmd **cmd, pid_t prev_pid)
 			|| (WEXITSTATUS(lst_blk_st) != 0
 				&& ft_is_op((*cmd)->prev_op, CMD_AND)))
 		{
+			*cmd = (*cmd)->next;
 			while (*cmd && ft_is_op((*cmd)->prev_op, CMD_PIPE))
 			{
 				ft_close_cmd_files(*cmd);
