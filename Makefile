@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+         #
+#    By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/11/09 20:21:44 by alebarbo         ###   ########.fr        #
+#    Updated: 2025/11/10 18:15:06 by lseabra-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,9 +38,12 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_apply_redirs.c \
 		ft_check_syntax_utils.c \
 		ft_check_syntax.c \
+		ft_cleanup_line.c \
 		ft_exec_line.c \
 		ft_exec_utils.c \
 		ft_get_ps1.c \
+		ft_is_op.c \
+		ft_ms_path.c \
 		ft_parser.c \
 		ft_read_line.c \
 		ft_expand_variables.c \
@@ -52,7 +55,6 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_split_prompt_utils.c \
 		ft_split_prompt.c \
 		ft_strarr_dup.c \
-		ft_ms_path.c \
 )
 
 # Object files

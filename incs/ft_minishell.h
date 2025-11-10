@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/09 20:23:00 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/10 18:11:27 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	ft_parser(t_data *dt);
 void	ft_remove_quotes(char **args);
 int		ft_ms_path(t_data *dt);
 bool	ft_is_op(const char *s, const char *op);
+bool	ft_is_logic_or_pipe_op(char *str);
+bool	ft_is_redir_op(char *str);
 int		ft_get_op_len(const char *s);
 size_t	ft_quote_len(const char *s);
 size_t	ft_parenthesis_len(const char *s);
@@ -48,5 +50,7 @@ void	ft_perror_exit(char *msg, int status);
 void	ft_close_unused_fds(t_cmd *cmd);
 void	ft_close_cmd_files(t_cmd *cmd);
 int		ft_resolve_cmd_path(char *cmd, char **path_addr);
-
+void	ft_wait_all_pids(t_data *dt);
+void	ft_free_strarr(char **strarr);
+void	ft_cleanup_line(t_data *dt);
 #endif

@@ -6,16 +6,18 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 12:45:27 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/07 16:24:28 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/10 17:05:08 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
 
-static void	ft_free_strarr(char **strarr)
+void	ft_free_strarr(char **strarr)
 {
 	int	i;
 
+	if (!strarr)
+		return ;
 	i = 0;
 	while (strarr[i])
 	{

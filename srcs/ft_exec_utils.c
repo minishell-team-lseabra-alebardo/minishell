@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:46:07 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/07 15:46:17 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/10 15:23:04 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 void	ft_dup2_close(int oldfd, int newfd)
 {
+	if (oldfd == newfd)
+		return ;
 	if (dup2(oldfd, newfd) == -1)
 	{
 		perror("dup2");
 		exit(EXIT_FAILURE);
 	}
-	close(oldfd);
+	if (oldfd > STDERR_FILENO)
+		close(oldfd);
 }
 
 void	ft_perror_exit(char *msg, int status)
@@ -46,4 +49,18 @@ void	ft_close_cmd_files(t_cmd *cmd)
 		close(cmd->infile);
 	if (cmd->outfile > STDERR_FILENO)
 		close(cmd->outfile);
+}
+
+void	ft_wait_all_pids(t_data *dt)
+{
+	pid_t	cur_pid;
+	int		i;
+
+	i = 0;
+	cur_pid = dt->pid_arr[i];
+	while (cur_pid != 0)
+	{
+		waitpid(cur_pid, &dt->lst_stat, 0);
+		cur_pid = dt->pid_arr[++i];
+	}
 }

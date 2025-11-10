@@ -6,23 +6,17 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 14:16:59 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/07 16:23:46 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/10 18:10:55 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
 
-bool	ft_is_op(const char *s, const char *op)
+static bool	ft_isop_split(const char *s, const char *op)
 {
-	size_t	len;
-
-	if (!s || !*s || !op)
+	if (!s || !op)
 		return (false);
-	if (ft_strlen(s) > ft_strlen(op))
-		len = ft_strlen(s);
-	else
-		len = ft_strlen(op);
-	if (ft_strncmp(s, op, len) == 0)
+	else if (ft_strncmp(s, op, ft_strlen(op)) == 0)
 		return (true);
 	else
 		return (false);
@@ -32,19 +26,19 @@ int	ft_get_op_len(const char *s)
 {
 	if (!s)
 		return (0);
-	else if (ft_is_op(s, CMD_AND))
+	else if (ft_isop_split(s, CMD_AND))
 		return ((int)ft_strlen(CMD_AND));
-	else if (ft_is_op(s, CMD_OR))
+	else if (ft_isop_split(s, CMD_OR))
 		return ((int)ft_strlen(CMD_OR));
-	else if (ft_is_op(s, CMD_PIPE))
+	else if (ft_isop_split(s, CMD_PIPE))
 		return ((int)ft_strlen(CMD_PIPE));
-	else if (ft_is_op(s, CMD_HEREDOC))
+	else if (ft_isop_split(s, CMD_HEREDOC))
 		return ((int)ft_strlen(CMD_HEREDOC));
-	else if (ft_is_op(s, CMD_IN))
+	else if (ft_isop_split(s, CMD_IN))
 		return ((int)ft_strlen(CMD_IN));
-	else if (ft_is_op(s, CMD_OUT_APPEND))
+	else if (ft_isop_split(s, CMD_OUT_APPEND))
 		return ((int)ft_strlen(CMD_OUT_APPEND));
-	else if (ft_is_op(s, CMD_OUT))
+	else if (ft_isop_split(s, CMD_OUT))
 		return ((int)ft_strlen(CMD_OUT));
 	else
 		return (0);
