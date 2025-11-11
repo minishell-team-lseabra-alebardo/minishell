@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:37:39 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/04 17:59:30 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/11 14:36:45 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,12 @@ static void	ft_move_chars(char *arg, char quote)
 	}
 }
 
-static void	ft_search_quotes(char *arg)
+void	ft_search_quotes(char *arg)
 {
 	while (*arg)
 	{
 		if (*arg == '\'' || *arg == '\"')
 			ft_move_chars(arg, *arg);
 		arg++;
-	}
-}
-
-void	ft_remove_quotes(char **args)
-{
-	while (*args)
-	{
-		ft_search_quotes(*args);
-		args++;
 	}
 }

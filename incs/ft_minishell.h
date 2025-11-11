@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/10 18:11:27 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/11 14:37:36 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int		ft_listener(void);
 void	ft_read_line(t_data *dt);
 char	*ft_get_ps1(void);
 void	ft_parser(t_data *dt);
-void	ft_remove_quotes(char **args);
+void	ft_search_quotes(char *arg);
+void	ft_args_treatment(char **args, char **ms_envp);
 int		ft_ms_path(t_data *dt);
 bool	ft_is_op(const char *s, const char *op);
 bool	ft_is_logic_or_pipe_op(char *str);

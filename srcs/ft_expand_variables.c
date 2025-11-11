@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expand_variables.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 20:14:48 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/10 15:17:11 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/11 14:36:01 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,12 @@ static char	*ft_search_variable(char **ms_envp, char *arg)
 	return (arg);
 }
 
-void	ft_variables(char **args, char **ms_envp)
+void	ft_args_treament(char **args, char **ms_envp)
 {
 	while (*args)
 	{
 		*args = ft_search_variable(ms_envp, *args);
+		ft_search_quotes(*args);
 		args++;
 	}
 }
