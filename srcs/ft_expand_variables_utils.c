@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 20:18:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/09 20:23:38 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/12 01:04:10 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	ft_is_whitespace(char c)
 	return (0);
 }
 
-int	ft_skip_single_quotes(char *arg, int i)
+int	ft_avoid_quotes(char *arg, char quote, int i)
 {
-	while (arg[i] && arg[i] != '\'')
+	while (arg[i] && arg[i] != quote)
 		i++;
 	return (i++);
 }
@@ -31,7 +31,7 @@ int	ft_var_size(char *arg)
 	int		i;
 
 	i = 0;
-	while (!ft_is_whitespace(arg[i]) && arg[i] != '\"')
+	while (!ft_is_whitespace(arg[i]) && arg[i] != '\'' && arg[i] != '\"')
 		i++;
 	return (++i);
 }
@@ -41,7 +41,7 @@ void	ft_copy_var_name(char *arg, char *var_name)
 	int		i;
 
 	i = 0;
-	while (!ft_is_whitespace(arg[i]) && arg[i] != '\"')
+	while (!ft_is_whitespace(arg[i]) && arg[i] != '\'' && arg[i] != '\"')
 	{
 		var_name[i] = arg[i];
 		i++;

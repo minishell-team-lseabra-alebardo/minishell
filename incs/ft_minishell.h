@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/11 14:37:36 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/11 22:16:50 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ int		ft_listener(void);
 void	ft_read_line(t_data *dt);
 char	*ft_get_ps1(void);
 void	ft_parser(t_data *dt);
-void	ft_search_quotes(char *arg);
-void	ft_args_treatment(char **args, char **ms_envp);
+void	ft_search_single_quotes(char *arg);
+void	ft_search_double_quotes(char *arg);
+void	ft_args_treatment(char **args, char **ms_envp, int mode);
 int		ft_ms_path(t_data *dt);
 bool	ft_is_op(const char *s, const char *op);
 bool	ft_is_logic_or_pipe_op(char *str);

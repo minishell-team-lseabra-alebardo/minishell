@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/11 14:44:09 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/11 22:41:17 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_exec_cmd(t_cmd *cmd, char **ms_envp)
 		ft_handle_path_failure(cmd, status);
 	ft_dup2_close(cmd->infile, STDIN_FILENO);
 	ft_dup2_close(cmd->outfile, STDOUT_FILENO);
-	ft_args_treatment(cmd->args, ms_envp);
+	ft_args_treatment(cmd->args, ms_envp, 1);
 	execve(path, cmd->args, ms_envp);
 	free(path);
 	ft_close_cmd_files(cmd);

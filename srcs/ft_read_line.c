@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_read_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:08:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/10 17:09:46 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/11 21:11:13 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void	ft_read_line(t_data *dt)
 				write(2, ERR_SYNTAX, 13);
 			else
 			{
+				ft_args_treatment(&line, dt->ms_envp, 0);
 				dt->split_line = ft_split_prompt(line, WS_POSIX);
 				ft_parser(dt);
 				// ft_print_cmds(dt);

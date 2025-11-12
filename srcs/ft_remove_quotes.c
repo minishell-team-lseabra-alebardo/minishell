@@ -6,23 +6,14 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:37:39 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/11 14:36:45 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/11 22:40:15 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
 
-static void	ft_move_chars(char *arg, char quote)
+static void	ft_move_chars(char *arg)
 {
-	ft_memmove(arg, arg + 1, 1);
-	arg++;
-	while (*arg != quote)
-	{
-		ft_memmove(arg, arg + 1, 1);
-		arg++;
-	}
-	ft_memmove(arg, arg + 1, 1);
-	arg++;
 	while (*arg)
 	{
 		ft_memmove(arg, arg + 1, 1);
@@ -30,12 +21,32 @@ static void	ft_move_chars(char *arg, char quote)
 	}
 }
 
-void	ft_search_quotes(char *arg)
+void	ft_search_double_quotes(char *arg)
 {
 	while (*arg)
 	{
-		if (*arg == '\'' || *arg == '\"')
-			ft_move_chars(arg, *arg);
+		while (*arg == '\"')
+		{
+			ft_move_chars(arg);
+			while (*arg != '\"')
+				arg++;
+			ft_move_chars(arg);
+		}
+		arg++;
+	}
+}
+
+void	ft_search_single_quotes(char *arg)
+{
+	while (*arg)
+	{
+		while (*arg == '\'')
+		{
+			ft_move_chars(arg);
+			while (*arg != '\'')
+				arg++;
+			ft_move_chars(arg);
+		}
 		arg++;
 	}
 }

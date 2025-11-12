@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expand_variables.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 20:14:48 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/11 14:46:01 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/11 22:54:23 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,19 @@ static char	*ft_expand_variable(char **ms_envp, char *arg, int i)
 	return (new_arg);
 }
 
-static char	*ft_search_variable(char **ms_envp, char *arg)
+static char	*ft_search_variable(char **ms_envp, char *arg, int mode)
 {
 	int		i;
+	char	quote;
 
 	i = 0;
 	while (arg[i])
 	{
-		if (arg[i] == '\'')
+		if (arg[i] == '\'' || (arg[i] == '\"' && mode == 0))
 		{
+			quote = arg[i];
 			i++;
-			i = ft_skip_single_quotes(arg, i);
+			i = ft_avoid_quotes(arg, quote, i);
 		}
 		if (arg[i] == '$' && !ft_is_whitespace(arg[i]))
 		{
@@ -93,12 +95,25 @@ static char	*ft_search_variable(char **ms_envp, char *arg)
 	return (arg);
 }
 
-void	ft_args_treatment(char **args, char **ms_envp)
+void	ft_args_treatment(char **args, char **ms_envp, int mode)
 {
-	while (*args)
+	char	**temp;
+
+	temp = args;
+	if (mode == 0)
+		*args = ft_search_variable(ms_envp, *args, mode);
+	else
 	{
-		*args = ft_search_variable(ms_envp, *args);
-		ft_search_quotes(*args);
-		args++;
+		while (*temp)
+		{
+			ft_search_double_quotes(*temp);
+			*temp = ft_search_variable(ms_envp, *temp, mode);
+			temp++;
+		}
+		while (*args)
+		{
+			ft_search_single_quotes(*args);
+			args++;
+		}
 	}
 }
