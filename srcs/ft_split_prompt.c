@@ -6,36 +6,19 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 15:10:56 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/07 16:23:50 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/14 16:46:23 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
 
-static int	ft_calc_jump(const char *s)
+static void	ft_handle_operator(size_t *i, char *s, char *seps, size_t *counter)
 {
-	int	counter;
-
-	counter = 0;
-	if (*s && ft_strchr("\'\"", *s))
-		counter += ft_quote_len(s);
-	else if (*s == '(')
-		counter += ft_parenthesis_len(s);
-	return (counter);
-}
-
-static bool	ft_check_n_back(const char *str)
-{
-	if (!str)
-		return (false);
-	str--;
-	while (*str && !ft_strchr(WS_POSIX, *str))
-	{
-		if (!ft_isdigit(*str))
-			return (false);
-		str--;
-	}
-	return (true);
+	if ((*i > 0 && !ft_strchr(seps, s[*i - 1]) && !ft_check_n_back(s + *i)))
+		(*counter)++;
+	*i += ft_get_op_len(s + *i);
+	if (s[*i] && !ft_strchr(seps, s[*i]))
+		(*counter)++;
 }
 
 /**
@@ -67,17 +50,39 @@ static size_t	ft_count_words(const char *s, char *seps)
 		if ((s[i] && ft_strchr("\'\"", s[i])) || (s[i] == '('))
 			i += ft_calc_jump(s + i);
 		else if (ft_get_op_len(s + i) > 0)
-		{
-			counter += (i > 0 && !ft_strchr(seps, s[i - 1]) && !ft_check_n_back(s + i));
-			i += ft_get_op_len(s + i);
-			counter += (s[i] && !ft_strchr(seps, s[i]));
-		}
+			ft_handle_operator(&i, (char *)s, seps, &counter);
 		else if (i > 0 && ft_strchr(seps, s[i]) && !ft_strchr(seps, s[i++ - 1]))
 			counter++;
 		else
 			i++;
 	}
 	return (counter + (i > 0 && (!ft_strchr(seps, s[i - 1]))));
+}
+
+static size_t	ft_get_world_len(const char *s, char *seps)
+{
+	size_t	i;
+
+	i = 0;
+	if (!s || !seps)
+		return (0);
+	while (ft_isdigit(s[i]))
+		i++;
+	if (ft_get_op_len(s + i) > 0)
+		i += ft_get_op_len(s + i);
+	else
+	{
+		while (s[i] && (!ft_strchr(seps, s[i])) && !ft_get_op_len(s + i))
+		{
+			if (s[i] && ft_strchr("\'\"", s[i]))
+				i += ft_quote_len(s + i);
+			else if (s[i] == '(')
+				i += ft_parenthesis_len(s + i);
+			else
+				i++;
+		}
+	}
+	return (i);
 }
 
 /**
@@ -97,31 +102,15 @@ static size_t	ft_count_words(const char *s, char *seps)
  */
 static char	*ft_process_word(const char **s, char *seps)
 {
-	int		i;
+	size_t	len;
 	char	*word;
 
-	i = 0;
-	while (ft_isdigit((*s)[i]))
-		i++;
-	if (ft_get_op_len(*s + i) > 0)
-		i += ft_get_op_len(*s + i);
-	else
-	{
-		while ((*s)[i] && (!ft_strchr(seps, (*s)[i])) && !ft_get_op_len(*s + i))
-		{
-			if ((*s)[i] && ft_strchr("\'\"", (*s)[i]))
-				i += ft_quote_len((*s) + i);
-			else if ((*s)[i] == '(')
-				i += ft_parenthesis_len((*s) + i);
-			else
-				i++;
-		}
-	}
-	word = ft_calloc((i + 1), sizeof(char));
+	len = ft_get_world_len(*s, seps);
+	word = ft_calloc((len + 1), sizeof(char));
 	if (!word)
 		return (NULL);
-	ft_memmove(word, *s, i);
-	*s += i;
+	ft_memmove(word, *s, len);
+	*s += len;
 	return (word);
 }
 

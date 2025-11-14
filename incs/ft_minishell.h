@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/14 15:19:21 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/14 16:34:15 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int		ft_ms_path(t_data *dt);
 bool	ft_is_op(const char *s, const char *op);
 bool	ft_is_logic_or_pipe_op(char *str);
 bool	ft_is_redir_op(char *str);
+int		ft_calc_jump(const char *s);
+bool	ft_check_n_back(const char *str);
 int		ft_get_op_len(const char *s);
 size_t	ft_quote_len(const char *s);
 size_t	ft_parenthesis_len(const char *s);

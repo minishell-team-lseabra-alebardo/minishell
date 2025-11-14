@@ -6,7 +6,7 @@
 #    By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/11/14 15:19:45 by lseabra-         ###   ########.fr        #
+#    Updated: 2025/11/14 16:33:05 by lseabra-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_resolve_cmd_path.c \
 		ft_signal_handler.c \
 		ft_skips.c \
+		ft_split_prompt_utils_2.c \
 		ft_split_prompt_utils.c \
 		ft_split_prompt.c \
 		ft_strarr_dup.c \
