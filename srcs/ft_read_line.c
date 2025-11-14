@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:08:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/14 15:24:05 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/14 16:08:36 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	ft_read_line(t_data *dt)
 				ft_args_treatment(&line, dt->ms_envp, 0);
 				dt->split_line = ft_split_prompt(line, WS_POSIX);
 				ft_parser(dt);
-				ft_print_cmds(dt);
 				ft_exec_line(dt);
 			}
 		}
