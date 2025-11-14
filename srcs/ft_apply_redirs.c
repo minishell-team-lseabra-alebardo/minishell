@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:07:14 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/07 14:01:16 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/14 12:12:14 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	ft_apply_infile(t_cmd *cmd, t_redir *rdr)
 			close(cmd->infile);
 		cmd->infile = open(rdr->filename, O_RDONLY);
 		if (cmd->infile < 0)
-			ft_perror_exit(rdr->filename, EXIT_FAILURE);
+			ft_puterror_exit(rdr->filename, NULL, EXIT_FAILURE);
 	}
 }
 
@@ -42,7 +42,7 @@ static void	ft_apply_outfile(t_cmd *cmd, t_redir *rdr)
 	{
 		fd = open(rdr->filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd < 0)
-			ft_perror_exit(rdr->filename, EXIT_FAILURE);
+			ft_puterror_exit(rdr->filename, NULL, EXIT_FAILURE);
 		if (rdr->fd_from != STDIN_FILENO)
 			ft_dup2_close(fd, rdr->fd_from);
 		else
@@ -62,7 +62,7 @@ static void	ft_apply_append_outfile(t_cmd *cmd, t_redir *rdr)
 	{
 		fd = open(rdr->filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (fd < 0)
-			ft_perror_exit(rdr->filename, EXIT_FAILURE);
+			ft_puterror_exit(rdr->filename, NULL, EXIT_FAILURE);
 		if (rdr->fd_from != STDIN_FILENO)
 			ft_dup2_close(fd, rdr->fd_from);
 		else
