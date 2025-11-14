@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/14 14:55:04 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/14 15:06:33 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,6 @@ void	ft_free_strarr(char **strarr);
 void	ft_cleanup_line(t_data *dt);
 int		ft_exec_heredoc(char *lim);
 void	ft_add_arg(t_cmd *cmd, char *new_arg);
-void	ft_init_pipe(t_cmd *cur, t_cmd *prev);
+int		ft_init_pipe(t_cmd *cur, t_cmd *prev);
 
 #endif

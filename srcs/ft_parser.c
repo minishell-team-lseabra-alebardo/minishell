@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:13:51 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/14 14:55:00 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/14 15:10:40 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	ft_init_redir(t_cmd *cmd, char ***s_arr, char *redir)
 		cur_redir->next = new_redir;
 }
 
-static void	ft_parse_cmd_tokens(char **split_arr, t_cmd *cmd)
+static void	ft_parse_cmd_tokens(char ***split_arr, t_cmd *cmd)
 {
 	while (**split_arr)
 	{
@@ -75,8 +75,11 @@ static t_cmd	*ft_init_cmd(char ***split_arr, t_cmd *prev, t_data *dt)
 		cur->prev_op = **split_arr;
 		*split_arr += 1;
 	}
-	if (prev && !ft_strncmp(cur->prev_op, CMD_PIPE, ft_strlen(CMD_PIPE) + 1))
-		ft_init_pipe(cur, prev);
+	if (prev && ft_is_op(cur->prev_op, CMD_PIPE))
+	{
+		if (ft_init_pipe(cur, prev) < 0)
+			return (NULL);
+	}
 	ft_parse_cmd_tokens(split_arr, cur);
 	return (cur);
 }

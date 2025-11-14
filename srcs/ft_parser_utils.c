@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 14:33:46 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/14 14:59:40 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/14 15:05:28 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,16 @@ void	ft_add_arg(t_cmd *cmd, char *new_arg)
 	}
 }
 
-void	ft_init_pipe(t_cmd *cur, t_cmd *prev)
+int	ft_init_pipe(t_cmd *cur, t_cmd *prev)
 {
 	int	pipefd[2];
 
 	if (pipe(pipefd) < 0)
 	{
 		perror("pipe");
-		return (NULL);
+		return (-1);
 	}
 	prev->outfile = pipefd[1];
 	cur->infile = pipefd[0];
+	return (0);
 }
