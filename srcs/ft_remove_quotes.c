@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:37:39 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/11 22:40:15 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/14 21:35:27 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,32 +21,39 @@ static void	ft_move_chars(char *arg)
 	}
 }
 
-void	ft_search_double_quotes(char *arg)
+static char	*ft_search_variables(char **ms_envp, char *arg, char quote, int *i)
 {
-	while (*arg)
+	while (arg[*i] != quote)
 	{
-		while (*arg == '\"')
-		{
-			ft_move_chars(arg);
-			while (*arg != '\"')
-				arg++;
-			ft_move_chars(arg);
-		}
-		arg++;
+		if (quote == '\"'
+			&& (arg[*i] == '$' && !ft_is_whitespace(arg[*(i) + 1])))
+			arg = ft_expand_variable(ms_envp, arg, i);
+		else
+			*i += 1;
 	}
+	return (arg);
 }
 
-void	ft_search_single_quotes(char *arg)
+char	*ft_search_quotes(char **ms_envp, char *arg)
 {
-	while (*arg)
+	int		i;
+	char	quote;
+
+	i = 0;
+	while (arg[i])
 	{
-		while (*arg == '\'')
+		if (arg[i] == '\'' || arg[i] == '\"')
 		{
-			ft_move_chars(arg);
-			while (*arg != '\'')
-				arg++;
-			ft_move_chars(arg);
+			quote = arg[i];
+			while (arg[i] == quote)
+			{
+				ft_move_chars(&arg[i]);
+				arg = ft_search_variables(ms_envp, arg, quote, &i);
+				ft_move_chars(&arg[i]);
+			}
 		}
-		arg++;
+		else
+			i++;
 	}
+	return (arg);
 }
