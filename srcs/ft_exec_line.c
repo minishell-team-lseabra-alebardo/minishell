@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/11 22:41:17 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/14 12:24:21 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ static void	ft_handle_path_failure(t_cmd *cmd, int status)
 		msg = ERR_NO_PERMISSION;
 	else
 		msg = ERR_GENERIC;
-	dup2(STDERR_FILENO, STDOUT_FILENO);
-	printf("%s: %s: %s", PROGRAM_NAME, cmd->args[0], msg);
-	exit(status);
+	ft_puterror_exit(cmd->args[0], msg, status);
 }
 
 void	ft_exec_cmd(t_cmd *cmd, char **ms_envp)
