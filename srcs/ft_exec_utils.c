@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:46:07 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/14 12:18:20 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/14 14:40:26 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_dup2_close(int oldfd, int newfd)
 
 void	ft_puterror_exit(char *target, char *message, int status)
 {
-	write(STDERR_FILENO, PROGRAM_NAME, ft_strlen(PROGRAM_NAME));
+	write(STDERR_FILENO, PGM_NAME, ft_strlen(PGM_NAME));
 	write(STDERR_FILENO, ": ", 2);
 	if (target)
 	{

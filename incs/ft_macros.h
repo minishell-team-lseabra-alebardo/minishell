@@ -6,14 +6,14 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:46:44 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/07 15:42:20 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/14 14:40:22 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_MACROS_H
 # define FT_MACROS_H
 
-# define PROGRAM_NAME "minishell"
+# define PGM_NAME "minishell"
 
 // POSIX whitespaces
 # define WS_SPACE		' '
@@ -36,7 +36,7 @@
 
 // HEREDOC
 # define HEREDOC_PREFIX		"> "
-# define HERE_DOC_WARNING	"warning: here-document delimited by end-of-file"
+# define HEREDOC_WARN	"warning: here-document delimited by end-of-file"
 
 // Error messages
 # define ERR_GENERIC		"Error\n"
