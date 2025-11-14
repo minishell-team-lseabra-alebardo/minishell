@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/14 21:37:58 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/14 23:01:37 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	ft_parser(t_data *dt);
 char	*ft_search_quotes(char **ms_envp, char *arg);
 void	ft_args_treatment(char **args, char **ms_envp, int mode);
 int		ft_ms_path(t_data *dt);
+void	ft_subshell(t_data *dt, char **argv);
 bool	ft_is_op(const char *s, const char *op);
 bool	ft_is_logic_or_pipe_op(char *str);
 bool	ft_is_redir_op(char *str);
@@ -59,6 +60,10 @@ void	ft_cleanup_line(t_data *dt);
 int		ft_exec_heredoc(char *lim);
 void	ft_add_arg(t_cmd *cmd, char *new_arg);
 int		ft_init_pipe(t_cmd *cur, t_cmd *prev);
+void	ft_close_error(t_data *dt);
+void	ft_free_prompt_line(char *prompt, char *line);
+void	ft_free_ms_envp(char **ms_envp);
+void	ft_exiting(char *prompt, char *line, t_data *dt);
 
 //TEST FUNCTIONS
 void	ft_print_cmds(t_data *dt);

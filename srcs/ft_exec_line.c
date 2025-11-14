@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/14 21:34:50 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/14 23:15:54 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	ft_exec_cmd(t_cmd *cmd, char **ms_envp)
 	char	*path;
 	int		status;
 
+	ft_args_treatment(cmd->args, ms_envp, 1);
 	path = NULL;
 	status = ft_resolve_cmd_path(cmd->args[0], &path);
-	ft_args_treatment(cmd->args, ms_envp, 1);
 	if (status != EXIT_SUCCESS)
 		ft_handle_path_failure(cmd, status);
 	ft_dup2_close(cmd->infile, STDIN_FILENO);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+         #
+#    By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/11/14 16:33:05 by lseabra-         ###   ########.fr        #
+#    Updated: 2025/11/14 23:03:47 by alebarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_cleanup_line.c \
 		ft_exec_line.c \
 		ft_exec_utils.c \
+		ft_subshell.c \
 		ft_get_ps1.c \
 		ft_is_op.c \
 		ft_ms_path.c \
@@ -53,6 +54,7 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_resolve_cmd_path.c \
 		ft_signal_handler.c \
 		ft_skips.c \
+		ft_free_exit.c \
 		ft_split_prompt_utils_2.c \
 		ft_split_prompt_utils.c \
 		ft_split_prompt.c \
