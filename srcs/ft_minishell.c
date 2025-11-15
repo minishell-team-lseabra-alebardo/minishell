@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 21:46:59 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/14 23:02:36 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/15 20:43:58 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	main(int argc, char *argv[], char *envp[])
 		return (EXIT_FAILURE);
 	dt->lst_stat = 0;
 	dt->cmd_ll = NULL;
-	if (argc > 1 && !ft_strncmp("minishell", argv[0], 10))
+	if (argc > 1 && !ft_strncmp("minishell", argv[0], 10)
+		&& argv[1][0] == '(')
 		ft_subshell(dt, argv);
 	if (ft_ms_path(dt) < 0)
 		ft_close_error(dt);

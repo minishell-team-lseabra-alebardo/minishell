@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:25:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/14 23:03:50 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/14 23:51:10 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,21 @@ void	ft_free_ms_envp(char **ms_envp)
 		i++;
 	}
 	free(ms_envp);
+}
+
+void	ft_free_strarr(char **strarr)
+{
+	int	i;
+
+	if (!strarr)
+		return ;
+	i = 0;
+	while (strarr[i])
+	{
+		free(strarr[i]);
+		i++;
+	}
+	free(strarr);
 }
 
 void	ft_exiting(char *prompt, char *line, t_data *dt)

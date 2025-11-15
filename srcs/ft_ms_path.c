@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 14:15:30 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/07 19:30:28 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/15 16:46:59 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,11 @@ int	ft_ms_path(t_data *dt)
 	pwd = ft_get_pwd(dt->ms_envp);
 	while (dt->ms_envp[i])
 		i++;
-	dt->ms_envp[i] = (char *) ft_calloc(ft_strlen(pwd) + 10, 1);
+	dt->ms_envp[i] = (char *) ft_calloc(ft_strlen(pwd) + 19, 1);
 	if (!dt->ms_envp[i])
 		return (-1);
 	ft_strlcpy(dt->ms_envp[i], "MS_PATH=", 9);
-	ft_strlcat(dt->ms_envp[i], pwd, ft_strlen(pwd) + 10);
+	ft_strlcat(dt->ms_envp[i], pwd, ft_strlen(pwd) + 19);
+	ft_strlcat(dt->ms_envp[i], "/minishell", ft_strlen(pwd) + 19);
 	return (0);
 }

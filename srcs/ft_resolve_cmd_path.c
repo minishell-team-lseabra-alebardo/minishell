@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_resolve_cmd_path.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 12:45:27 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/10 17:05:08 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/14 23:56:43 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
-
-void	ft_free_strarr(char **strarr)
-{
-	int	i;
-
-	if (!strarr)
-		return ;
-	i = 0;
-	while (strarr[i])
-	{
-		free(strarr[i]);
-		i++;
-	}
-	free(strarr);
-}
 
 static int	ft_check_abs_path(char *cmd, char **path_addr)
 {
