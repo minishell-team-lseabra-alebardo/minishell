@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 15:13:45 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/14 15:24:54 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/16 19:17:05 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	ft_print_redirs(t_redir *redir)
 		printf("redir[%d]\n", i);
 		printf("\ttype: %s\n", redir->type);
 		printf("\tfilename: %s\n", redir->filename);
-		printf("\tfd_from: %d\n", redir->fd_from);
+		printf("\tfd_from: %s\n", redir->fd_from);
 		printf("\tfd_to: %d\n", redir->fd_to);
 		redir = redir->next;
 	}

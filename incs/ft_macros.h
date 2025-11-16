@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:46:44 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/14 14:40:22 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/16 18:34:24 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define CMD_ALL		"&|<>"
 
 // HEREDOC
-# define HEREDOC_PREFIX		"> "
+# define HEREDOC_PREFIX	"> "
 # define HEREDOC_WARN	"warning: here-document delimited by end-of-file"
 
 // Error messages
@@ -43,6 +43,7 @@
 # define ERR_SYNTAX			"Syntax error\n"
 # define ERR_NO_PERMISSION	"Permission denied\n"
 # define ERR_CMD_NOT_FOUND	"command not found\n"
+# define ERR_BAD_FD			"Bad file descriptor\n"
 
 // Exit status code
 # define EXIT_CANNOT_EXEC	126

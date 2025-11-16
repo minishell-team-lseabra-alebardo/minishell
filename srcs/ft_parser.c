@@ -6,11 +6,23 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:13:51 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/14 15:10:40 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/16 19:11:59 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
+
+static char	*ft_get_str_fd(char *redir)
+{
+	size_t	i;
+	char	*str_fd;
+
+	i = 0;
+	while (ft_isdigit(redir[i]))
+		i++;
+	str_fd = ft_substr(redir, 0, i);
+	return (str_fd);
+}
 
 static void	ft_init_redir(t_cmd *cmd, char ***s_arr, char *redir)
 {
@@ -22,7 +34,7 @@ static void	ft_init_redir(t_cmd *cmd, char ***s_arr, char *redir)
 		return ;
 	if (ft_isdigit(*redir))
 	{
-		new_redir->fd_from = ft_atoi(redir);
+		new_redir->fd_from = ft_get_str_fd(redir);
 		while (ft_isdigit(*redir))
 			redir++;
 	}

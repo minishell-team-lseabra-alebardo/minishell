@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 16:07:52 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/10 17:07:00 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/16 19:13:59 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	ft_free_redirs(t_redir *redir)
 		return ;
 	if (redir->next)
 		ft_free_redirs(redir->next);
+	if (redir->fd_from)
+		free(redir->fd_from);
 	free(redir);
 }
 

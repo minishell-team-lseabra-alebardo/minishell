@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/15 20:34:24 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/16 19:03:18 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # include <ft_expand.h>
 # include <stdbool.h>
 # include <sys/wait.h>
+# include <stdint.h>
+# include <limits.h>
 
 int		ft_listener(void);
 void	ft_read_line(t_data *dt);
@@ -48,10 +50,10 @@ size_t	ft_parenthesis_len(const char *s);
 char	**ft_free_strarr_until(char **arr, size_t position);
 char	**ft_split_prompt(const char *s, char *seps);
 char	**ft_strarr_dup(char **strarr);
+void	ft_puterror_exit(char *target, char *message, int status);
 void	ft_apply_redirs(t_cmd *cmd);
 void	ft_exec_line(t_data *dt);
 void	ft_dup2_close(int oldfd, int newfd);
-void	ft_puterror_exit(char *target, char *message, int status);
 void	ft_close_unused_fds(t_cmd *cmd);
 void	ft_close_cmd_files(t_cmd *cmd);
 int		ft_resolve_cmd_path(char *cmd, char **path_addr);
@@ -65,6 +67,7 @@ void	ft_free_strarr(char **strarr);
 void	ft_free_prompt_line(char *prompt, char *line);
 void	ft_free_ms_envp(char **ms_envp);
 void	ft_exiting(char *prompt, char *line, t_data *dt);
+int		ft_str_to_fd(char *str);
 
 //TEST FUNCTIONS
 void	ft_print_cmds(t_data *dt);

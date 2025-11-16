@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_types.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:56:36 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/07 15:37:07 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/16 19:06:31 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_redir
 {
 	char			*type;
 	char			*filename;
-	int				fd_from;
+	char			*fd_from;
 	int				fd_to;
 	struct s_redir	*next;
 }			t_redir;
