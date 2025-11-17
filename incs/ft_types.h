@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:56:36 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/16 19:06:31 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/17 14:53:02 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct s_redir
 typedef struct s_cmd
 {
 	char			**ms_envp;
-	int				*lst_stat;
 	char			*prev_op;
 	char			**args;
 	int				infile;

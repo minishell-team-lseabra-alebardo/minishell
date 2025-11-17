@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:13:51 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/16 19:11:59 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/17 14:53:39 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ static t_cmd	*ft_init_cmd(char ***split_arr, t_cmd *prev, t_data *dt)
 	if (!cur)
 		return (NULL);
 	cur->ms_envp = dt->ms_envp;
-	cur->lst_stat = &dt->lst_stat;
 	cur->infile = STDIN_FILENO;
 	cur->outfile = STDOUT_FILENO;
 	if (ft_is_logic_or_pipe_op(**split_arr))
