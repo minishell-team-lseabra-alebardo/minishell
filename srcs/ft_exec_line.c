@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/15 20:37:58 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/17 15:04:02 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,18 @@ void	ft_exec_cmd(t_cmd *cmd, char **ms_envp)
 	perror("execve");
 }
 
-static void	ft_skip_based_on_stat(t_cmd **cmd, pid_t prev_pid)
+static void	ft_skip_based_on_stat(t_cmd **cmd, pid_t prev_pid, int *lst_stat)
 {
-	pid_t	lst_blk_st;
+	pid_t	lst_proc_st;
 
-	waitpid(prev_pid, &lst_blk_st, 0);
-	if (WIFEXITED(lst_blk_st))
+	waitpid(prev_pid, &lst_proc_st, 0);
+	if (WIFEXITED(lst_proc_st))
 	{
-		if ((WEXITSTATUS(lst_blk_st) == 0
+		*lst_stat = WEXITSTATUS(lst_proc_st);
+		if (*lst_stat == 0
 				&& ft_is_op((*cmd)->prev_op, CMD_OR))
-			|| (WEXITSTATUS(lst_blk_st) != 0
-				&& ft_is_op((*cmd)->prev_op, CMD_AND)))
+			|| (*lst_stat != 0
+				&& ft_is_op((*cmd)->prev_op, CMD_AND))
 		{
 			*cmd = (*cmd)->next;
 			while (*cmd && ft_is_op((*cmd)->prev_op, CMD_PIPE))
