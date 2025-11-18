@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/17 15:04:02 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/18 15:33:21 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,8 @@ static void	ft_skip_based_on_stat(t_cmd **cmd, pid_t prev_pid, int *lst_stat)
 	if (WIFEXITED(lst_proc_st))
 	{
 		*lst_stat = WEXITSTATUS(lst_proc_st);
-		if (*lst_stat == 0
-				&& ft_is_op((*cmd)->prev_op, CMD_OR))
-			|| (*lst_stat != 0
-				&& ft_is_op((*cmd)->prev_op, CMD_AND))
+		while (*cmd && ((*lst_stat == 0 && ft_is_op((*cmd)->prev_op, CMD_OR))
+			|| (*lst_stat != 0 && ft_is_op((*cmd)->prev_op, CMD_AND))))
 		{
 			*cmd = (*cmd)->next;
 			while (*cmd && ft_is_op((*cmd)->prev_op, CMD_PIPE))
@@ -89,7 +87,7 @@ void	ft_exec_line(t_data *dt)
 		ft_close_cmd_files(cur_cmd);
 		cur_cmd = cur_cmd->next;
 		if (cur_cmd && !ft_is_op(cur_cmd->prev_op, CMD_PIPE))
-			ft_skip_based_on_stat(&cur_cmd, dt->pid_arr[i]);
+			ft_skip_based_on_stat(&cur_cmd, dt->pid_arr[i], &dt->lst_stat);
 		i++;
 	}
 	ft_wait_all_pids(dt);
