@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/18 15:33:21 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/18 16:19:04 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	ft_skip_based_on_stat(t_cmd **cmd, pid_t prev_pid, int *lst_stat)
 	{
 		*lst_stat = WEXITSTATUS(lst_proc_st);
 		while (*cmd && ((*lst_stat == 0 && ft_is_op((*cmd)->prev_op, CMD_OR))
-			|| (*lst_stat != 0 && ft_is_op((*cmd)->prev_op, CMD_AND))))
+				|| (*lst_stat != 0 && ft_is_op((*cmd)->prev_op, CMD_AND))))
 		{
 			*cmd = (*cmd)->next;
 			while (*cmd && ft_is_op((*cmd)->prev_op, CMD_PIPE))
