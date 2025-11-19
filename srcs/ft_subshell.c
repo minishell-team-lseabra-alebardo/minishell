@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:46:46 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/15 21:07:40 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/19 15:30:43 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,8 @@ void	ft_subshell(t_data *dt, char **argv)
 	ft_args_treatment(&line, dt->ms_envp, 0);
 	dt->split_line = ft_split_prompt(line, WS_POSIX);
 	ft_parser(dt);
-	ft_exec_line(dt);
-	ft_free_prompt_line(0, line);
-	ft_free_ms_envp(dt->ms_envp);
-	free(dt);
-	exit(0);
+	ft_exec_line_subshell(dt);
+	ft_exit(dt);
 }
 
 static char	*ft_get_ms_path(char **ms_envp)

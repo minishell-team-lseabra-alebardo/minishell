@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/16 19:03:18 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/19 15:30:16 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ char	**ft_strarr_dup(char **strarr);
 void	ft_puterror_exit(char *target, char *message, int status);
 void	ft_apply_redirs(t_cmd *cmd);
 void	ft_exec_line(t_data *dt);
+void	ft_exec_line_subshell(t_data *dt);
 void	ft_dup2_close(int oldfd, int newfd);
 void	ft_close_unused_fds(t_cmd *cmd);
 void	ft_close_cmd_files(t_cmd *cmd);
@@ -65,8 +66,8 @@ int		ft_init_pipe(t_cmd *cur, t_cmd *prev);
 void	ft_close_error(t_data *dt);
 void	ft_free_strarr(char **strarr);
 void	ft_free_prompt_line(char *prompt, char *line);
-void	ft_free_ms_envp(char **ms_envp);
-void	ft_exiting(char *prompt, char *line, t_data *dt);
+int		ft_exit(t_data *dt);
+int		ft_exit_subshell(t_data *dt);
 int		ft_str_to_fd(char *str);
 
 //TEST FUNCTIONS
