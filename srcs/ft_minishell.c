@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 21:46:59 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/19 15:06:40 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/19 21:43:58 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char *argv[], char *envp[])
 	dt->cmd_ll = NULL;
 	if (argc > 1 && !ft_strncmp("minishell", argv[0], 10) && argv[1][0] == '(')
 		ft_subshell(dt, argv);
-	if (ft_ms_path(dt) < 0)
+	if (ft_ms_path(dt) < 0 || ft_shlvl(dt) < 0)
 		ft_close_error(dt);
 	ft_read_line(dt);
 }

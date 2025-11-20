@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+         #
+#    By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/11/16 19:07:17 by lseabra-         ###   ########.fr        #
+#    Updated: 2025/11/20 00:18:42 by alebarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_split_prompt.c \
 		ft_str_to_fd.c \
 		ft_strarr_dup.c \
+		ft_shlvl.c \
 		test_utils.c \
 )
 

@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/19 15:30:16 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/20 00:18:30 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	ft_free_prompt_line(char *prompt, char *line);
 int		ft_exit(t_data *dt);
 int		ft_exit_subshell(t_data *dt);
 int		ft_str_to_fd(char *str);
+int		ft_shlvl(t_data *dt);
 
 //TEST FUNCTIONS
 void	ft_print_cmds(t_data *dt);
