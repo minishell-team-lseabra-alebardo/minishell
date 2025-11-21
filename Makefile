@@ -6,18 +6,22 @@
 #    By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2025/11/20 00:18:42 by alebarbo         ###   ########.fr        #
+=======
+#    Updated: 2025/11/21 13:08:09 by lseabra-         ###   ########.fr        #
+>>>>>>> main
 #                                                                              #
 # **************************************************************************** #
 
 #==============================================================================#
 #                                 COLOR CODES                                  #
 #==============================================================================#
-RED   = \033[0;31m
-GREEN   = \033[0;32m
-YELLOW  = \033[0;33m
-BLUE    = \033[0;34m
-RESET   = \033[0m
+RED		= \033[0;31m
+GREEN	= \033[0;32m
+YELLOW	= \033[0;33m
+BLUE	= \033[0;34m
+RESET	= \033[0m
 
 #==============================================================================#
 #                                  VARIABLES                                   #
@@ -36,9 +40,12 @@ BUILD_PATH = .build
 SRC = $(addprefix $(SRC_PATH)/, \
 		ft_minishell.c \
 		ft_apply_redirs.c \
+		ft_change_directory.c \
 		ft_check_syntax_utils.c \
 		ft_check_syntax.c \
 		ft_cleanup_line.c \
+		ft_exec_builtin.c \
+		ft_exec_cmd.c \
 		ft_exec_line.c \
 		ft_exec_utils.c \
 		ft_subshell.c \
@@ -68,10 +75,10 @@ SRC = $(addprefix $(SRC_PATH)/, \
 OBJ = $(addprefix $(BUILD_PATH)/, $(notdir $(SRC:.c=.o)))
 
 # LIBFT
-LIBFT_PATH     = libft
-LIBFT_INC_PATH = $(LIBFT_PATH)/includes
-LIBFT_LINK     = ft
-LIBFT_NAME     = $(LIBFT_PATH)/lib$(LIBFT_LINK).a
+LIBFT_PATH		= libft
+LIBFT_INC_PATH	= $(LIBFT_PATH)/includes
+LIBFT_LINK		= ft
+LIBFT_NAME		= $(LIBFT_PATH)/lib$(LIBFT_LINK).a
 
 # Compiler and Flags
 CC      = cc
@@ -80,10 +87,10 @@ INC     = -I$(INC_PATH) -I$(LIBFT_INC_PATH)
 LDFLAGS = -L$(LIBFT_PATH) -l$(LIBFT_LINK) -lreadline
 
 # Utility Commands
-RM      = rm -f
-MKDIR_P = mkdir -p
-RMDIR   = $(RM) -r
-MAKE    = make --no-print-directory
+RM		= rm -f
+MKDIR_P	= mkdir -p
+RMDIR	= $(RM) -r
+MAKE	= make --no-print-directory
 
 .PHONY: all clean fclean re
 
