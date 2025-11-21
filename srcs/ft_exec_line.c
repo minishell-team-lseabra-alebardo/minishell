@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/21 18:14:08 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/21 18:21:29 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	ft_skip_based_on_stat(t_cmd **cmd, pid_t prev_pid, int *lst_stat)
 	}
 }
 
-static void	ft_exec_child(t_data * dt, t_cmd *cmd)
+static void	ft_exec_child(t_data *dt, t_cmd *cmd)
 {
 	ft_close_unused_fds(cmd->next);
 	ft_apply_redirs(cmd);
@@ -52,9 +52,6 @@ void	ft_exec_line(t_data *dt)
 	i = 0;
 	while (cur_cmd)
 	{
-		dt->pexit = 0;
-		if (ft_is_in_pipeline(cur_cmd))
-			dt->pexit = 1;
 		if (ft_is_builtin(cur_cmd->args[0]) && !ft_is_in_pipeline(cur_cmd))
 		{
 			ft_exec_builtin(dt, cur_cmd);
