@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 14:15:30 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/15 16:46:59 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/21 18:51:39 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*ft_get_pwd(char **ms_envp)
 	return (ms_envp[i] + 4);
 }
 
-static char	**ft_expand_envp(char **ms_envp)
+char	**ft_expand_envp(char **ms_envp)
 {
 	char	**expanded_envp;
 	int		i;
@@ -50,6 +50,8 @@ int	ft_ms_path(t_data *dt)
 
 	i = 0;
 	dt->ms_envp = ft_expand_envp(dt->ms_envp);
+	if (!dt->ms_envp)
+		return (-1);
 	pwd = ft_get_pwd(dt->ms_envp);
 	while (dt->ms_envp[i])
 		i++;
