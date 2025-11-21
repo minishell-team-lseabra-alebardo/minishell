@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/21 13:05:53 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/21 14:41:16 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int		ft_exit(t_data *dt);
 int		ft_exit_subshell(t_data *dt);
 int		ft_str_to_fd(char *str);
 void	ft_exec_builtin(t_data *dt, t_cmd *cmd);
+bool	ft_is_in_pipeline(t_cmd *cmd);
 bool	ft_is_builtin(char *cmd);
 void	ft_change_directory(t_data *dt, t_cmd *cmd);
 

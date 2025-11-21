@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 16:53:43 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/21 13:21:59 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/21 15:00:48 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ void	ft_change_directory(t_data *dt, t_cmd *cmd)
 
 	ft_close_cmd_files(cmd);
 	if (!cmd->args[1])
+	{
 		path = *(ft_getenv("HOME", dt->ms_envp)) + 5;
+		printf("%s\n", path);
+	}
 	else if (cmd->args[2])
 		ft_puterror_exit("cd", ERR_TOO_MANY_ARGS, EXIT_FAILURE);
 	else if (cmd->args[1][0] == '\0')
@@ -82,5 +85,4 @@ void	ft_change_directory(t_data *dt, t_cmd *cmd)
 	pwd = getcwd(0, 0);
 	ft_set_env("PWD", pwd, dt->ms_envp);
 	free(pwd);
-	exit(EXIT_SUCCESS);
 }

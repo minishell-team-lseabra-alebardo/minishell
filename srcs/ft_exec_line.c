@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/21 13:10:05 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/21 15:04:40 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,12 @@ void	ft_exec_line(t_data *dt)
 	i = 0;
 	while (cur_cmd)
 	{
-		if (!ft_strncmp("exit", cur_cmd->args[0], 5))
-			ft_exit(dt);
+		if (ft_is_builtin(cur_cmd->args[0]) && !ft_is_in_pipeline(cur_cmd))
+		{
+			ft_exec_builtin(dt, cur_cmd);
+			cur_cmd = cur_cmd->next;
+			continue ;
+		}
 		dt->pid_arr[i] = fork();
 		if (dt->pid_arr[i] == 0)
 			ft_exec_child(dt, cur_cmd);
