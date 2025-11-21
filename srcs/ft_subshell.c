@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:46:46 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/21 18:23:32 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/21 18:30:29 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,8 @@ static void	ft_remove_parentheses(char *line)
 	}
 	i = 0;
 	while (line[i])
-	{
-		if (line[i] == ')')
-			line[i] = 0;
 		i++;
-	}
+	line[i - 1] = 0;
 }
 
 void	ft_subshell(t_data *dt, char **argv)
