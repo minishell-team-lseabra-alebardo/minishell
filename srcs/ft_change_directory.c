@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 16:53:43 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/20 18:44:37 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/21 13:21:59 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ static void	ft_set_env(char *name, char *value, char **ms_envp)
 	env_addr = ft_getenv(name, ms_envp);
 	if (!env_addr)
 		return ;
-	while ((*env_addr)[name_len] && (*env_addr)[name_len] != "=")
+	while ((*env_addr)[name_len] && (*env_addr)[name_len] != '=')
 		name_len++;
-	if ((*env_addr)[name_len] == "=")
+	if ((*env_addr)[name_len] == '=')
 		name_len++;
 	else
 		return ;
@@ -57,28 +57,30 @@ static void	ft_set_env(char *name, char *value, char **ms_envp)
 	free(tmp);
 }
 
-void	ft_change_directory(t_data *dt, char **args)
+void	ft_change_directory(t_data *dt, t_cmd *cmd)
 {
 	char	*pwd;
 	char	*path;
-	char	*tmp;
-	int		i;
 
-	
-	if (ft_strncmp(args[0], "cd", 3) != 0)
-		return ;
+	ft_close_cmd_files(cmd);
+	if (!cmd->args[1])
+		path = *(ft_getenv("HOME", dt->ms_envp)) + 5;
+	else if (cmd->args[2])
+		ft_puterror_exit("cd", ERR_TOO_MANY_ARGS, EXIT_FAILURE);
+	else if (cmd->args[1][0] == '\0')
+		exit(EXIT_SUCCESS);
+	else
+		path = cmd->args[1];
 	pwd = getcwd(0, 0);
-	i = 0;
-	while (args[i])
-		i++;
-	if (chdir(args[1]) < 0)
+	if (chdir(path) < 0)
 	{
 		free(pwd);
-		ft_puterror_exit(args[1], strerror(errno), EXIT_FAILURE);
+		ft_puterror_exit(cmd->args[1], strerror(errno), EXIT_FAILURE);
 	}
 	ft_set_env("OLD_PWD", pwd, dt->ms_envp);
 	free(pwd);
 	pwd = getcwd(0, 0);
 	ft_set_env("PWD", pwd, dt->ms_envp);
 	free(pwd);
+	exit(EXIT_SUCCESS);
 }
