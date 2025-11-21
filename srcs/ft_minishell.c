@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 21:46:59 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/18 16:18:43 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/19 15:06:40 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	main(int argc, char *argv[], char *envp[])
 	dt->ms_envp = ft_strarr_dup(envp);
 	if (!dt->ms_envp)
 		return (EXIT_FAILURE);
+	dt->prompt = NULL;
+	dt->line = NULL;
 	dt->lst_stat = 0;
 	dt->cmd_ll = NULL;
 	if (argc > 1 && !ft_strncmp("minishell", argv[0], 10) && argv[1][0] == '(')

@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/16 19:03:18 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/21 14:41:16 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ char	**ft_split_prompt(const char *s, char *seps);
 char	**ft_strarr_dup(char **strarr);
 void	ft_puterror_exit(char *target, char *message, int status);
 void	ft_apply_redirs(t_cmd *cmd);
+void	ft_exec_cmd(t_cmd *cmd, char **ms_envp);
 void	ft_exec_line(t_data *dt);
+void	ft_exec_line_subshell(t_data *dt);
 void	ft_dup2_close(int oldfd, int newfd);
 void	ft_close_unused_fds(t_cmd *cmd);
 void	ft_close_cmd_files(t_cmd *cmd);
@@ -65,9 +67,13 @@ int		ft_init_pipe(t_cmd *cur, t_cmd *prev);
 void	ft_close_error(t_data *dt);
 void	ft_free_strarr(char **strarr);
 void	ft_free_prompt_line(char *prompt, char *line);
-void	ft_free_ms_envp(char **ms_envp);
-void	ft_exiting(char *prompt, char *line, t_data *dt);
+int		ft_exit(t_data *dt);
+int		ft_exit_subshell(t_data *dt);
 int		ft_str_to_fd(char *str);
+void	ft_exec_builtin(t_data *dt, t_cmd *cmd);
+bool	ft_is_in_pipeline(t_cmd *cmd);
+bool	ft_is_builtin(char *cmd);
+void	ft_change_directory(t_data *dt, t_cmd *cmd);
 
 //TEST FUNCTIONS
 void	ft_print_cmds(t_data *dt);
