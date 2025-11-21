@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:46:46 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/19 15:30:43 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/21 18:10:33 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,14 @@ void	ft_subshell(t_data *dt, char **argv)
 {
 	char	*line;
 
+	dt->pexit = 1;
 	line = ft_strdup(argv[1]);
 	if (line[0] == '(')
 		ft_remove_parentheses(line);
 	ft_args_treatment(&line, dt->ms_envp, 0);
 	dt->split_line = ft_split_prompt(line, WS_POSIX);
 	ft_parser(dt);
-	ft_exec_line_subshell(dt);
+	ft_exec_line(dt);
 	ft_exit(dt);
 }
 
