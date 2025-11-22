@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/22 17:38:01 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/22 18:10:43 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ char	*ft_search_quotes(char **ms_envp, char *arg);
 void	ft_args_treatment(char **args, char **ms_envp, int mode);
 int		ft_ms_path(t_data *dt);
 int		ft_shlvl(t_data *dt);
-void	ft_subshell(t_data *dt, char **argv);
-int		ft_prepare_subshell(char **ms_envp, t_cmd *cmd, char **path);
+int	ft_subshell(char **argv, char **envp);
+int		ft_prepare_subshell(char **ms_envp, t_cmd *cmd, char **path, int lst_stat);
 bool	ft_is_op(const char *s, const char *op);
 bool	ft_is_logic_or_pipe_op(char *str);
 bool	ft_is_redir_op(char *str);
@@ -54,7 +54,7 @@ char	**ft_strarr_dup(char **strarr);
 char	**ft_expand_envp(char **ms_envp);
 void	ft_puterror_exit(char *target, char *message, int status);
 void	ft_apply_redirs(t_cmd *cmd);
-void	ft_exec_cmd(t_cmd *cmd, char **ms_envp);
+void	ft_exec_cmd(t_cmd *cmd, char **ms_envp, int lst_stat);
 void	ft_exec_line(t_data *dt);
 void	ft_dup2_close(int oldfd, int newfd);
 void	ft_close_unused_fds(t_cmd *cmd);
