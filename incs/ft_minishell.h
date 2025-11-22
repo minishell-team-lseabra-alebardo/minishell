@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
 /*   Updated: 2025/11/22 18:10:43 by alebarbo         ###   ########.fr       */
@@ -68,7 +68,7 @@ int		ft_init_pipe(t_cmd *cur, t_cmd *prev);
 void	ft_close_error(t_data *dt);
 void	ft_free_strarr(char **strarr);
 void	ft_free_prompt_line(char *prompt, char *line);
-int		ft_exit(t_data *dt);
+int		ft_exit(t_data *dt, t_cmd *cmd);
 int		ft_str_to_fd(char *str);
 void	ft_exec_builtin(t_data *dt, t_cmd *cmd);
 bool	ft_is_in_pipeline(t_cmd *cmd);

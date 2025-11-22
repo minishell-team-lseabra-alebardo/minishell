@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 11:44:08 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/21 15:16:10 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/22 18:09:09 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 bool	ft_is_in_pipeline(t_cmd *cmd)
 {
-	if (ft_is_op(cmd->prev_op, CMD_PIPE))
+	if (!cmd)
+		return (false);
+	else if (ft_is_op(cmd->prev_op, CMD_PIPE))
 		return (true);
 	else if (cmd->next && ft_is_op(cmd->next->prev_op, CMD_PIPE))
 		return (true);
-	return (false);
+	else
+		return (false);
 }
 
 bool	ft_is_builtin(char *cmd)
@@ -46,7 +49,7 @@ void	ft_exec_builtin(t_data *dt, t_cmd *cmd)
 	if (ft_strncmp("cd", cmd->args[0], 3) == 0)
 		ft_change_directory(dt, cmd);
 	else if (ft_strncmp("exit", cmd->args[0], 5) == 0)
-		ft_exit(dt);
+		ft_exit(dt, cmd);
 	// if (ft_strncmp("echo", cmd, 5) == 0)
 	// 	TODO()
 	// else if (ft_strncmp("pwd", cmd, 4) == 0)
