@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/21 18:21:29 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/22 14:53:55 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	ft_exec_line(t_data *dt)
 	i = 0;
 	while (cur_cmd)
 	{
+		ft_args_treatment(cur_cmd->args, dt->ms_envp, 1);
 		if (ft_is_builtin(cur_cmd->args[0]) && !ft_is_in_pipeline(cur_cmd))
 		{
 			ft_exec_builtin(dt, cur_cmd);
