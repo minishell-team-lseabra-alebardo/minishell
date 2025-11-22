@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_read_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:08:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/19 15:06:43 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/22 17:48:45 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_read_line(t_data *dt)
 		dt->prompt = ft_get_ps1();
 		dt->line = readline(dt->prompt);
 		if (!dt->line)
-			ft_exit(dt);
+			ft_exit(dt, NULL);
 		if (dt->line && *dt->line)
 		{
 			add_history(dt->line);

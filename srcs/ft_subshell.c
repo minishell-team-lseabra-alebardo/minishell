@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_subshell.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:46:46 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/21 18:30:29 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/22 17:48:53 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_subshell(t_data *dt, char **argv)
 	dt->split_line = ft_split_prompt(line, WS_POSIX);
 	ft_parser(dt);
 	ft_exec_line(dt);
-	ft_exit(dt);
+	ft_exit(dt, NULL);
 }
 
 static char	*ft_get_ms_path(char **ms_envp)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:25:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/21 18:24:04 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/22 19:09:51 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ void	ft_free_strarr(char **strarr)
 	free(strarr);
 }
 
-int	ft_exit(t_data *dt)
+int	ft_exit(t_data *dt, t_cmd *cmd)
 {
 	ft_close_unused_fds(dt->cmd_ll);
-	ft_cleanup_line(dt);
 	ft_free_strarr(dt->ms_envp);
 	ft_free_prompt_line(dt->prompt, dt->line);
-	if (dt->pexit)
+	if (dt->pexit && (!cmd || (cmd && !ft_is_in_pipeline(cmd))))
 		printf("exit\n");
+	ft_cleanup_line(dt);
 	free(dt);
 	exit(0);
 }
