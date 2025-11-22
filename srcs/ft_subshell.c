@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:46:46 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/21 18:30:29 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/22 18:13:14 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,21 @@ static void	ft_remove_parentheses(char *line)
 	line[i - 1] = 0;
 }
 
-void	ft_subshell(t_data *dt, char **argv)
+int	ft_subshell(char **argv, char **envp)
 {
+	t_data	*dt;
 	char	*line;
 
+	dt = (t_data *) ft_calloc(1, sizeof(t_data));
+	if (!dt)
+		return (EXIT_FAILURE);
+	dt->ms_envp = ft_strarr_dup(envp);
+	if (!dt->ms_envp)
+		return (EXIT_FAILURE);
+	dt->prompt = NULL;
+	dt->line = NULL;
+	dt->lst_stat = ft_atoi(argv[2]);
+	dt->cmd_ll = NULL;
 	dt->pexit = 0;
 	line = ft_strdup(argv[1]);
 	if (line[0] == '(')
@@ -40,7 +51,7 @@ void	ft_subshell(t_data *dt, char **argv)
 	dt->split_line = ft_split_prompt(line, WS_POSIX);
 	ft_parser(dt);
 	ft_exec_line(dt);
-	ft_exit(dt);
+	return (ft_exit(dt));
 }
 
 static char	*ft_get_ms_path(char **ms_envp)
@@ -53,30 +64,19 @@ static char	*ft_get_ms_path(char **ms_envp)
 	return (ms_envp[i] + 8);
 }
 
-static char	**ft_include_subshell(char **args)
+static char	**ft_include_subshell(char **args, int lst_stat)
 {
 	char	**new_args;
-	int		i;
-	int		j;
 
-	i = 0;
-	while (args[i])
-		i++;
-	new_args = (char **) ft_calloc(i + 2, sizeof(char *));
+	new_args = (char **) ft_calloc(4, sizeof(char *));
 	new_args[0] = ft_strdup("minishell");
-	i = 0;
-	j = 1;
-	while (args[i])
-	{
-		new_args[j] = args[i];
-		i++;
-		j++;
-	}
+	new_args[1] = args[0];
+	new_args[2] = ft_itoa(lst_stat);
 	free(args);
 	return (new_args);
 }
 
-int	ft_prepare_subshell(char **ms_envp, t_cmd *cmd, char **path)
+int	ft_prepare_subshell(char **ms_envp, t_cmd *cmd, char **path, int lst_stat)
 {
 	if (!ft_strncmp(cmd->args[0], "minishell", 10))
 	{
@@ -85,7 +85,7 @@ int	ft_prepare_subshell(char **ms_envp, t_cmd *cmd, char **path)
 	}
 	if (cmd->args[0][0] == '(')
 	{
-		cmd->args = ft_include_subshell(cmd->args);
+		cmd->args = ft_include_subshell(cmd->args, lst_stat);
 		*path = ft_strdup(ft_get_ms_path(ms_envp));
 		return (1);
 	}

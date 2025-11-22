@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/22 14:53:55 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/22 18:02:00 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	ft_exec_child(t_data *dt, t_cmd *cmd)
 	if (ft_is_builtin(cmd->args[0]))
 		ft_exec_builtin(dt, cmd);
 	else
-		ft_exec_cmd(cmd, dt->ms_envp);
+		ft_exec_cmd(cmd, dt->ms_envp, dt->lst_stat);
 }
 
 void	ft_exec_line(t_data *dt)
