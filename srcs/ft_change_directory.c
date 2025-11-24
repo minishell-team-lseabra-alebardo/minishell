@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 16:53:43 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/22 19:14:17 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/24 12:37:20 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	ft_set_env(char *name, char *value, char **ms_envp)
 	free(tmp);
 }
 
-void	ft_change_directory(t_data *dt, t_cmd *cmd)
+int	ft_change_directory(t_data *dt, t_cmd *cmd)
 {
 	char	*pwd;
 	char	*path;
@@ -66,20 +66,21 @@ void	ft_change_directory(t_data *dt, t_cmd *cmd)
 	if (!cmd->args[1])
 		path = *(ft_getenv("HOME", dt->ms_envp)) + 5;
 	else if (cmd->args[2])
-		ft_puterror_exit("cd", ERR_TOO_MANY_ARGS, EXIT_FAILURE);
+		return (ft_puterror_ret("cd", ERR_TOO_MANY_ARGS, EXIT_FAILURE));
 	else if (cmd->args[1][0] == '\0')
-		exit(EXIT_SUCCESS);
+		return (EXIT_SUCCESS);
 	else
 		path = cmd->args[1];
 	pwd = getcwd(0, 0);
 	if (chdir(path) < 0)
 	{
 		free(pwd);
-		ft_puterror_exit(cmd->args[1], strerror(errno), EXIT_FAILURE);
+		return (ft_puterror_ret(cmd->args[1], strerror(errno), EXIT_FAILURE));
 	}
 	ft_set_env("OLD_PWD", pwd, dt->ms_envp);
 	free(pwd);
 	pwd = getcwd(0, 0);
 	ft_set_env("PWD", pwd, dt->ms_envp);
 	free(pwd);
+	return (EXIT_SUCCESS);
 }

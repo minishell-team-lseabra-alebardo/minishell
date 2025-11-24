@@ -3,33 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/22 18:02:00 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/24 15:51:15 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
 
+static void	ft_skip_pipeline(t_cmd **cmd)
+{
+	*cmd = (*cmd)->next;
+	while (*cmd && ft_is_op((*cmd)->prev_op, CMD_PIPE))
+	{
+		ft_close_cmd_files(*cmd);
+		*cmd = (*cmd)->next;
+	}
+}
+
 static void	ft_skip_based_on_stat(t_cmd **cmd, pid_t prev_pid, int *lst_stat)
 {
 	pid_t	lst_proc_st;
 
-	waitpid(prev_pid, &lst_proc_st, 0);
-	if (WIFEXITED(lst_proc_st))
+	if (!(*cmd))
+		return ;
+	else if (!(*cmd)->next || ft_is_op((*cmd)->next->prev_op, CMD_PIPE))
 	{
-		*lst_stat = WEXITSTATUS(lst_proc_st);
-		while (*cmd && ((*lst_stat == 0 && ft_is_op((*cmd)->prev_op, CMD_OR))
-				|| (*lst_stat != 0 && ft_is_op((*cmd)->prev_op, CMD_AND))))
-		{
-			*cmd = (*cmd)->next;
-			while (*cmd && ft_is_op((*cmd)->prev_op, CMD_PIPE))
-			{
-				ft_close_cmd_files(*cmd);
-				*cmd = (*cmd)->next;
-			}
-		}
+		*cmd = (*cmd)->next;
+		return ;
+	}
+	if (!ft_is_builtin((*cmd)->args[0]))
+	{
+		waitpid(prev_pid, &lst_proc_st, 0);
+		if (WIFEXITED(lst_proc_st))
+			*lst_stat = WEXITSTATUS(lst_proc_st);
+	}
+	*cmd = (*cmd)->next;
+	while (*cmd && ((*lst_stat == 0 && ft_is_op((*cmd)->prev_op, CMD_OR))
+			|| (*lst_stat != 0 && ft_is_op((*cmd)->prev_op, CMD_AND))))
+	{
+		ft_skip_pipeline(cmd);
 	}
 }
 
@@ -54,19 +68,16 @@ void	ft_exec_line(t_data *dt)
 	{
 		ft_args_treatment(cur_cmd->args, dt->ms_envp, 1);
 		if (ft_is_builtin(cur_cmd->args[0]) && !ft_is_in_pipeline(cur_cmd))
-		{
 			ft_exec_builtin(dt, cur_cmd);
-			cur_cmd = cur_cmd->next;
-			continue ;
+		else
+		{
+			dt->pid_arr[i] = fork();
+			if (dt->pid_arr[i] == 0)
+				ft_exec_child(dt, cur_cmd);
+			i++;
 		}
-		dt->pid_arr[i] = fork();
-		if (dt->pid_arr[i] == 0)
-			ft_exec_child(dt, cur_cmd);
 		ft_close_cmd_files(cur_cmd);
-		cur_cmd = cur_cmd->next;
-		if (cur_cmd && !ft_is_op(cur_cmd->prev_op, CMD_PIPE))
-			ft_skip_based_on_stat(&cur_cmd, dt->pid_arr[i], &dt->lst_stat);
-		i++;
+		ft_skip_based_on_stat(&cur_cmd, dt->pid_arr[i], &dt->lst_stat);
 	}
 	ft_wait_all_pids(dt);
 	ft_cleanup_line(dt);
