@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_subshell.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:46:46 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/24 18:35:17 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/24 19:42:31 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	ft_remove_parentheses(char *line)
 int	ft_subshell(char **argv, char **envp)
 {
 	t_data	*dt;
-	int		status;
+//	int		status;
 
 	dt = (t_data *) ft_calloc(1, sizeof(t_data));
 	if (!dt)
@@ -48,13 +48,7 @@ int	ft_subshell(char **argv, char **envp)
 	dt->split_line = ft_split_prompt(dt->line, WS_POSIX);
 	ft_parser(dt);
 	ft_exec_line(dt);
-	ft_close_unused_fds(dt->cmd_ll);
-	ft_free_strarr(dt->ms_envp);
-	ft_free_prompt_line(dt->prompt, dt->line);
-	ft_cleanup_line(dt);
-	status = dt->lst_stat;
-	free(dt);
-	return (status);
+	return (ft_exit(dt, NULL));
 }
 
 static char	*ft_get_ms_path(char **ms_envp)
