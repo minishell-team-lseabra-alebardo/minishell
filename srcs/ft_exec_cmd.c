@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 13:01:44 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/22 18:03:47 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/24 15:55:12 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_exec_cmd(t_cmd *cmd, char **ms_envp, int lst_stat)
 	int		status;
 
 	path = NULL;
-	if (ft_prepare_subshell(ms_envp, cmd, &path, lst_stat))
+	if (ft_prep_subshell(ms_envp, cmd, &path, lst_stat))
 		status = EXIT_SUCCESS;
 	else
 		status = ft_resolve_cmd_path(cmd->args[0], &path);

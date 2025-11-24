@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/22 18:10:43 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/24 15:55:11 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ char	*ft_search_quotes(char **ms_envp, char *arg);
 void	ft_args_treatment(char **args, char **ms_envp, int mode);
 int		ft_ms_path(t_data *dt);
 int		ft_shlvl(t_data *dt);
-int	ft_subshell(char **argv, char **envp);
-int		ft_prepare_subshell(char **ms_envp, t_cmd *cmd, char **path, int lst_stat);
+int		ft_subshell(char **argv, char **envp);
+int		ft_prep_subshell(char **ms_envp, t_cmd *cmd, char **path, int lst_stat);
 bool	ft_is_op(const char *s, const char *op);
 bool	ft_is_logic_or_pipe_op(char *str);
 bool	ft_is_redir_op(char *str);
@@ -52,6 +52,8 @@ char	**ft_free_strarr_until(char **arr, size_t position);
 char	**ft_split_prompt(const char *s, char *seps);
 char	**ft_strarr_dup(char **strarr);
 char	**ft_expand_envp(char **ms_envp);
+void	ft_puterror(char *target, char *message);
+int		ft_puterror_ret(char *target, char *message, int ret);
 void	ft_puterror_exit(char *target, char *message, int status);
 void	ft_apply_redirs(t_cmd *cmd);
 void	ft_exec_cmd(t_cmd *cmd, char **ms_envp, int lst_stat);
@@ -73,7 +75,7 @@ int		ft_str_to_fd(char *str);
 void	ft_exec_builtin(t_data *dt, t_cmd *cmd);
 bool	ft_is_in_pipeline(t_cmd *cmd);
 bool	ft_is_builtin(char *cmd);
-void	ft_change_directory(t_data *dt, t_cmd *cmd);
+int		ft_change_directory(t_data *dt, t_cmd *cmd);
 
 //TEST FUNCTIONS
 void	ft_print_cmds(t_data *dt);
