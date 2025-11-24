@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:46:46 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/22 18:13:14 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/24 17:06:34 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static char	**ft_include_subshell(char **args, int lst_stat)
 	return (new_args);
 }
 
-int	ft_prepare_subshell(char **ms_envp, t_cmd *cmd, char **path, int lst_stat)
+int	ft_prep_subshell(char **ms_envp, t_cmd *cmd, char **path, int lst_stat)
 {
 	if (!ft_strncmp(cmd->args[0], "minishell", 10))
 	{

@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:46:07 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/16 18:01:38 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/24 15:44:50 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,6 @@ void	ft_dup2_close(int oldfd, int newfd)
 	}
 	if (oldfd > STDERR_FILENO)
 		close(oldfd);
-}
-
-void	ft_puterror_exit(char *target, char *message, int status)
-{
-	write(STDERR_FILENO, PGM_NAME, ft_strlen(PGM_NAME));
-	write(STDERR_FILENO, ": ", 2);
-	if (target)
-	{
-		write(STDERR_FILENO, target, ft_strlen(target));
-		write(STDERR_FILENO, ": ", 2);
-	}
-	if (!message)
-	{
-		message = strerror(errno);
-		write(STDERR_FILENO, message, ft_strlen(message));
-		write(STDERR_FILENO, "\n", 1);
-	}
-	else
-		write(STDERR_FILENO, message, ft_strlen(message));
-	exit(status);
 }
 
 void	ft_close_unused_fds(t_cmd *cmd)
@@ -65,16 +45,34 @@ void	ft_close_cmd_files(t_cmd *cmd)
 		close(cmd->outfile);
 }
 
+static t_cmd	*ft_get_last_cmd(t_cmd *cmd_ll)
+{
+	t_cmd	*cur_cmd;
+
+	if (!cmd_ll)
+		return (NULL);
+	cur_cmd = cmd_ll;
+	while (cur_cmd->next)
+		cur_cmd = cur_cmd->next;
+	return (cur_cmd);
+}
+
 void	ft_wait_all_pids(t_data *dt)
 {
+	t_cmd	*lst_cmd;
 	pid_t	cur_pid;
+	int		lst_stat;
 	int		i;
 
 	i = 0;
 	cur_pid = dt->pid_arr[i];
 	while (cur_pid != 0)
 	{
-		waitpid(cur_pid, &dt->lst_stat, 0);
-		cur_pid = dt->pid_arr[++i];
+		waitpid(cur_pid, &lst_stat, 0);
+		cur_pid = dt->pid_arr[i];
+		i++;
 	}
+	lst_cmd = ft_get_last_cmd(dt->cmd_ll);
+	if (!ft_is_builtin(lst_cmd->args[0]))
+		dt->lst_stat = lst_stat;
 }
