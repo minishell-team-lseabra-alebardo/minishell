@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 16:53:43 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/24 12:37:20 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/25 12:33:12 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	ft_change_directory(t_data *dt, t_cmd *cmd)
 	if (!cmd->args[1])
 		path = *(ft_getenv("HOME", dt->ms_envp)) + 5;
 	else if (cmd->args[2])
-		return (ft_puterror_ret("cd", ERR_TOO_MANY_ARGS, EXIT_FAILURE));
+		return (ft_puterror_ret("cd", NULL, ERR_TOO_MANY_ARGS, EXIT_FAILURE));
 	else if (cmd->args[1][0] == '\0')
 		return (EXIT_SUCCESS);
 	else
@@ -75,7 +75,8 @@ int	ft_change_directory(t_data *dt, t_cmd *cmd)
 	if (chdir(path) < 0)
 	{
 		free(pwd);
-		return (ft_puterror_ret(cmd->args[1], strerror(errno), EXIT_FAILURE));
+		ft_puterror("cd", cmd->args[1], NULL);
+		return (EXIT_FAILURE);
 	}
 	ft_set_env("OLD_PWD", pwd, dt->ms_envp);
 	free(pwd);
