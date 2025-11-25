@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 11:44:08 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/24 13:26:12 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/25 15:40:54 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ bool	ft_is_builtin(char *cmd)
 		return (true);
 	else if (!ft_strncmp("exit", cmd, 5))
 		return (true);
+	else if (ft_strncmp("pwd", cmd, 4) == 0)
+		return (true);
 	// if (ft_strncmp("echo", cmd, 5) == 0)
-	// 	return (true);
-	// else if (ft_strncmp("pwd", cmd, 4) == 0)
 	// 	return (true);
 	// else if (ft_strncmp("export", cmd, 7) == 0)
 	// 	return (true);
@@ -52,15 +52,15 @@ void	ft_exec_builtin(t_data *dt, t_cmd *cmd)
 		dt->lst_stat = ft_change_directory(dt, cmd);
 	else if (ft_strncmp("exit", cmd->args[0], 5) == 0)
 		ft_exit(dt, cmd);
-	// if (ft_strncmp("echo", cmd, 5) == 0)
+	else if (ft_strncmp("pwd", cmd->args[0], 4) == 0)
+		dt->lst_stat = ft_pwd();
+	// if (ft_strncmp("echo", cmd->args[0], 5) == 0)
 	// 	TODO()
-	// else if (ft_strncmp("pwd", cmd, 4) == 0)
+	// else if (ft_strncmp("export", cmd->args[0], 7) == 0)
 	// 	TODO()
-	// else if (ft_strncmp("export", cmd, 7) == 0)
+	// else if (ft_strncmp("unset", cmd->args[0], 6) == 0)
 	// 	TODO()
-	// else if (ft_strncmp("unset", cmd, 6) == 0)
-	// 	TODO()
-	// else if (ft_strncmp("env", cmd, 6) == 0)
+	// else if (ft_strncmp("env", cmd->args[0], 6) == 0)
 	// 	TODO()
 	if (ft_is_in_pipeline(cmd))
 		exit(EXIT_SUCCESS);
