@@ -6,13 +6,13 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 16:53:43 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/25 12:33:12 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/25 15:06:43 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
 
-static char	**ft_getenv(char *name, char **ms_envp)
+char	**ft_getenv(char *name, char **ms_envp)
 {
 	size_t	len;
 	int		i;
@@ -30,7 +30,7 @@ static char	**ft_getenv(char *name, char **ms_envp)
 	return (NULL);
 }
 
-static void	ft_set_env(char *name, char *value, char **ms_envp)
+void	ft_set_env(char *name, char *value, char **ms_envp)
 {
 	char	*res;
 	char	*tmp;

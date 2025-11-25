@@ -6,7 +6,7 @@
 #    By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/11/24 12:00:34 by lseabra-         ###   ########.fr        #
+#    Updated: 2025/11/25 15:41:18 by lseabra-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_parser_utils.c \
 		ft_parser.c \
 		ft_puterror.c \
+		ft_pwd.c \
 		ft_read_line.c \
 		ft_expand_variables.c \
 		ft_expand_variables_utils.c \
