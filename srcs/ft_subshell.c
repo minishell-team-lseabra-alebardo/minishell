@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:46:46 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/24 17:06:34 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/25 12:42:22 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static void	ft_remove_parentheses(char *line)
 int	ft_subshell(char **argv, char **envp)
 {
 	t_data	*dt;
-	char	*line;
 
 	dt = (t_data *) ft_calloc(1, sizeof(t_data));
 	if (!dt)
@@ -39,16 +38,13 @@ int	ft_subshell(char **argv, char **envp)
 	dt->ms_envp = ft_strarr_dup(envp);
 	if (!dt->ms_envp)
 		return (EXIT_FAILURE);
-	dt->prompt = NULL;
-	dt->line = NULL;
 	dt->lst_stat = ft_atoi(argv[2]);
-	dt->cmd_ll = NULL;
 	dt->pexit = 0;
-	line = ft_strdup(argv[1]);
-	if (line[0] == '(')
-		ft_remove_parentheses(line);
-	ft_args_treatment(&line, dt->ms_envp, 0);
-	dt->split_line = ft_split_prompt(line, WS_POSIX);
+	dt->line = ft_strdup(argv[1]);
+	if (dt->line[0] == '(')
+		ft_remove_parentheses(dt->line);
+	ft_args_treatment(&dt->line, dt->ms_envp, 0);
+	dt->split_line = ft_split_prompt(dt->line, WS_POSIX);
 	ft_parser(dt);
 	ft_exec_line(dt);
 	return (ft_exit(dt, NULL));

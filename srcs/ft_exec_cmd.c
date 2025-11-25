@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 13:01:44 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/24 15:55:12 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/25 12:33:45 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	ft_handle_path_failure(t_cmd *cmd, int status)
 		msg = ERR_NO_PERMISSION;
 	else
 		msg = ERR_GENERIC;
-	ft_puterror_exit(cmd->args[0], msg, status);
+	ft_puterror_exit(NULL, cmd->args[0], msg, status);
 }
 
 void	ft_exec_cmd(t_cmd *cmd, char **ms_envp, int lst_stat)

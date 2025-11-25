@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:25:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/22 19:09:51 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/24 19:42:28 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ void	ft_free_strarr(char **strarr)
 
 int	ft_exit(t_data *dt, t_cmd *cmd)
 {
+	int		lst_stat;
+
+	lst_stat = dt->lst_stat;
 	ft_close_unused_fds(dt->cmd_ll);
 	ft_free_strarr(dt->ms_envp);
 	ft_free_prompt_line(dt->prompt, dt->line);
@@ -56,5 +59,7 @@ int	ft_exit(t_data *dt, t_cmd *cmd)
 		printf("exit\n");
 	ft_cleanup_line(dt);
 	free(dt);
-	exit(0);
+	if (lst_stat == EXIT_SUCCESS)
+		exit(EXIT_SUCCESS);
+	exit(EXIT_FAILURE);
 }
