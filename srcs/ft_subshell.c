@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_subshell.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:46:46 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/24 19:42:31 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/11/25 12:42:22 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static void	ft_remove_parentheses(char *line)
 int	ft_subshell(char **argv, char **envp)
 {
 	t_data	*dt;
-//	int		status;
 
 	dt = (t_data *) ft_calloc(1, sizeof(t_data));
 	if (!dt)
