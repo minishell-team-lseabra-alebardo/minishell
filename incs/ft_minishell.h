@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/25 15:39:17 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/26 14:29:41 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 
 int		ft_listener(void);
 void	ft_read_line(t_data *dt);
-char	*ft_get_ps1(void);
+char	*ft_get_ps1(char **ms_envp);
 void	ft_parser(t_data *dt);
 char	*ft_search_quotes(char **ms_envp, char *arg);
 void	ft_args_treatment(char **args, char **ms_envp, int mode);
@@ -75,7 +75,8 @@ int		ft_str_to_fd(char *str);
 void	ft_exec_builtin(t_data *dt, t_cmd *cmd);
 bool	ft_is_in_pipeline(t_cmd *cmd);
 bool	ft_is_builtin(char *cmd);
-char	**ft_getenv(char *name, char **ms_envp);
+char	**ft_getenv_addr(char *name, char **ms_envp);
+char	*ft_getenv(char *name, char **ms_envp);
 void	ft_set_env(char *name, char *value, char **ms_envp);
 int		ft_change_directory(t_data *dt, t_cmd *cmd);
 int		ft_pwd(void);

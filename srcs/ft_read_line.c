@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:08:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/22 17:48:45 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/26 12:01:37 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_read_line(t_data *dt)
 {
 	while (1)
 	{
-		dt->prompt = ft_get_ps1();
+		dt->prompt = ft_get_ps1(dt->ms_envp);
 		dt->line = readline(dt->prompt);
 		if (!dt->line)
 			ft_exit(dt, NULL);
