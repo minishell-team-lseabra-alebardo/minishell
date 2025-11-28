@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 14:31:20 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/28 11:07:49 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/28 11:55:07 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	ft_export(t_cmd *cmd, char **ms_envp)
 	{
 		printf("TODO(): export a variable.\n");
 	}
-	else if (cmd->args[0] )
+	else if (cmd->args[0])
 		ft_print_ordered_env(ms_envp);
 	return (EXIT_SUCCESS);
 }

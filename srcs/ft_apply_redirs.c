@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:07:14 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/25 12:29:51 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/28 11:31:59 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,6 @@ void	ft_apply_redirs(t_cmd *cmd)
 		ft_apply_append_outfile(cmd, cur_redir);
 		cur_redir = cur_redir->next;
 	}
+	ft_dup2_close(cmd->infile, STDIN_FILENO);
+	ft_dup2_close(cmd->outfile, STDOUT_FILENO);
 }

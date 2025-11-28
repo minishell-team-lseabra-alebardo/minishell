@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 11:44:08 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/28 11:10:32 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/28 11:55:28 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ bool	ft_is_parent_bltn(char *cmd)
 	else
 		return (false);
 }
+
 bool	ft_is_builtin(char *cmd)
 {
 	if (!cmd)
@@ -55,16 +56,18 @@ bool	ft_is_builtin(char *cmd)
 		return (false);
 }
 
-void	ft_exec_builtin(t_data *dt, t_cmd *cmd)
+int	ft_exec_builtin(t_data *dt, t_cmd *cmd)
 {
+	int	lst_stat;
+
 	if (ft_strncmp("cd", cmd->args[0], 3) == 0)
-		dt->lst_stat = ft_change_directory(dt, cmd);
+		lst_stat = ft_change_directory(dt, cmd);
 	else if (ft_strncmp("exit", cmd->args[0], 5) == 0)
 		ft_exit(dt, cmd);
 	else if (ft_strncmp("pwd", cmd->args[0], 4) == 0)
-		dt->lst_stat = ft_pwd();
+		lst_stat = ft_pwd();
 	else if (ft_strncmp("export", cmd->args[0], 7) == 0)
-		dt->lst_stat = ft_export(cmd, dt->ms_envp);
+		lst_stat = ft_export(cmd, dt->ms_envp);
 	// if (ft_strncmp("echo", cmd->args[0], 5) == 0)
 	// 	TODO()
 	// else if (ft_strncmp("unset", cmd->args[0], 6) == 0)
@@ -73,4 +76,5 @@ void	ft_exec_builtin(t_data *dt, t_cmd *cmd)
 	// 	TODO()
 	if (ft_is_in_pipeline(cmd))
 		exit(EXIT_SUCCESS);
+	return (lst_stat);
 }

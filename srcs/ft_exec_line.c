@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/28 11:08:30 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/28 11:48:05 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,16 @@ static void	ft_skip_based_on_stat(t_cmd **cmd, pid_t prev_pid, int *lst_stat)
 
 static void	ft_exec_child(t_data *dt, t_cmd *cmd)
 {
+	int	status;
+
 	ft_close_unused_fds(cmd->next);
 	ft_apply_redirs(cmd);
 	if (ft_is_builtin(cmd->args[0]))
-		ft_exec_builtin(dt, cmd);
+	{
+		status = ft_exec_builtin(dt, cmd);
+		ft_close_cmd_files(cmd);
+		exit(status);
+	}
 	else
 		ft_exec_cmd(cmd, dt->ms_envp, dt->lst_stat);
 }
@@ -68,7 +74,7 @@ void	ft_exec_line(t_data *dt)
 	{
 		ft_args_treatment(cur_cmd->args, dt->ms_envp, 1);
 		if (ft_is_parent_bltn(cur_cmd->args[0]) && !ft_is_in_pipeline(cur_cmd))
-			ft_exec_builtin(dt, cur_cmd);
+			dt->lst_stat = ft_exec_builtin(dt, cur_cmd);
 		else
 		{
 			dt->pid_arr[i] = fork();

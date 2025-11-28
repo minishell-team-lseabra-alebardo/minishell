@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/28 11:08:50 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/28 11:47:15 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	ft_free_strarr(char **strarr);
 void	ft_free_prompt_line(char *prompt, char *line);
 int		ft_exit(t_data *dt, t_cmd *cmd);
 int		ft_str_to_fd(char *str);
-void	ft_exec_builtin(t_data *dt, t_cmd *cmd);
+int		ft_exec_builtin(t_data *dt, t_cmd *cmd);
 bool	ft_is_in_pipeline(t_cmd *cmd);
 bool	ft_is_builtin(char *cmd);
 bool	ft_is_parent_bltn(char *cmd);
