@@ -6,7 +6,7 @@
 #    By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/11/26 14:53:33 by lseabra-         ###   ########.fr        #
+#    Updated: 2025/11/27 17:13:58 by lseabra-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,10 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_exec_cmd.c \
 		ft_exec_line.c \
 		ft_exec_utils.c \
-		ft_subshell.c \
+		ft_expand_variables_utils.c \
+		ft_expand_variables.c \
+		ft_export.c \
+		ft_free_exit.c \
 		ft_get_ps1.c \
 		ft_is_op.c \
 		ft_ms_path.c \
@@ -54,19 +57,17 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_puterror.c \
 		ft_pwd.c \
 		ft_read_line.c \
-		ft_expand_variables.c \
-		ft_expand_variables_utils.c \
 		ft_remove_quotes.c \
 		ft_resolve_cmd_path.c \
+		ft_shlvl.c \
 		ft_signal_handler.c \
 		ft_skips.c \
-		ft_free_exit.c \
 		ft_split_prompt_utils_2.c \
 		ft_split_prompt_utils.c \
 		ft_split_prompt.c \
 		ft_str_to_fd.c \
 		ft_strarr_dup.c \
-		ft_shlvl.c \
+		ft_subshell.c \
 		test_utils.c \
 )
 

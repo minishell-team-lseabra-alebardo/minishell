@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:46:44 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/21 11:00:15 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/27 17:47:06 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@
 # define EXIT_CANNOT_EXEC	126
 # define EXIT_NOT_FOUND		127
 
-# define MAX_PROCESSES 1024
+# define MAX_PROCESSES	1024
+
+//Builtins
+# define EXP_PREFIX	"declare -x "
 
 #endif

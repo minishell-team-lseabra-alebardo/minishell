@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/24 15:51:15 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/28 11:08:30 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	ft_skip_based_on_stat(t_cmd **cmd, pid_t prev_pid, int *lst_stat)
 		*cmd = (*cmd)->next;
 		return ;
 	}
-	if (!ft_is_builtin((*cmd)->args[0]))
+	if (!ft_is_parent_bltn((*cmd)->args[0]))
 	{
 		waitpid(prev_pid, &lst_proc_st, 0);
 		if (WIFEXITED(lst_proc_st))
@@ -67,7 +67,7 @@ void	ft_exec_line(t_data *dt)
 	while (cur_cmd)
 	{
 		ft_args_treatment(cur_cmd->args, dt->ms_envp, 1);
-		if (ft_is_builtin(cur_cmd->args[0]) && !ft_is_in_pipeline(cur_cmd))
+		if (ft_is_parent_bltn(cur_cmd->args[0]) && !ft_is_in_pipeline(cur_cmd))
 			ft_exec_builtin(dt, cur_cmd);
 		else
 		{
