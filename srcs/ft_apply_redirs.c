@@ -6,13 +6,13 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:07:14 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/28 11:31:59 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/01 19:44:37 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
 
-static void	ft_apply_heredoc(t_cmd *cmd, t_redir *rdr)
+static void	ft_apply_infile(t_cmd *cmd, t_redir *rdr, int *status)
 {
 	if (ft_is_op(rdr->type, CMD_HEREDOC))
 	{
@@ -20,87 +20,91 @@ static void	ft_apply_heredoc(t_cmd *cmd, t_redir *rdr)
 			close(cmd->infile);
 		cmd->infile = rdr->fd_to;
 	}
-}
-
-static void	ft_apply_infile(t_cmd *cmd, t_redir *rdr)
-{
-	if (ft_is_op(rdr->type, CMD_IN))
+	else if (ft_is_op(rdr->type, CMD_IN))
 	{
 		if (cmd->infile > STDERR_FILENO)
 			close(cmd->infile);
 		cmd->infile = open(rdr->filename, O_RDONLY);
 		if (cmd->infile < 0)
-			ft_puterror_exit(NULL, rdr->filename, NULL, EXIT_FAILURE);
-	}
-}
-
-static void	ft_apply_outfile(t_cmd *cmd, t_redir *rdr)
-{
-	int	fd;
-	int	fd_from;
-
-	if (rdr->fd_from)
-		fd_from = ft_str_to_fd(rdr->fd_from);
-	else
-		fd_from = 0;
-	if (ft_is_op(rdr->type, CMD_OUT))
-	{
-		fd = open(rdr->filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (fd < 0)
-			ft_puterror_exit(NULL, rdr->filename, NULL, EXIT_FAILURE);
-		if (fd_from > STDIN_FILENO)
-			ft_dup2_close(fd, fd_from);
-		else if (fd_from < 0)
-			ft_puterror_exit(NULL, rdr->fd_from, ERR_BAD_FD, EXIT_FAILURE);
-		else
 		{
-			if (cmd->outfile > STDERR_FILENO)
-				close(cmd->outfile);
-			cmd->outfile = fd;
+			*status = EXIT_FAILURE;
+			ft_puterror(NULL, rdr->filename, NULL);
 		}
 	}
 }
 
-static void	ft_apply_append_outfile(t_cmd *cmd, t_redir *rdr)
+static int	ft_handle_fd_from(char *fd_from)
+{
+	int	res;
+
+	if (fd_from)
+		res = ft_str_to_fd(fd_from);
+	else
+		res = STDIN_FILENO;
+	return (res);
+}
+
+static int	ft_open_outfile(char *type, char *filename)
 {
 	int	fd;
-	int	fd_from;
 
-	if (rdr->fd_from)
-		fd_from = ft_str_to_fd(rdr->fd_from);
-	else
-		fd_from = 0;
-	if (ft_is_op(rdr->type, CMD_OUT_APPEND))
+	fd = -1;
+	if (ft_is_op(type, CMD_OUT))
+		fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	else if (ft_is_op(type, CMD_OUT_APPEND))
+		fd = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	return (fd);
+}
+
+static void	ft_apply_outfile(t_cmd *cmd, t_redir *rdr, int *status)
+{
+	int	fd_from;
+	int	fd;
+
+	fd = ft_open_outfile(rdr->type, rdr->filename);
+	if (fd < 0)
 	{
-		fd = open(rdr->filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		if (fd < 0)
-			ft_puterror_exit(NULL, rdr->filename, NULL, EXIT_FAILURE);
-		if (fd_from > STDIN_FILENO)
-			ft_dup2_close(fd, fd_from);
-		else if (fd_from < 0)
-			ft_puterror_exit(NULL, rdr->fd_from, ERR_BAD_FD, EXIT_FAILURE);
-		else
-		{
-			if (cmd->outfile > STDERR_FILENO)
-				close(cmd->outfile);
-			cmd->outfile = fd;
-		}
+		*status = ft_puterror_ret(NULL, rdr->filename, NULL, EXIT_FAILURE);
+		return ;
+	}
+	fd_from = ft_handle_fd_from(rdr->fd_from);
+	if (fd_from > STDIN_FILENO)
+		ft_dup2_close(fd, fd_from);
+	else if (fd_from < 0 || fd_from >= 1024)
+	{
+		*status = ft_puterror_ret(NULL, rdr->fd_from, ERR_BAD_FD, EXIT_FAILURE);
+		return ;
+	}
+	else
+	{
+		if (cmd->outfile > STDERR_FILENO)
+			close(cmd->outfile);
+		cmd->outfile = fd;
 	}
 }
 
-void	ft_apply_redirs(t_cmd *cmd)
+int	ft_apply_redirs(t_cmd *cmd)
 {
-	t_redir	*cur_redir;
+	t_redir	*cur_rdr;
+	int		status;
 
-	cur_redir = cmd->redir_ll;
-	while (cur_redir)
+	cur_rdr = cmd->redir_ll;
+	status = EXIT_SUCCESS;
+	while (cur_rdr)
 	{
-		ft_apply_heredoc(cmd, cur_redir);
-		ft_apply_infile(cmd, cur_redir);
-		ft_apply_outfile(cmd, cur_redir);
-		ft_apply_append_outfile(cmd, cur_redir);
-		cur_redir = cur_redir->next;
+		if (ft_is_op(cur_rdr->type, CMD_HEREDOC)
+			|| ft_is_op(cur_rdr->type, CMD_IN))
+		{
+			ft_apply_infile(cmd, cur_rdr, &status);
+		}
+		else if (ft_is_op(cur_rdr->type, CMD_OUT_APPEND)
+			|| ft_is_op(cur_rdr->type, CMD_OUT))
+		{
+			ft_apply_outfile(cmd, cur_rdr, &status);
+		}
+		cur_rdr = cur_rdr->next;
+		if (status != EXIT_SUCCESS)
+			break ;
 	}
-	ft_dup2_close(cmd->infile, STDIN_FILENO);
-	ft_dup2_close(cmd->outfile, STDOUT_FILENO);
+	return (status);
 }

@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 11:44:08 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/29 17:20:36 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/01 17:08:51 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ bool	ft_is_parent_bltn(char *cmd)
 		return (true);
 	else if (!ft_strncmp("exit", cmd, 5))
 		return (true);
+	else if (ft_strncmp("export", cmd, 7) == 0)
+		return (true);
 	else
 		return (false);
 }
@@ -43,8 +45,6 @@ bool	ft_is_builtin(char *cmd)
 	else if (ft_is_parent_bltn(cmd))
 		return (true);
 	else if (ft_strncmp("pwd", cmd, 4) == 0)
-		return (true);
-	else if (ft_strncmp("export", cmd, 7) == 0)
 		return (true);
 	// if (ft_strncmp("echo", cmd, 5) == 0)
 	// 	return (true);

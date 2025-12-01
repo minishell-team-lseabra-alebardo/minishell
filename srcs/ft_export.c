@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 14:31:20 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/30 10:01:32 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/01 19:49:33 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ static bool	ft_validate_var(char *var)
 	int	i;
 
 	i = 0;
-	while(var[i] && ft_isalpha(var[i]))
+	while (var[i] && ft_isalpha(var[i]))
 		i++;
 	if (!ft_isalpha(var[i]) && (i == 0 || var[i] != '='))
 		return (false);
@@ -192,8 +192,6 @@ static int	ft_export_vars(char	**args, t_data *dt)
 	int		status;
 	char	**new_envp;
 
-	if (!args || !dt)
-		return (EXIT_FAILURE);
 	new_var_counter = ft_count_new_vars(args, dt->ms_envp);
 	envp_len = ft_get_envp_len(dt->ms_envp);
 	status = EXIT_SUCCESS;
