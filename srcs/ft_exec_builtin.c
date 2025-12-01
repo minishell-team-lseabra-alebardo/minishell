@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 11:44:08 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/28 11:55:28 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/29 17:20:36 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	ft_exec_builtin(t_data *dt, t_cmd *cmd)
 	else if (ft_strncmp("pwd", cmd->args[0], 4) == 0)
 		lst_stat = ft_pwd();
 	else if (ft_strncmp("export", cmd->args[0], 7) == 0)
-		lst_stat = ft_export(cmd, dt->ms_envp);
+		lst_stat = ft_export(cmd, dt);
 	// if (ft_strncmp("echo", cmd->args[0], 5) == 0)
 	// 	TODO()
 	// else if (ft_strncmp("unset", cmd->args[0], 6) == 0)

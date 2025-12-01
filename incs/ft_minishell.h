@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/28 11:47:15 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/29 17:14:15 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*ft_getenv(char *name, char **ms_envp);
 void	ft_set_env(char *name, char *value, char **ms_envp);
 int		ft_change_directory(t_data *dt, t_cmd *cmd);
 int		ft_pwd(void);
-int		ft_export(t_cmd *cmd, char **ms_envp);
+int		ft_export(t_cmd *cmd, t_data *dt);
 
 //TEST FUNCTIONS
 void	ft_print_cmds(t_data *dt);

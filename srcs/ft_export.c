@@ -6,13 +6,13 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 14:31:20 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/28 11:55:07 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/30 10:01:32 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
 
-int	ft_strcmp(char *s1, char *s2)
+int	ft_strcmp_all(char *s1, char *s2)
 {
 	size_t	s1_len;
 	size_t	s2_len;
@@ -41,7 +41,7 @@ static void	ft_strarr_bubble_sort(char **strarr, size_t len)
 		j = 0;
 		while (j < len - 1 - i)
 		{
-			if (ft_strcmp(strarr[j], strarr[j + 1]) > 0)
+			if (ft_strcmp_all(strarr[j], strarr[j + 1]) > 0)
 			{
 				tmp = strarr[j];
 				strarr[j] = strarr[j + 1];
@@ -81,19 +81,19 @@ static void	ft_print_formatted_env(char *env)
 	free(res);
 }
 
-static void	ft_print_ordered_env(char **strarr)
+static int	ft_print_ordered_env(char **strarr)
 {
 	char	**ordered;
 	size_t	i;
 
 	if (!strarr)
-		return ;
+		return (EXIT_FAILURE);
 	i = 0;
 	while (strarr[i])
 		i++;
 	ordered = ft_calloc(i + 1, sizeof(char *));
 	if (!ordered)
-		return ;
+		return (EXIT_FAILURE);
 	ft_memcpy(ordered, strarr, i * sizeof(char *));
 	ft_strarr_bubble_sort(ordered, i);
 	i = 0;
@@ -103,17 +103,125 @@ static void	ft_print_ordered_env(char **strarr)
 		i++;
 	}
 	free(ordered);
+	return (EXIT_SUCCESS);
 }
 
-int	ft_export(t_cmd *cmd, char **ms_envp)
+static bool	ft_validate_var(char *var)
 {
-	if (!cmd || !cmd->args || !ms_envp)
-		return (EXIT_FAILURE);
-	if (cmd->args[1] && ft_is_in_pipeline(cmd))
+	int	i;
+
+	i = 0;
+	while(var[i] && ft_isalpha(var[i]))
+		i++;
+	if (!ft_isalpha(var[i]) && (i == 0 || var[i] != '='))
+		return (false);
+	else
+		return (true);
+}
+
+static char	**ft_get_var_addr(char *var, char **ms_envp)
+{
+	size_t	i;
+	char	*name;
+	char	**addr;
+
+	i = 0;
+	while (var[i] && var[i] != '=')
+		i++;
+	name = ft_substr(var, 0, i);
+	addr = ft_getenv_addr(name, ms_envp);
+	free(name);
+	return (addr);
+}
+
+static size_t	ft_count_new_vars(char **args, char **ms_envp)
+{
+	size_t	counter;
+	size_t	i;
+
+	counter = 0;
+	i = 0;
+	while (args[i])
 	{
-		printf("TODO(): export a variable.\n");
+		if (ft_validate_var(args[i]) && !ft_get_var_addr(args[i], ms_envp))
+			counter++;
+		i++;
 	}
+	return (counter);
+}
+
+static size_t	ft_get_envp_len(char **ms_envp)
+{
+	size_t	i;
+
+	if (!ms_envp)
+		return (0);
+	i = 0;
+	while (ms_envp[i])
+		i++;
+	return (i);
+}
+
+static int	ft_add_var(char *arg, char **ms_envp, size_t *envp_len)
+{
+	char	**env_addr;
+
+	if (!ft_validate_var(arg))
+	{
+		ft_puterror("export", arg, ERR_INV_ID);
+		return (EXIT_FAILURE);
+	}
+	env_addr = ft_get_var_addr(arg, ms_envp);
+	if (env_addr)
+	{
+		free(*env_addr);
+		*env_addr = ft_strdup(arg);
+	}
+	else
+	{
+		ms_envp[*envp_len] = ft_strdup(arg);
+		(*envp_len)++;
+	}
+	return (EXIT_SUCCESS);
+}
+
+static int	ft_export_vars(char	**args, t_data *dt)
+{
+	size_t	new_var_counter;
+	size_t	envp_len;
+	int		status;
+	char	**new_envp;
+
+	if (!args || !dt)
+		return (EXIT_FAILURE);
+	new_var_counter = ft_count_new_vars(args, dt->ms_envp);
+	envp_len = ft_get_envp_len(dt->ms_envp);
+	status = EXIT_SUCCESS;
+	if (new_var_counter > 0)
+	{
+		new_envp = ft_calloc(envp_len + new_var_counter + 1, sizeof(char *));
+		if (!new_envp)
+			return (EXIT_FAILURE);
+		ft_memcpy(new_envp, dt->ms_envp, envp_len * sizeof(char *));
+		free(dt->ms_envp);
+		dt->ms_envp = new_envp;
+	}
+	while (*args)
+	{
+		if (ft_add_var(*args, dt->ms_envp, &envp_len) != EXIT_SUCCESS)
+			status = EXIT_FAILURE;
+		args++;
+	}
+	return (status);
+}
+
+int	ft_export(t_cmd *cmd, t_data *dt)
+{
+	if (!cmd || !cmd->args || !dt->ms_envp)
+		return (EXIT_FAILURE);
+	else if (cmd->args[1] && !ft_is_in_pipeline(cmd))
+		return (ft_export_vars(cmd->args + 1, dt));
 	else if (cmd->args[0])
-		ft_print_ordered_env(ms_envp);
+		return (ft_print_ordered_env(dt->ms_envp));
 	return (EXIT_SUCCESS);
 }

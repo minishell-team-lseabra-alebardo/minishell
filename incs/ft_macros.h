@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:46:44 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/27 17:47:06 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/11/29 16:29:39 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 # define ERR_CMD_NOT_FOUND	"command not found\n"
 # define ERR_BAD_FD			"Bad file descriptor\n"
 # define ERR_TOO_MANY_ARGS	"too many arguments\n"
+# define ERR_INV_ID	"not a valid identifier\n"
 
 // Exit status code
 # define EXIT_CANNOT_EXEC	126
