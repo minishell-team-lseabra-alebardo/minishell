@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 20:14:48 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/02 20:47:18 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/02 21:11:36 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,6 @@ char	*ft_expand_variable(t_data *dt, char **ms_envp, char *arg, int *i)
 	if (!var_name)
 		return (arg);
 	ft_copy_var_name(&arg[*i], var_name);
-	// if (!ft_strncmp("?", var_name, var_size))
-	// {
-	// 	free(var_name);
-	// 	return (ft_copy_lst_stat(dt->lst_stat, arg, var_size, i));
-	// }
 	while (*ms_envp && ft_strncmp(*ms_envp, var_name, var_size))
 		ms_envp++;
 	free(var_name);
