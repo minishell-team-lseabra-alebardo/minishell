@@ -6,13 +6,13 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 20:14:48 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/02 17:10:49 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/02 20:35:48 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
 
-static void	ft_copy_rest(char *new_arg, char *src)
+void	ft_copy_rest(char *new_arg, char *src)
 {
 	while (*new_arg)
 		new_arg++;
@@ -61,6 +61,11 @@ char	*ft_expand_variable(t_data *dt, char **ms_envp, char *arg, int *i)
 	if (!var_name)
 		return (arg);
 	ft_copy_var_name(&arg[*i], var_name);
+	if (!ft_strncmp("?=", var_name, var_size))
+	{
+		free(var_name);
+		return (ft_copy_lst_stat(dt->lst_stat, arg, var_size, i));
+	}
 	while (*ms_envp && ft_strncmp(*ms_envp, var_name, var_size))
 		ms_envp++;
 	free(var_name);

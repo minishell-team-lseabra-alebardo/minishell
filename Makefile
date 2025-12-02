@@ -6,7 +6,7 @@
 #    By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/12/02 16:36:32 by alebarbo         ###   ########.fr        #
+#    Updated: 2025/12/02 20:34:50 by alebarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_exec_cmd.c \
 		ft_exec_line.c \
 		ft_exec_utils.c \
+		ft_copy_lst_stat.c \
 		ft_expand_variables_utils.c \
 		ft_expand_variables.c \
 		ft_export.c \

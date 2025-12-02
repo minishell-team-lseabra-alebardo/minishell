@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 16:30:59 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/02 16:42:21 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/02 20:41:19 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void	ft_echo(char **args)
 	int		flag_n;
 
 	i = 1;
+	if (!args[i])
+	{
+		printf("\n");
+		return ;
+	}
 	flag_n = ft_strncmp(args[1], "-n", 3);
 	if (!flag_n)
 		i++;
