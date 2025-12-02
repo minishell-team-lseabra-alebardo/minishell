@@ -6,7 +6,7 @@
 #    By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/12/02 21:13:56 by alebarbo         ###   ########.fr        #
+#    Updated: 2025/12/02 22:05:34 by alebarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_pwd.c \
 		ft_env.c \
 		ft_echo.c \
+		ft_unset.c \
 		ft_read_line.c \
 		ft_remove_quotes.c \
 		ft_resolve_cmd_path.c \

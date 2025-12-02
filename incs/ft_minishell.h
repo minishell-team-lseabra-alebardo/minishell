@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/02 21:14:01 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/02 22:05:22 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int		ft_pwd(void);
 int		ft_export(t_cmd *cmd, t_data *dt);
 void	ft_env(char **ms_envp);
 void	ft_echo(char **args);
+void	ft_unset(t_data *dt, char **args);
 
 //TEST FUNCTIONS
 void	ft_print_cmds(t_data *dt);
