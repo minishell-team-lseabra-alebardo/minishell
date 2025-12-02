@@ -6,24 +6,11 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:46:07 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/24 15:44:50 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/02 16:26:58 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
-
-void	ft_dup2_close(int oldfd, int newfd)
-{
-	if (oldfd == newfd)
-		return ;
-	if (dup2(oldfd, newfd) == -1)
-	{
-		perror("dup2");
-		exit(EXIT_FAILURE);
-	}
-	if (oldfd > STDERR_FILENO)
-		close(oldfd);
-}
 
 void	ft_close_unused_fds(t_cmd *cmd)
 {
