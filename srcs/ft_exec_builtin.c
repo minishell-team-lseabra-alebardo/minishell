@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 11:44:08 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/02 19:18:58 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/02 19:26:55 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ bool	ft_is_builtin(char *cmd)
 		return (true);
 	else if (ft_strncmp("pwd", cmd, 4) == 0)
 		return (true);
-	// if (ft_strncmp("echo", cmd, 5) == 0)
-	// 	return (true);
+	else if (ft_strncmp("echo", cmd, 5) == 0)
+	 	return (true);
 	// else if (ft_strncmp("unset", cmd, 6) == 0)
 	// 	return (true);
 	else if (ft_strncmp("env", cmd, 4) == 0)
@@ -73,8 +73,8 @@ int	ft_exec_builtin(t_data *dt, t_cmd *cmd)
 		lst_stat = ft_pwd();
 	else if (ft_strncmp("export", cmd->args[0], 7) == 0)
 		lst_stat = ft_export(cmd, dt);
-	// if (ft_strncmp("echo", cmd->args[0], 5) == 0)
-	// 	TODO()
+	else if (ft_strncmp("echo", cmd->args[0], 5) == 0)
+		ft_echo(cmd->args);
 	// else if (ft_strncmp("unset", cmd->args[0], 6) == 0)
 	// 	TODO()
 	else if (ft_strncmp("env", cmd->args[0], 4) == 0)
