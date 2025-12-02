@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+         #
+#    By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/11/26 14:53:33 by lseabra-         ###   ########.fr        #
+#    Updated: 2025/12/02 15:21:34 by alebarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_parser.c \
 		ft_puterror.c \
 		ft_pwd.c \
+		ft_env.c \
 		ft_read_line.c \
 		ft_expand_variables.c \
 		ft_expand_variables_utils.c \

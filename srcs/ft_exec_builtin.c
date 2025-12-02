@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 11:44:08 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/25 15:40:54 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/02 15:21:03 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	ft_exec_builtin(t_data *dt, t_cmd *cmd)
 	// 	TODO()
 	// else if (ft_strncmp("unset", cmd->args[0], 6) == 0)
 	// 	TODO()
-	// else if (ft_strncmp("env", cmd->args[0], 6) == 0)
-	// 	TODO()
+	else if (ft_strncmp("env", cmd->args[0], 4) == 0)
+		ft_env(dt->ms_envp);
 	if (ft_is_in_pipeline(cmd))
 		exit(EXIT_SUCCESS);
 }
