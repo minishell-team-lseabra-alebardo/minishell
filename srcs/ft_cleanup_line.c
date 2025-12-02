@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 16:07:52 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/16 19:13:59 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/02 18:31:41 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static void	ft_free_redirs(t_redir *redir)
 
 static void	ft_free_cmds(t_cmd *cmd)
 {
+	size_t	i;
+
 	if (!cmd)
 		return ;
 	if (cmd->next)
@@ -32,6 +34,16 @@ static void	ft_free_cmds(t_cmd *cmd)
 	ft_free_redirs(cmd->redir_ll);
 	if (cmd->args)
 		free(cmd->args);
+	if (cmd->dup2_backup)
+	{
+		i = 0;
+		while (cmd->dup2_backup[i])
+		{
+			free(cmd->dup2_backup[i]);
+			i++;
+		}
+		free(cmd->dup2_backup);
+	}
 	free(cmd);
 }
 

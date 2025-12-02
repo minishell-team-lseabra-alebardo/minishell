@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 11:44:08 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/02 16:10:31 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/02 19:18:58 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ bool	ft_is_builtin(char *cmd)
 	// else if (ft_strncmp("unset", cmd, 6) == 0)
 	// 	return (true);
 	else if (ft_strncmp("env", cmd, 4) == 0)
-	 	return (true);
+		return (true);
 	else
 		return (false);
 }
@@ -60,6 +60,11 @@ int	ft_exec_builtin(t_data *dt, t_cmd *cmd)
 {
 	int	lst_stat;
 
+	lst_stat = ft_apply_redirs(cmd);
+	if (lst_stat != EXIT_SUCCESS)
+		return (lst_stat);
+	ft_dup2_backup_close(cmd->infile, STDIN_FILENO, cmd);
+	ft_dup2_backup_close(cmd->outfile, STDOUT_FILENO, cmd);
 	if (ft_strncmp("cd", cmd->args[0], 3) == 0)
 		lst_stat = ft_change_directory(dt, cmd);
 	else if (ft_strncmp("exit", cmd->args[0], 5) == 0)
@@ -74,6 +79,7 @@ int	ft_exec_builtin(t_data *dt, t_cmd *cmd)
 	// 	TODO()
 	else if (ft_strncmp("env", cmd->args[0], 4) == 0)
 		ft_env(dt->ms_envp);
+	ft_reset_dup2(cmd);
 	if (ft_is_in_pipeline(cmd))
 		exit(EXIT_SUCCESS);
 	return (lst_stat);

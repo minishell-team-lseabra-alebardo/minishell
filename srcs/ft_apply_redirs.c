@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:07:14 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/01 19:44:37 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/02 18:28:35 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	ft_apply_outfile(t_cmd *cmd, t_redir *rdr, int *status)
 	}
 	fd_from = ft_handle_fd_from(rdr->fd_from);
 	if (fd_from > STDIN_FILENO)
-		ft_dup2_close(fd, fd_from);
+		ft_dup2_backup_close(fd, fd_from, cmd);
 	else if (fd_from < 0 || fd_from >= 1024)
 	{
 		*status = ft_puterror_ret(NULL, rdr->fd_from, ERR_BAD_FD, EXIT_FAILURE);

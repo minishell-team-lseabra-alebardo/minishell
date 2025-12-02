@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:46:44 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/29 16:29:39 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:19:30 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define FT_MACROS_H
 
 # define PGM_NAME "minishell"
+
+// Internal functions return
+# define ERROR		-1
+# define SUCCESS	0
 
 // POSIX whitespaces
 # define WS_SPACE		' '

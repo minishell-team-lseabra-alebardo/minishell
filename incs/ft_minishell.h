@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/02 16:10:00 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/02 18:19:37 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int		ft_apply_redirs(t_cmd *cmd);
 void	ft_exec_cmd(t_cmd *cmd, char **ms_envp, int lst_stat);
 void	ft_exec_line(t_data *dt);
 void	ft_dup2_close(int oldfd, int newfd);
+void	ft_dup2_backup_close(int oldfd, int newfd, t_cmd *cmd);
+void	ft_reset_dup2(t_cmd *cmd);
 void	ft_close_unused_fds(t_cmd *cmd);
 void	ft_close_cmd_files(t_cmd *cmd);
 int		ft_resolve_cmd_path(char *cmd, char **path_addr);
