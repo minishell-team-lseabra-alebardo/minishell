@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/01 18:16:09 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:11:29 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ft_exec_line(t_data *dt)
 	i = 0;
 	while (cur_cmd)
 	{
-		ft_args_treatment(cur_cmd->args, dt->ms_envp, 1);
+		ft_args_treatment(cur_cmd->args, dt, 1);
 		if (ft_is_parent_bltn(cur_cmd->args[0]) && !ft_is_in_pipeline(cur_cmd))
 			dt->lst_stat = ft_exec_builtin(dt, cur_cmd);
 		else

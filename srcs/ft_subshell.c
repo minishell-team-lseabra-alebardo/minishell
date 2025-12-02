@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_subshell.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:46:46 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/25 12:42:22 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/02 20:36:03 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_subshell(char **argv, char **envp)
 	dt->line = ft_strdup(argv[1]);
 	if (dt->line[0] == '(')
 		ft_remove_parentheses(dt->line);
-	ft_args_treatment(&dt->line, dt->ms_envp, 0);
+	ft_args_treatment(&dt->line, dt, 0);
 	dt->split_line = ft_split_prompt(dt->line, WS_POSIX);
 	ft_parser(dt);
 	ft_exec_line(dt);

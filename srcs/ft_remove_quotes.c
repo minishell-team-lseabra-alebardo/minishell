@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:37:39 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/14 21:35:27 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:03:08 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,20 @@ static void	ft_move_chars(char *arg)
 	}
 }
 
-static char	*ft_search_variables(char **ms_envp, char *arg, char quote, int *i)
+static char	*ft_search_variables(t_data *dt, char *arg, char quote, int *i)
 {
 	while (arg[*i] != quote)
 	{
 		if (quote == '\"'
 			&& (arg[*i] == '$' && !ft_is_whitespace(arg[*(i) + 1])))
-			arg = ft_expand_variable(ms_envp, arg, i);
+			arg = ft_expand_variable(dt, dt->ms_envp, arg, i);
 		else
 			*i += 1;
 	}
 	return (arg);
 }
 
-char	*ft_search_quotes(char **ms_envp, char *arg)
+char	*ft_search_quotes(t_data *dt, char *arg)
 {
 	int		i;
 	char	quote;
@@ -48,7 +48,7 @@ char	*ft_search_quotes(char **ms_envp, char *arg)
 			while (arg[i] == quote)
 			{
 				ft_move_chars(&arg[i]);
-				arg = ft_search_variables(ms_envp, arg, quote, &i);
+				arg = ft_search_variables(dt, arg, quote, &i);
 				ft_move_chars(&arg[i]);
 			}
 		}
