@@ -6,13 +6,13 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 20:29:40 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/02 20:38:16 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/02 20:48:59 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
 
-char	*ft_copy_lst_stat(int lst_stat, char *arg, int var_size, int *i)
+char	*ft_copy_lst_stat(int lst_stat, char *arg, int *i)
 {
 	char	*new_arg;
 	char	*stat_string;
@@ -23,12 +23,12 @@ char	*ft_copy_lst_stat(int lst_stat, char *arg, int var_size, int *i)
 	if (!stat_string)
 		return (arg);
 	env_var_len = ft_strlen(stat_string);
-	new_arg = ft_calloc((ft_strlen(arg) + env_var_len) - var_size + 1, 1);
+	new_arg = ft_calloc(ft_strlen(arg) + env_var_len, 1);
 	if (!new_arg)
 		return (arg);
 	j = ft_copy_start(new_arg, arg, *i);
 	ft_copy_rest(new_arg, stat_string);
-	j += var_size;
+	j += 2;
 	ft_copy_rest(new_arg, &arg[j]);
 	*i += env_var_len - 1;
 	free(stat_string);
