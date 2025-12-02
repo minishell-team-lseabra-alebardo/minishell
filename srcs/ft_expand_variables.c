@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 20:14:48 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/18 16:21:16 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:10:49 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	*ft_copy_var_value(char *env_var, char *arg, int var_size, int *i)
 	return (new_arg);
 }
 
-char	*ft_expand_variable(char **ms_envp, char *arg, int *i)
+char	*ft_expand_variable(t_data *dt, char **ms_envp, char *arg, int *i)
 {
 	char	*var_name;
 	char	*new_arg;
@@ -71,7 +71,7 @@ char	*ft_expand_variable(char **ms_envp, char *arg, int *i)
 	return (new_arg);
 }
 
-static char	*ft_search_variable(char **ms_envp, char *arg, int mode)
+static char	*ft_search_variable(t_data *dt, char *arg, int mode)
 {
 	int		i;
 	char	quote;
@@ -91,22 +91,22 @@ static char	*ft_search_variable(char **ms_envp, char *arg, int mode)
 				i++;
 		}
 		if (arg[i] == '$' && !ft_is_whitespace(arg[i + 1]))
-			arg = ft_expand_variable(ms_envp, arg, &i);
+			arg = ft_expand_variable(dt, dt->ms_envp, arg, &i);
 		else
 			i++;
 	}
 	return (arg);
 }
 
-void	ft_args_treatment(char **args, char **ms_envp, int mode)
+void	ft_args_treatment(char **args, t_data *dt, int mode)
 {
 	if (mode == 0)
-		*args = ft_search_variable(ms_envp, *args, mode);
+		*args = ft_search_variable(dt, *args, mode);
 	else
 	{
 		while (*args)
 		{
-			*args = ft_search_quotes(ms_envp, *args);
+			*args = ft_search_quotes(dt, *args);
 			args++;
 		}
 	}
