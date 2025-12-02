@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 11:44:08 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/02 16:04:51 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/02 16:06:10 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ bool	ft_is_builtin(char *cmd)
 	// 	return (true);
 	// else if (ft_strncmp("unset", cmd, 6) == 0)
 	// 	return (true);
-	// else if (ft_strncmp("env", cmd, 6) == 0)
-	// 	return (true);
+	else if (ft_strncmp("env", cmd, 4) == 0)
+	 	return (true);
 	else
 		return (false);
 }
