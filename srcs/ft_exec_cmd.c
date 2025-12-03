@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 13:01:44 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/28 11:33:13 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/03 16:38:03 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	ft_exec_cmd(t_cmd *cmd, char **ms_envp, int lst_stat)
 	int		status;
 
 	path = NULL;
+	ft_dup2_close(cmd->infile, STDIN_FILENO);
+	ft_dup2_close(cmd->outfile, STDOUT_FILENO);
 	if (ft_prep_subshell(ms_envp, cmd, &path, lst_stat))
 		status = EXIT_SUCCESS;
 	else

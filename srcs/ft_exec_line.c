@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/02 17:11:29 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/03 16:38:18 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ static void	ft_exec_child(t_data *dt, t_cmd *cmd)
 		ft_close_cmd_files(cmd);
 		exit(status);
 	}
-	ft_dup2_close(cmd->infile, STDIN_FILENO);
-	ft_dup2_close(cmd->outfile, STDOUT_FILENO);
 	if (ft_is_builtin(cmd->args[0]))
 	{
 		status = ft_exec_builtin(dt, cmd);
