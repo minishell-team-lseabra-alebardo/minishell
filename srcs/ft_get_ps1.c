@@ -6,33 +6,11 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:03:27 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/03 12:48:05 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/03 13:48:17 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minishell.h"
-
-static char	*ft_get_hostname(void)
-{
-	char	*ref;
-	char	*hostname;
-	char	*res;
-	size_t	size;
-
-	ref = "local/";
-	hostname = getenv("SESSION_MANAGER");
-	if (!hostname)
-		return (NULL);
-	if (ft_strncmp(hostname, ref, ft_strlen(ref)) == 0)
-		hostname += ft_strlen(ref);
-	if (*hostname == 0)
-		return (NULL);
-	size = 0;
-	while (hostname[size] && hostname[size] != '.' && hostname[size] != ':')
-		size++;
-	res = ft_substr(hostname, 0, size);
-	return (res);
-}
 
 static char	*ft_strjoin_free(char *s1, bool free_s1, char *s2, bool free_s2)
 {
@@ -71,23 +49,15 @@ static char	*ft_get_prompt_cwd(char **ms_envp)
 
 char	*ft_get_ps1(char **ms_envp)
 {
-	char	*username;
-	char	*hostname;
 	char	*cwd;
 	char	*res;
 
-	username = getenv("USER");
-	hostname = ft_get_hostname();
 	cwd = ft_get_prompt_cwd(ms_envp);
-	res = ft_strdup(ORANGE);
-	if (username)
-		res = ft_strjoin_free(res, true, username, false);
-	if (hostname)
-	{
-		res = ft_strjoin_free(res, true, "@", false);
-		res = ft_strjoin_free(res, true, hostname, true);
-		res = ft_strjoin_free(res, true, ":", false);
-	}
+	res = ft_strjoin(ORANGE, "[");
+	res = ft_strjoin_free(res, true, PGM_NAME, false);
+	res = ft_strjoin_free(res, true, "]", false);
+	res = ft_strjoin_free(res, true, WHITE, false);
+	res = ft_strjoin_free(res, true, ":", false);
 	res = ft_strjoin_free(res, true, BLUE_GULF, false);
 	res = ft_strjoin_free(res, true, cwd, true);
 	res = ft_strjoin_free(res, true, RESET, false);

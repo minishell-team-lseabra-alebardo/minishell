@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:46:44 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/03 13:10:04 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/03 13:41:50 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 // Colors
 # define ORANGE  "\033[38;5;208m"
 # define BLUE_GULF   "\e[38;5;33m"
+# define WHITE   "\033[38;5;255m"
 # define RESET   "\033[0m"
 
 // Internal functions return
