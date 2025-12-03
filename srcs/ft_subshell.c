@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:46:46 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/02 20:36:03 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/03 20:06:41 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,11 @@ static char	*ft_get_ms_path(char **ms_envp)
 
 	i = 0;
 	while (ft_strncmp(ms_envp[i], "MS_PATH=", 8))
+	{
 		i++;
+		if (!ms_envp[i])
+			return (0);
+	}
 	return (ms_envp[i] + 8);
 }
 
@@ -74,15 +78,20 @@ static char	**ft_include_subshell(char **args, int lst_stat)
 
 int	ft_prep_subshell(char **ms_envp, t_cmd *cmd, char **path, int lst_stat)
 {
+	char	*ms_path;
+
+	ms_path = ft_get_ms_path(ms_envp);
+	if (!ms_path)
+		return (0);
 	if (!ft_strncmp(cmd->args[0], "minishell", 10))
 	{
-		*path = ft_strdup(ft_get_ms_path(ms_envp));
+		*path = ft_strdup(ms_path);
 		return (1);
 	}
 	if (cmd->args[0][0] == '(')
 	{
 		cmd->args = ft_include_subshell(cmd->args, lst_stat);
-		*path = ft_strdup(ft_get_ms_path(ms_envp));
+		*path = ft_strdup(ms_path);
 		return (1);
 	}
 	return (0);

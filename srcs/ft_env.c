@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 15:10:33 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/03 17:28:52 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/03 20:06:38 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_env(char **ms_envp)
 		j = 0;
 		while (ms_envp[i][j])
 		{
-			if (ms_envp[i][j] == '=')
+			if (ms_envp[i][j] == '=' && ft_strncmp("MS_PATH=", ms_envp[i], 8))
 			{
 				printf("%s\n", ms_envp[i]);
 				break ;
