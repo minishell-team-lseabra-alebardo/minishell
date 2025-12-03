@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:46:44 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/02 17:19:30 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/03 13:10:04 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 # define FT_MACROS_H
 
 # define PGM_NAME "minishell"
+
+// Colors
+# define ORANGE  "\033[38;5;208m"
+# define BLUE_GULF   "\e[38;5;33m"
+# define RESET   "\033[0m"
 
 // Internal functions return
 # define ERROR		-1

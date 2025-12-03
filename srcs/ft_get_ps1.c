@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:03:27 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/26 15:05:47 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/03 12:48:05 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,15 @@ static char	*ft_get_hostname(void)
 	return (res);
 }
 
-static char	*ft_strjoin_free(char *malloc_str, char *str)
+static char	*ft_strjoin_free(char *s1, bool free_s1, char *s2, bool free_s2)
 {
 	char	*res;
 
-	res = ft_strjoin(malloc_str, str);
-	free(malloc_str);
+	res = ft_strjoin(s1, s2);
+	if (free_s1)
+		free(s1);
+	if (free_s2)
+		free(s2);
 	return (res);
 }
 
@@ -47,16 +50,22 @@ static char	*ft_get_prompt_cwd(char **ms_envp)
 {
 	char	*cwd;
 	char	*home;
+	char	*tmp;
 
 	cwd = ft_getenv("PWD", ms_envp);
 	home = ft_getenv("HOME", ms_envp);
+	if (home && ft_strlen(home) < 2)
+		home = NULL;
+	if (cwd)
+		cwd = ft_strdup(cwd);
+	else
+		cwd = getcwd(0, 0);
 	if (home && ft_strncmp(cwd, home, ft_strlen(home)) == 0)
 	{
-		cwd += ft_strlen(home);
-		cwd = ft_strjoin("~", cwd);
+		tmp = cwd;
+		cwd = ft_strjoin("~", cwd + ft_strlen(home));
+		free(tmp);
 	}
-	else if (cwd)
-		cwd = ft_strdup(cwd);
 	return (cwd);
 }
 
@@ -70,18 +79,18 @@ char	*ft_get_ps1(char **ms_envp)
 	username = getenv("USER");
 	hostname = ft_get_hostname();
 	cwd = ft_get_prompt_cwd(ms_envp);
-	res = ft_strdup("");
+	res = ft_strdup(ORANGE);
 	if (username)
-		res = ft_strjoin_free(res, username);
+		res = ft_strjoin_free(res, true, username, false);
 	if (hostname)
 	{
-		res = ft_strjoin_free(res, "@");
-		res = ft_strjoin_free(res, hostname);
-		free(hostname);
-		res = ft_strjoin_free(res, ":");
+		res = ft_strjoin_free(res, true, "@", false);
+		res = ft_strjoin_free(res, true, hostname, true);
+		res = ft_strjoin_free(res, true, ":", false);
 	}
-	res = ft_strjoin_free(res, cwd);
-	free(cwd);
-	res = ft_strjoin_free(res, "$ ");
+	res = ft_strjoin_free(res, true, BLUE_GULF, false);
+	res = ft_strjoin_free(res, true, cwd, true);
+	res = ft_strjoin_free(res, true, RESET, false);
+	res = ft_strjoin_free(res, true, "$ ", false);
 	return (res);
 }
