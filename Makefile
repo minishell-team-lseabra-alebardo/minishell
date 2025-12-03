@@ -62,6 +62,7 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_pwd.c \
 		ft_env.c \
 		ft_echo.c \
+		ft_unset.c \
 		ft_read_line.c \
 		ft_remove_quotes.c \
 		ft_resolve_cmd_path.c \

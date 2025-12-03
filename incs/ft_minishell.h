@@ -88,6 +88,7 @@ int		ft_pwd(void);
 int		ft_export(t_cmd *cmd, t_data *dt);
 void	ft_env(char **ms_envp);
 void	ft_echo(char **args);
+void	ft_unset(t_data *dt, char **args);
 
 //TEST FUNCTIONS
 void	ft_print_cmds(t_data *dt);
