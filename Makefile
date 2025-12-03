@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+         #
+#    By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/12/02 21:13:56 by alebarbo         ###   ########.fr        #
+#    Updated: 2025/12/03 17:23:28 by lseabra-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_copy_lst_stat.c \
 		ft_expand_variables_utils.c \
 		ft_expand_variables.c \
+		ft_export_vars.c \
 		ft_export.c \
 		ft_free_exit.c \
 		ft_get_ps1.c \
@@ -56,6 +57,7 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_ms_path.c \
 		ft_parser_utils.c \
 		ft_parser.c \
+		ft_print_ordered_exp.c \
 		ft_puterror.c \
 		ft_pwd.c \
 		ft_env.c \
