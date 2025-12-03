@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:48:27 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/28 15:51:26 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/03 20:29:08 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int	ft_check_unclosed(char *line)
 	{
 		if (*temp == '(')
 			temp = ft_check_parentheses(temp);
+		else if (*temp == ')')
+			return (-1);
 		else if (*temp == '\'')
 			temp = ft_check_single(temp);
 		else if (*temp == '\"')
