@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ms_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 14:15:30 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/04 11:47:46 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/04 17:41:40 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,27 @@ char	**ft_expand_envp(char **ms_envp)
 	return (expanded_envp);
 }
 
+static int	ft_check_ms_path(t_data *dt)
+{
+	int		i;
+
+	i = 0;
+	while (dt->ms_envp[i])
+	{
+		if (!ft_strncmp(dt->ms_envp[i], "MS_PATH=", 8))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int	ft_ms_path(t_data *dt)
 {
 	char	*pwd;
 	int		i;
 
+	if (ft_check_ms_path(dt))
+		return (SUCCESS);
 	i = 0;
 	dt->ms_envp = ft_expand_envp(dt->ms_envp);
 	if (!dt->ms_envp)
