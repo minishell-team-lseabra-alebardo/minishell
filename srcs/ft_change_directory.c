@@ -6,12 +6,26 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 16:53:43 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/26 14:30:24 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/04 12:25:08 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
 
+/**
+ * @brief Changes the current working directory for the minishell session.
+ *
+ * Implements the behavior of the `cd` builtin. If no argument is provided,
+ * the function attempts to change to the directory stored in the HOME
+ * environment variable. If more than one argument is given, an error is
+ * returned. Empty arguments (e.g., `cd ""`) are ignored successfully.
+ *
+ * On success, the function updates the PWD and OLD_PWD environment variables.
+ *
+ * @param dt  Pointer to the minishell main data structure.
+ * @param cmd Pointer to the parsed command structure containing arguments.
+ * @return EXIT_SUCCESS on success, EXIT_FAILURE on error.
+ */
 int	ft_change_directory(t_data *dt, t_cmd *cmd)
 {
 	char	*pwd;

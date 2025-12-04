@@ -6,12 +6,22 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 16:26:42 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/02 19:17:09 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/04 12:38:07 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
 
+/**
+ * @brief Performs a dup2() redirection and closes the old FD when appropriate.
+ *
+ * If oldfd and newfd differ, dup2(oldfd, newfd) is attempted. On success,
+ * oldfd is closed if it is not a standard descriptor (STDERR_FILENO or below).
+ * Errors are reported via ft_puterror().
+ *
+ * @param oldfd The source file descriptor.
+ * @param newfd The destination file descriptor.
+ */
 void	ft_dup2_close(int oldfd, int newfd)
 {
 	if (oldfd == newfd)
@@ -22,6 +32,17 @@ void	ft_dup2_close(int oldfd, int newfd)
 		close(oldfd);
 }
 
+/**
+ * @brief Adds a dup2 backup entry to a command's backup list.
+ *
+ * Stores a pointer representing a saved FD pair in cmd->dup2_backup,
+ * expanding the array as needed. Used to track redirections that must be
+ * restored later.
+ *
+ * @param backup Pointer to a two-int array {saved_fd, target_fd}.
+ * @param cmd    Pointer to the command whose backup list is updated.
+ * @return SUCCESS on success, ERROR on allocation failure.
+ */
 static int	ft_add_to_backup(int *backup, t_cmd *cmd)
 {
 	int		**new_dup2_backup;
@@ -45,6 +66,18 @@ static int	ft_add_to_backup(int *backup, t_cmd *cmd)
 	return (SUCCESS);
 }
 
+/**
+ * @brief Performs a dup2 redirection while saving the original FD for later
+ *restore them if the command is executed in the parent proccess.
+ *
+ * Saves the current value of newfd, performs the redirection using
+ * ft_dup2_close(), and records the backup pair in cmd->dup2_backup.
+ * If backup storage fails, the saved FD is discarded.
+ *
+ * @param oldfd The source FD for dup2().
+ * @param newfd The destination FD to overwrite.
+ * @param cmd   Pointer to the command owning the backup list.
+ */
 void	ft_dup2_backup_close(int oldfd, int newfd, t_cmd *cmd)
 {
 	int	savefd;
@@ -64,6 +97,15 @@ void	ft_dup2_backup_close(int oldfd, int newfd, t_cmd *cmd)
 	}
 }
 
+/**
+ * @brief Restores all file descriptors saved in a command's dup2 backup list.
+ *
+ * Iterates over cmd->dup2_backup, restoring each saved state using
+ * ft_dup2_close(). This is typically used after redirections applied
+ * in the parent process.
+ *
+ * @param cmd Pointer to the command whose saved FDs should be restored.
+ */
 void	ft_reset_dup2(t_cmd *cmd)
 {
 	size_t	i;
