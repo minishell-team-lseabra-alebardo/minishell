@@ -6,7 +6,7 @@
 #    By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/12/03 17:23:28 by lseabra-         ###   ########.fr        #
+#    Updated: 2025/12/04 11:39:29 by lseabra-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ BUILD_PATH = .build
 # Source files
 SRC = $(addprefix $(SRC_PATH)/, \
 		ft_minishell.c \
-		env_utils.c \
+		ft_env_utils.c \
 		ft_apply_redirs.c \
 		ft_change_directory.c \
 		ft_check_syntax_utils.c \
