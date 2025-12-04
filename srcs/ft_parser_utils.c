@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 14:33:46 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/04 11:42:25 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/04 11:47:14 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,5 @@ int	ft_init_pipe(t_cmd *cur, t_cmd *prev)
 	}
 	prev->outfile = pipefd[1];
 	cur->infile = pipefd[0];
-	return (0);
+	return (SUCCESS);
 }

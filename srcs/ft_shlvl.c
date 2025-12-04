@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 21:52:38 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/04 11:42:29 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/04 12:00:32 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	ft_new_shlvl(t_data *dt)
 	if (!dt->ms_envp[i])
 		return (ERROR);
 	ft_strlcpy(dt->ms_envp[i], "SHLVL=1", 8);
-	return (0);
+	return (SUCCESS);
 }
 
 int	ft_shlvl(t_data *dt)
@@ -72,5 +72,5 @@ int	ft_shlvl(t_data *dt)
 	ft_strlcat(new_shlvl, shlvl_var, 18);
 	free(shlvl_var);
 	ft_change_shlvl(new_shlvl, dt->ms_envp);
-	return (0);
+	return (SUCCESS);
 }

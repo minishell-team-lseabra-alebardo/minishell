@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 14:15:30 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/04 11:41:17 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/04 11:47:46 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,5 @@ int	ft_ms_path(t_data *dt)
 	ft_strlcpy(dt->ms_envp[i], "MS_PATH=", 9);
 	ft_strlcat(dt->ms_envp[i], pwd, ft_strlen(pwd) + 19);
 	ft_strlcat(dt->ms_envp[i], "/minishell", ft_strlen(pwd) + 19);
-	return (0);
+	return (SUCCESS);
 }

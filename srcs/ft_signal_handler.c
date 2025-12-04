@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:59:53 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/04 11:42:32 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/04 12:00:54 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	ft_sigint_listener(void)
 	sig_action.sa_flags = 0;
 	if (sigaction(SIGINT, &sig_action, 0))
 		return (ERROR);
-	return (0);
+	return (SUCCESS);
 }
 
 static int	ft_sigquit_listener(void)
@@ -50,12 +50,12 @@ static int	ft_sigquit_listener(void)
 	sig_action.sa_flags = 0;
 	if (sigaction(SIGQUIT, &sig_action, 0))
 		return (ERROR);
-	return (0);
+	return (SUCCESS);
 }
 
 int	ft_listener(void)
 {
 	if (ft_sigquit_listener() < 0 || ft_sigint_listener() < 0)
 		return (ERROR);
-	return (0);
+	return (SUCCESS);
 }
