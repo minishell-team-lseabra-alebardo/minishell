@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 14:33:46 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/14 15:05:28 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/04 11:42:25 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_exec_heredoc(char *lim)
 	int		pipefd[2];
 
 	if (pipe(pipefd) < 0)
-		return (ft_perror_return_status("pipe", -1));
+		return (ft_perror_return_status("pipe", ERROR));
 	while (true)
 	{
 		ft_putstr_fd(HEREDOC_PREFIX, STDOUT_FILENO);
@@ -91,7 +91,7 @@ int	ft_init_pipe(t_cmd *cur, t_cmd *prev)
 	if (pipe(pipefd) < 0)
 	{
 		perror("pipe");
-		return (-1);
+		return (ERROR);
 	}
 	prev->outfile = pipefd[1];
 	cur->infile = pipefd[0];

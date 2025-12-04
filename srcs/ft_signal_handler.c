@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_signal_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:59:53 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/01 03:13:01 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/04 11:42:32 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	ft_sigint_listener(void)
 	sig_action.sa_mask = sig_set;
 	sig_action.sa_flags = 0;
 	if (sigaction(SIGINT, &sig_action, 0))
-		return (-1);
+		return (ERROR);
 	return (0);
 }
 
@@ -49,13 +49,13 @@ static int	ft_sigquit_listener(void)
 	sig_action.sa_mask = sig_set;
 	sig_action.sa_flags = 0;
 	if (sigaction(SIGQUIT, &sig_action, 0))
-		return (-1);
+		return (ERROR);
 	return (0);
 }
 
 int	ft_listener(void)
 {
 	if (ft_sigquit_listener() < 0 || ft_sigint_listener() < 0)
-		return (-1);
+		return (ERROR);
 	return (0);
 }

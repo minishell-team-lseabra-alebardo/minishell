@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_shlvl.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 21:52:38 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/21 18:51:32 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/04 11:42:29 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ static int	ft_new_shlvl(t_data *dt)
 
 	dt->ms_envp = ft_expand_envp(dt->ms_envp);
 	if (!dt->ms_envp)
-		return (-1);
+		return (ERROR);
 	i = 0;
 	while (dt->ms_envp[i])
 		i++;
 	dt->ms_envp[i] = (char *) ft_calloc(18, sizeof(char));
 	if (!dt->ms_envp[i])
-		return (-1);
+		return (ERROR);
 	ft_strlcpy(dt->ms_envp[i], "SHLVL=1", 8);
 	return (0);
 }
@@ -66,7 +66,7 @@ int	ft_shlvl(t_data *dt)
 		shlvl_value++;
 	new_shlvl = (char *) ft_calloc(18, sizeof(char));
 	if (!new_shlvl)
-		return (-1);
+		return (ERROR);
 	ft_strlcpy(new_shlvl, "SHLVL=", 7);
 	shlvl_var = ft_itoa(shlvl_value);
 	ft_strlcat(new_shlvl, shlvl_var, 18);
