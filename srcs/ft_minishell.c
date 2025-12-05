@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 21:46:59 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/22 18:12:15 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/05 16:29:10 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char *argv[], char *envp[])
 		return (EXIT_FAILURE);
 	dt->prompt = NULL;
 	dt->line = NULL;
-	dt->lst_stat = 0;
+	dt->lst_stat = ft_get_lst_stat(0, true);
 	dt->cmd_ll = NULL;
 	dt->pexit = 1;
 	if (ft_ms_path(dt) < 0 || ft_shlvl(dt) < 0)

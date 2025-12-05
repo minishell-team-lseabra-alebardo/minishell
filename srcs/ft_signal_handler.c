@@ -6,11 +6,21 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:59:53 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/10/01 03:13:01 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/05 16:23:33 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
+
+int	ft_get_lst_stat(int lst_stat, bool flag)
+{
+	static int	status;
+
+	if (flag)
+		status = lst_stat;
+	return (status);
+	
+}
 
 static void	ft_signal_handler(int sig)
 {
@@ -20,6 +30,7 @@ static void	ft_signal_handler(int sig)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		ft_get_lst_stat(130, true);
 	}
 }
 

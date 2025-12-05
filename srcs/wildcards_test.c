@@ -1,26 +1,21 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
-#include <dirent.h>
-#include <sys/types.h>
+#include <ft_minishell.h>
 
-int	ft_is_whitespace(char c)
-{
-	if (!c || (c == ' ' || (c >= '\t' && c <= '\r')))
-		return (1);
-	return (0);
-}
+// int	ft_is_whitespace(char c)
+// {
+// 	if (!c || (c == ' ' || (c >= '\t' && c <= '\r')))
+// 		return (1);
+// 	return (0);
+// }
 
-int	ft_avoid_quotes(char *arg, char quote, int i)
-{
-	i++;
-	while (arg[i] && arg[i] != quote)
-		i++;
-	return (i++);
-}
+// int	ft_avoid_quotes(char *arg, char quote, int i)
+// {
+// 	i++;
+// 	while (arg[i] && arg[i] != quote)
+// 		i++;
+// 	return (i++);
+// }
 
-int	ft_avoid_parentheses(char *line, int i)
+static int	ft_avoid_parentheses(char *line, int i)
 {
 	while (line[i] != ')')
 		i++;
@@ -71,7 +66,8 @@ int	ft_count_names(void)
 		cont = readdir(dir);
 		if (!cont)
 			break ;
-		if (strncmp(cont->d_name, ".", 2) && strncmp(cont->d_name, "..", 3))
+		if (ft_strncmp(cont->d_name, ".", 2)
+			&& ft_strncmp(cont->d_name, "..", 3))
 			i++;
 	}
 	closedir(dir);
@@ -85,7 +81,7 @@ char	**ft_get_names(int names_count)
 	DIR				*dir;
 	struct dirent	*cont;
 
-	names = (char **) calloc(names_count + 1, sizeof(char *));
+	names = (char **) ft_calloc(names_count + 1, sizeof(char *));
 	if (!names)
 		return (NULL);
 	dir = opendir(".");
@@ -97,7 +93,8 @@ char	**ft_get_names(int names_count)
 		cont = readdir(dir);
 		if (!cont)
 			break;
-		if (strncmp(cont->d_name, ".", 2) && strncmp(cont->d_name, "..", 3))
+		if (ft_strncmp(cont->d_name, ".", 2)
+			&& ft_strncmp(cont->d_name, "..", 3))
 			names[i] = strdup(cont->d_name);
 	}
 	closedir(dir);
@@ -131,6 +128,33 @@ int	ft_search_wildcard(char *line, int *wildmark, int start)
 	return (0);
 }
 
+char	*ft_match_ends(char **split, char *name, int *wildmark)
+{
+	char	*temp;
+	int		i;
+	int		j;
+
+	temp = name;
+	i = 0;
+	j = 0;
+	if (!wildmark[2])
+	{
+		while (split[i + 1])
+			i++;
+		while (temp[j])
+			j++;
+		while (temp[j - 1] != '*')
+			j--;
+		if (ft_strncmp(split[i], &temp[j], ft_strlen(split[i])))
+			return (0);
+	}
+	if (!wildmark[0] && ft_strncmp(split[0], temp, ft_strlen(split[i])))
+		return (0);
+	else if (!wildmark[0] && !ft_strncmp(split[0], temp, ft_strlen(split[i])))
+		return (&temp[ft_strlen(split[0])]);
+	return (temp);
+}
+
 int	ft_search_matches(char **split, char *name, int *wildmark)
 {
 	int		i;
@@ -138,68 +162,101 @@ int	ft_search_matches(char **split, char *name, int *wildmark)
 
 	i = 0;
 	temp = name;
-	if (!wildmark[0] && strncmp(split[i], temp, strlen(split[i])))
-		return (0);
-	else if (!wildmark[0] && !strncmp(split[i], temp, strlen(split[i])))
+	if (!split[0])
+		return (1);
+	if (!wildmark[0] || !wildmark[2])
 	{
+		temp = ft_match_ends(split, name, wildmark);
 		i++;
-		temp = &temp[strlen(split[i])];
 	}
-	while (wildmark[1] && split[i])
+	if (!temp)
+		return (0);
+	while (wildmark[1] && split[i] && *temp)
 	{
-
+		if (!ft_strncmp(split[i], temp, ft_strlen(split[i])))
+		{
+			i++;
+			temp += ft_strlen(split[i]);
+		}
+		else
+			temp++;
+		if (!wildmark[2] && !split[i + 1])
+			break;
 	}
-	//CONTINUE HERE
+	if (!wildmark[2] && !split[i + 1])
+		return (1);
+	else if (!split[i])
+		return (1);
+	return (0);
 }
 
 char	*ft_create_new_line(char **names, char *wildtoken, int *wildmark)
 {
 	char	**split;
-	char	*new_line;
+	char	*match;
 	int		i;
 
 	split = ft_split(wildtoken, '*');
 	if (!split)
 		return (0);
-	new_line = (char *) calloc((ft_count_names() * 256) + 1, 1);
-	if (!new_line)
+	match = (char *) ft_calloc((ft_count_names() * 257) + 1, 1);
+	if (!match)
 		return (NULL);
 	i = 0;
 	while (names[i])
 	{
 		if (ft_search_matches(split, names[i], wildmark))
 		{
-			ft_strlcat(new_line, names[i], (ft_count_names() * 256) + 1);
-			ft_strlcat(new_line, " ", (ft_count_names() * 256) + 1);
+			ft_strlcat(match, names[i], (ft_count_names() * 257) + 1);
+			ft_strlcat(match, " ", (ft_count_names() * 257) + 1);
 		}
 		i++;
 	}
-	new_line[i - 1] = 0;
-	if (!new_line[0])
+	// FIX THIS new_line[i - 1] = 0;
+	if (!match[0])
 		return (0);
+	return (match);
+}
+
+char	*ft_copy_match(char *match, char *line, int wild_size, int *i)
+{
+	char	*new_line;
+	int		match_len;
+	int		j;
+
+	match_len = ft_strlen(match);
+	new_line = (char *) ft_calloc((ft_strlen(line) + match_len)
+		- wild_size + 1, 1);
+	if (!new_line)
+		return (0);
+	j = ft_copy_start(new_line, line, *i);
+	ft_copy_rest(new_line, match);
+	j += wild_size;
+	ft_copy_rest(new_line, &line[j]);
+	*i += match_len - 1;
 	return (new_line);
 }
 
-char	*ft_treat_wildcard(char **names, char *line, int *wildmark, int start)
+char	*ft_treat_wildcard(char **names, char *line, int *wildmark, int *start)
 {
 	char	*wildtoken;
-	char	*new_line;
-	char	i;
+	char	*match;
+	int		i;
 
 	i = 0;
-	wildtoken = (char *) calloc(wildmark[3] + 1, sizeof(char));
+	wildtoken = (char *) ft_calloc(wildmark[3] + 1, sizeof(char));
 	if (!wildtoken)
 		return (line);
 	while (i < wildmark[3])
 	{
-		wildtoken[i] = line[start + i];
+		wildtoken[i] = line[*start + i];
 		i++;
 	}
 	wildtoken = ft_search_wildquotes(wildtoken);
-	new_line = ft_create_new_line(names, wildtoken, wildmark);
-	if (!new_line)
+	match = ft_create_new_line(names, wildtoken, wildmark);
+	if (!match)
 		return (line);
-	//CONTINUE HERE
+	return (ft_copy_match(match, line, wildmark[3], start));
 }
 
 char	*ft_convert_wildcard(char **names, char *line)
@@ -209,6 +266,7 @@ char	*ft_convert_wildcard(char **names, char *line)
 	int		i;
 
 	i = 0;
+	new_line = ft_strdup(line);
 	while(line[i])
 	{
 		while (ft_is_whitespace(line[i]))
@@ -220,12 +278,12 @@ char	*ft_convert_wildcard(char **names, char *line)
 		else if (line[i])
 		{
 			if (ft_search_wildcard(line, wildmark, i))
-				new_line = ft_treat_wildcard(names, line, wildmark, i);
+				new_line = ft_treat_wildcard(names, line, wildmark, &i);
 			else
-				while (!ft_is_whitespace(line[i]))
-					i++;
+				i++;
 		}
 	}
+	return (new_line);
 }
 
 char	*ft_wildcards(char *line)
@@ -236,34 +294,13 @@ char	*ft_wildcards(char *line)
 
 	names_count = ft_count_names();
 	if (names_count < 0)
-		return (-1);
+		return (line);
 	if (!names_count)
 		return (line);
 	names = ft_get_names(names_count);
 	if (!names)
-		return (-1);
+		return (line);
 	new_line = ft_convert_wildcard(names, line);
 	free(line);
 	return (new_line);
-}
-
-int	main(void)
-{
-	DIR				*directory;
-	struct dirent	*contents;
-
-	directory = opendir("/home/magusk/test_codes");
-	if (!directory)
-	{
-		puts("Directory not open");
-		return (-1);
-	}
-	contents = readdir(directory);
-	while (contents)
-	{
-		if (strncmp(contents->d_name, ".", 2) && strncmp(contents->d_name, "..", 3))
-			printf("%s\n", contents->d_name);
-		contents = readdir(directory);
-	}
-	closedir(directory);
 }

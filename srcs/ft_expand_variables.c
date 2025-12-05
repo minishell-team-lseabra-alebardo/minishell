@@ -6,13 +6,13 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 20:14:48 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/18 16:21:16 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/05 15:52:34 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
 
-static void	ft_copy_rest(char *new_arg, char *src)
+void	ft_copy_rest(char *new_arg, char *src)
 {
 	while (*new_arg)
 		new_arg++;
@@ -101,7 +101,10 @@ static char	*ft_search_variable(char **ms_envp, char *arg, int mode)
 void	ft_args_treatment(char **args, char **ms_envp, int mode)
 {
 	if (mode == 0)
+	{
 		*args = ft_search_variable(ms_envp, *args, mode);
+		*args = ft_wildcards(*args);
+	}
 	else
 	{
 		while (*args)
