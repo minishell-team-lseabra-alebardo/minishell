@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:46:07 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/06 19:50:22 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/06 21:12:22 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ void	ft_wait_all_pids(t_data *dt)
 		i++;
 		cur_pid = dt->pid_arr[i];
 	}
-	ft_get_status(WEXITSTATUS(lst_stat), true);
+	if (ft_get_status(0, false) != 130)
+		ft_get_status(WEXITSTATUS(lst_stat), true);
 }
