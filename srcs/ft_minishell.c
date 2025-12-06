@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 21:46:59 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/06 19:38:38 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/06 22:26:15 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	main(int argc, char *argv[], char *envp[])
 	dt = ft_data_init(envp);
 	while (1)
 	{
+		ft_get_status(0, true);
 		dt->prompt = ft_get_ps1(dt->ms_envp);
 		dt->line = readline(dt->prompt);
 		ft_treat_line(dt);

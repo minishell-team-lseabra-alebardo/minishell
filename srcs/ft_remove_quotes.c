@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:37:39 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/05 23:01:43 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/06 22:28:14 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	*ft_search_variables(t_data *dt, char *arg, char quote, int *i)
 	{
 		if (quote == '\"'
 			&& (arg[*i] == '$' && !ft_is_whitespace(arg[*(i) + 1])))
-			arg = ft_expand_variable(dt->ms_envp, arg, i);
+			arg = ft_expand_variable(dt->ms_envp, dt, arg, i);
 		else
 			*i += 1;
 	}
