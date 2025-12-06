@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_resolve_cmd_path.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 12:45:27 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/14 23:56:43 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/06 16:52:58 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static int	ft_search_in_path(char *cmd, char **path_addr, char **path_arr)
 	char	*complete_path;
 
 	status = EXIT_NOT_FOUND;
+	if (!cmd || !cmd[0])
+		return (status);
 	i = 0;
 	while (path_arr[i])
 	{

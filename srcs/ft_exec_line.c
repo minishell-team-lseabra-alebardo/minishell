@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/04 13:06:16 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/06 16:36:17 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,12 @@ static void	ft_exec_child(t_data *dt, t_cmd *cmd)
 		ft_close_cmd_files(cmd);
 		exit(status);
 	}
-	if (ft_is_builtin(cmd->args[0]))
+	else if (!cmd->args || !cmd->args[0])
+	{
+		dt->pexit = 0;
+		ft_exit(dt, cmd);
+	}
+	else if (ft_is_builtin(cmd->args[0]))
 	{
 		status = ft_exec_builtin(dt, cmd);
 		ft_close_cmd_files(cmd);

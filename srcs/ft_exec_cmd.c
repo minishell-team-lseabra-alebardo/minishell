@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 13:01:44 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/04 12:57:48 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/06 18:51:39 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,22 @@
  */
 static void	ft_handle_path_failure(t_cmd *cmd, int status)
 {
-	char	*msg;
+	char	*message;
+	char	*target;
 
-	if (status == EXIT_NOT_FOUND)
-		msg = ERR_CMD_NOT_FOUND;
-	else if (status == EXIT_CANNOT_EXEC)
-		msg = ERR_NO_PERMISSION;
+	if (cmd && cmd->args && cmd->args[0] && !cmd->args[0][0])
+		target = "\"\"";
+	else if (cmd && cmd->args)
+		target = cmd->args[0];
 	else
-		msg = ERR_GENERIC;
-	ft_puterror_exit(NULL, cmd->args[0], msg, status);
+		target = NULL;
+	if (status == EXIT_NOT_FOUND)
+		message = ERR_CMD_NOT_FOUND;
+	else if (status == EXIT_CANNOT_EXEC)
+		message = ERR_NO_PERMISSION;
+	else
+		message = ERR_GENERIC;
+	ft_puterror_exit(NULL, target, message, status);
 }
 
 /**
