@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/06 21:11:55 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/06 22:15:48 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,16 +160,15 @@ void	ft_exec_line(t_data *dt)
 			ft_get_status(ft_exec_builtin(dt, cur_cmd), true);
 		else
 		{
-			ft_get_status(0, true);
 			dt->pid_arr[i] = fork();
 			if (dt->pid_arr[i] == 0)
 				ft_exec_child(dt, cur_cmd);
 			i++;
 		}
 		ft_close_cmd_files(cur_cmd);
-		ft_skip_based_on_stat(&cur_cmd, dt->pid_arr[i]);
 		if (ft_get_status(0, false) == 130)
 			break ;
+		ft_skip_based_on_stat(&cur_cmd, dt->pid_arr[i]);
 	}
 	ft_wait_all_pids(dt);
 	ft_cleanup_line(dt);
