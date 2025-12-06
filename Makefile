@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+         #
+#    By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/12/04 11:39:29 by lseabra-         ###   ########.fr        #
+#    Updated: 2025/12/06 00:14:59 by alebarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,18 +35,21 @@ BUILD_PATH = .build
 # Source files
 SRC = $(addprefix $(SRC_PATH)/, \
 		ft_minishell.c \
-		ft_env_utils.c \
 		ft_apply_redirs.c \
 		ft_change_directory.c \
 		ft_check_syntax_utils.c \
 		ft_check_syntax.c \
 		ft_cleanup_line.c \
+		ft_copy_lst_stat.c \
+		ft_data_init.c \
 		ft_dup2_close.c \
 		ft_exec_builtin.c \
 		ft_exec_cmd.c \
 		ft_exec_line.c \
 		ft_exec_utils.c \
-		ft_copy_lst_stat.c \
+		ft_echo.c \
+		ft_env.c \
+		ft_env_utils.c \
 		ft_expand_variables_utils.c \
 		ft_expand_variables.c \
 		ft_export_vars.c \
@@ -60,10 +63,6 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_print_ordered_exp.c \
 		ft_puterror.c \
 		ft_pwd.c \
-		ft_env.c \
-		ft_echo.c \
-		ft_unset.c \
-		ft_read_line.c \
 		ft_remove_quotes.c \
 		ft_resolve_cmd_path.c \
 		ft_shlvl.c \
@@ -75,6 +74,8 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_str_to_fd.c \
 		ft_strarr_dup.c \
 		ft_subshell.c \
+		ft_treat_line.c \
+		ft_unset.c \
 		test_utils.c \
 )
 
@@ -89,7 +90,7 @@ LIBFT_NAME		= $(LIBFT_PATH)/lib$(LIBFT_LINK).a
 
 # Compiler and Flags
 CC      = cc
-CFLAGS  = -Wall -Wextra -Werror -ggdb -fsanitize=address
+CFLAGS  = -Wall -Wextra -Werror -ggdb #-fsanitize=address
 INC     = -I$(INC_PATH) -I$(LIBFT_INC_PATH)
 LDFLAGS = -L$(LIBFT_PATH) -l$(LIBFT_LINK) -lreadline
 

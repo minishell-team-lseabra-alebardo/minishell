@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:25:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/24 19:42:28 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/06 00:08:38 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,27 @@ void	ft_free_strarr(char **strarr)
 	free(strarr);
 }
 
+void	ft_free_data(t_data *dt)
+{
+	if (dt)
+	{
+		ft_close_unused_fds(dt->cmd_ll);
+		ft_free_strarr(dt->ms_envp);
+		ft_free_prompt_line(dt->prompt, dt->line);
+		ft_cleanup_line(dt);
+		free(dt);
+	}
+}
+
 int	ft_exit(t_data *dt, t_cmd *cmd)
 {
-	int		lst_stat;
+	int		pexit;
 
-	lst_stat = dt->lst_stat;
-	ft_close_unused_fds(dt->cmd_ll);
-	ft_free_strarr(dt->ms_envp);
-	ft_free_prompt_line(dt->prompt, dt->line);
-	if (dt->pexit && (!cmd || (cmd && !ft_is_in_pipeline(cmd))))
+	pexit = dt->pexit;
+	ft_free_data(dt);
+	if (pexit && (!cmd || (cmd && !ft_is_in_pipeline(cmd))))
 		printf("exit\n");
-	ft_cleanup_line(dt);
-	free(dt);
-	if (lst_stat == EXIT_SUCCESS)
+	if (ft_get_status(0, false) == EXIT_SUCCESS)
 		exit(EXIT_SUCCESS);
 	exit(EXIT_FAILURE);
 }

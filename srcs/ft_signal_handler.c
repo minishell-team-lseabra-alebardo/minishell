@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_signal_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:59:53 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/04 12:00:54 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/05 23:03:08 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
+
+int	ft_get_status(int last_status, bool flag)
+{
+	static int	status;
+
+	if (flag)
+		status = last_status;
+	return (status);
+}
 
 static void	ft_signal_handler(int sig)
 {
@@ -20,6 +29,7 @@ static void	ft_signal_handler(int sig)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		ft_get_status(130, true);
 	}
 }
 

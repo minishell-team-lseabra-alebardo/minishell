@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:46:07 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/02 16:26:58 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/05 22:57:26 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,5 @@ void	ft_wait_all_pids(t_data *dt)
 	}
 	lst_cmd = ft_get_last_cmd(dt->cmd_ll);
 	if (!ft_is_builtin(lst_cmd->args[0]))
-		dt->lst_stat = lst_stat;
+		ft_get_status(lst_stat, true);
 }
