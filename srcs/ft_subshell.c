@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_subshell.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:46:46 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/03 20:06:41 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/06 17:14:13 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	ft_prep_subshell(char **ms_envp, t_cmd *cmd, char **path, int lst_stat)
 	char	*ms_path;
 
 	ms_path = ft_get_ms_path(ms_envp);
-	if (!ms_path)
+	if (!ms_path || !cmd || !cmd->args || !cmd->args[0] || !path)
 		return (0);
 	if (!ft_strncmp(cmd->args[0], "minishell", 10))
 	{

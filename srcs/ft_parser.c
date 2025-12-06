@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:13:51 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/17 14:53:39 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/06 16:06:39 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,9 @@ static t_cmd	*ft_init_cmd(char ***split_arr, t_cmd *prev, t_data *dt)
 		return (NULL);
 	cur = ft_calloc(1, sizeof(t_cmd));
 	if (!cur)
+		return (NULL);
+	cur->args = ft_calloc(1, sizeof(char *));
+	if (!cur->args)
 		return (NULL);
 	cur->ms_envp = dt->ms_envp;
 	cur->infile = STDIN_FILENO;
