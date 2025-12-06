@@ -6,7 +6,7 @@
 #    By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/12/06 00:14:59 by alebarbo         ###   ########.fr        #
+#    Updated: 2025/12/06 16:48:43 by alebarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,7 @@ LIBFT_NAME		= $(LIBFT_PATH)/lib$(LIBFT_LINK).a
 
 # Compiler and Flags
 CC      = cc
-CFLAGS  = -Wall -Wextra -Werror -ggdb #-fsanitize=address
+CFLAGS  = -Wall -Wextra -Werror -ggdb -fsanitize=address
 INC     = -I$(INC_PATH) -I$(LIBFT_INC_PATH)
 LDFLAGS = -L$(LIBFT_PATH) -l$(LIBFT_LINK) -lreadline
 

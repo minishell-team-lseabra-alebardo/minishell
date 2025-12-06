@@ -6,22 +6,13 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:59:53 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/05 23:03:08 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/06 19:07:35 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
 
-int	ft_get_status(int last_status, bool flag)
-{
-	static int	status;
-
-	if (flag)
-		status = last_status;
-	return (status);
-}
-
-static void	ft_signal_handler(int sig)
+static void	ft_sigint_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
@@ -40,7 +31,7 @@ static int	ft_sigint_listener(void)
 
 	sigemptyset(&sig_set);
 	sigaddset(&sig_set, SIGINT);
-	sig_action.sa_handler = ft_signal_handler;
+	sig_action.sa_handler = ft_sigint_handler;
 	sig_action.sa_mask = sig_set;
 	sig_action.sa_flags = 0;
 	if (sigaction(SIGINT, &sig_action, 0))

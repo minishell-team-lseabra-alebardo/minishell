@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:25:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/06 00:08:38 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/06 19:49:10 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,27 @@ void	ft_close_error(t_data *dt)
 	exit(EXIT_FAILURE);
 }
 
-void	ft_free_prompt_line(char *prompt, char *line)
+void	ft_free_prompt_line(t_data *dt)
 {
-	if (prompt)
-		free(prompt);
-	if (line)
-		free(line);
+	if (dt->prompt)
+	{
+		free(dt->prompt);
+		dt->prompt = NULL;
+	}
+	if (dt->line)
+	{
+		free(dt->line);
+		dt->line = NULL;
+	}
+}
+
+void	ft_free_prev_line(t_data *dt)
+{
+	if (dt->prev_line && dt->line)
+	{
+		free(dt->prev_line);
+		dt->prev_line = ft_strdup(dt->line);
+	}
 }
 
 void	ft_free_strarr(char **strarr)
@@ -47,24 +62,17 @@ void	ft_free_strarr(char **strarr)
 	free(strarr);
 }
 
-void	ft_free_data(t_data *dt)
-{
-	if (dt)
-	{
-		ft_close_unused_fds(dt->cmd_ll);
-		ft_free_strarr(dt->ms_envp);
-		ft_free_prompt_line(dt->prompt, dt->line);
-		ft_cleanup_line(dt);
-		free(dt);
-	}
-}
-
 int	ft_exit(t_data *dt, t_cmd *cmd)
 {
 	int		pexit;
 
 	pexit = dt->pexit;
-	ft_free_data(dt);
+	ft_close_unused_fds(dt->cmd_ll);
+	ft_free_strarr(dt->ms_envp);
+	ft_free_prompt_line(dt);
+	ft_cleanup_line(dt);
+	free(dt->prev_line);
+	free(dt);
 	if (pexit && (!cmd || (cmd && !ft_is_in_pipeline(cmd))))
 		printf("exit\n");
 	if (ft_get_status(0, false) == EXIT_SUCCESS)

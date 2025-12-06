@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_read_line.c                                     :+:      :+:    :+:   */
+/*   ft_treat_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:08:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/06 00:13:40 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/06 19:42:33 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ void	ft_treat_line(t_data *dt)
 		ft_exit(dt, NULL);
 	if (dt->line && *dt->line)
 	{
-		add_history(dt->line);
+		if (ft_strncmp(dt->line, dt->prev_line, ft_strlen(dt->line)))
+		{
+			ft_free_prev_line(dt);
+			add_history(dt->line);
+		}
 		if (ft_check_syntax(dt->line) < 0)
 			write(2, ERR_SYNTAX, 13);
 		else

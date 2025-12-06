@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:56:36 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/05 22:59:29 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/06 19:35:46 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_data
 	int		pexit;
 	char	*prompt;
 	char	*line;
+	char	*prev_line;
 	char	**split_line;
 	t_cmd	*cmd_ll;
 	pid_t	pid_arr[MAX_PROCESSES];

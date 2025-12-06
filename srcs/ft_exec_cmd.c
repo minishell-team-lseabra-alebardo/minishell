@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 13:01:44 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/04 12:57:48 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/06 19:12:55 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,16 @@ static void	ft_handle_path_failure(t_cmd *cmd, int status)
 void	ft_exec_cmd(t_cmd *cmd, char **ms_envp, int lst_stat)
 {
 	char	*path;
-	int		status;
 
 	path = NULL;
 	ft_dup2_close(cmd->infile, STDIN_FILENO);
 	ft_dup2_close(cmd->outfile, STDOUT_FILENO);
 	if (ft_prep_subshell(ms_envp, cmd, &path, lst_stat))
-		status = EXIT_SUCCESS;
+		ft_get_status(EXIT_SUCCESS, true);
 	else
-		status = ft_resolve_cmd_path(cmd->args[0], &path);
-	if (status != EXIT_SUCCESS)
-		ft_handle_path_failure(cmd, status);
+		ft_get_status(ft_resolve_cmd_path(cmd->args[0], &path), true);
+	if (ft_get_status(0, false) != EXIT_SUCCESS)
+		ft_handle_path_failure(cmd, ft_get_status(0, false));
 	execve(path, cmd->args, ms_envp);
 	free(path);
 	ft_close_cmd_files(cmd);
