@@ -1,36 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   ft_status.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/02 15:10:33 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/05 23:14:46 by alebarbo         ###   ########.fr       */
+/*   Created: 2025/12/06 15:35:15 by alebarbo          #+#    #+#             */
+/*   Updated: 2025/12/06 15:38:06 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_minishell.h>
+#ifndef FT_STATUS_H
+# define FT_STATUS_H
+# include <stdbool.h>
 
-int	ft_env(char **ms_envp)
-{
-	int		i;
-	int		j;
+unsigned char	ft_get_status(unsigned char last_status, bool flag);
 
-	i = 0;
-	while (ms_envp[i])
-	{
-		j = 0;
-		while (ms_envp[i][j])
-		{
-			if (ms_envp[i][j] == '=' && ft_strncmp("MS_PATH=", ms_envp[i], 8))
-			{
-				printf("%s\n", ms_envp[i]);
-				break ;
-			}
-			j++;
-		}
-		i++;
-	}
-	return (EXIT_SUCCESS);
-}
+#endif

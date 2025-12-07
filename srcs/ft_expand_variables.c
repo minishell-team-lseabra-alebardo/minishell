@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 20:14:48 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/02 21:11:36 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/06 22:27:53 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	*ft_copy_var_value(char *env_var, char *arg, int var_size, int *i)
 	return (new_arg);
 }
 
-char	*ft_expand_variable(t_data *dt, char **ms_envp, char *arg, int *i)
+char	*ft_expand_variable(char **ms_envp, t_data *dt, char *arg, int *i)
 {
 	char	*var_name;
 	char	*new_arg;
@@ -57,7 +57,7 @@ char	*ft_expand_variable(t_data *dt, char **ms_envp, char *arg, int *i)
 
 	*i += 1;
 	if (!ft_strncmp("?", &arg[*i], 1))
-		return (ft_copy_lst_stat(dt->lst_stat, arg, i));
+		return (ft_copy_lst_stat(dt->last_status, arg, i));
 	var_size = ft_var_size(&arg[*i]);
 	var_name = (char *) ft_calloc(var_size + 1, 1);
 	if (!var_name)
@@ -93,7 +93,7 @@ static char	*ft_search_variable(t_data *dt, char *arg, int mode)
 				i++;
 		}
 		if (arg[i] == '$' && !ft_is_whitespace(arg[i + 1]))
-			arg = ft_expand_variable(dt, dt->ms_envp, arg, &i);
+			arg = ft_expand_variable(dt->ms_envp, dt, arg, &i);
 		else
 			i++;
 	}

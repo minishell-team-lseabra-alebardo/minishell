@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/06 16:36:17 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/07 17:32:23 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	ft_skip_pipeline(t_cmd **cmd)
  * @param lst_stat Pointer to the last exit status, updated with the exit
  *                 status of the previous command.
  */
-static void	ft_skip_based_on_stat(t_cmd **cmd, pid_t prev_pid, int *lst_stat)
+static void	ft_skip_based_on_stat(t_cmd **cmd, pid_t prev_pid)
 {
 	pid_t	lst_proc_st;
 
@@ -69,11 +69,13 @@ static void	ft_skip_based_on_stat(t_cmd **cmd, pid_t prev_pid, int *lst_stat)
 	{
 		waitpid(prev_pid, &lst_proc_st, 0);
 		if (WIFEXITED(lst_proc_st))
-			*lst_stat = WEXITSTATUS(lst_proc_st);
+			ft_get_status(WEXITSTATUS(lst_proc_st), true);
 	}
 	*cmd = (*cmd)->next;
-	while (*cmd && ((*lst_stat == 0 && ft_is_op((*cmd)->prev_op, CMD_OR))
-			|| (*lst_stat != 0 && ft_is_op((*cmd)->prev_op, CMD_AND))))
+	while (*cmd && ((ft_get_status(0, false) == 0
+				&& ft_is_op((*cmd)->prev_op, CMD_OR))
+			|| (ft_get_status(0, false) != 0
+				&& ft_is_op((*cmd)->prev_op, CMD_AND))))
 	{
 		ft_skip_pipeline(cmd);
 	}
@@ -121,7 +123,7 @@ static void	ft_exec_child(t_data *dt, t_cmd *cmd)
 		exit(status);
 	}
 	else
-		ft_exec_cmd(cmd, dt->ms_envp, dt->lst_stat);
+		ft_exec_cmd(cmd, dt->ms_envp, ft_get_status(0, false));
 }
 
 /**
@@ -160,7 +162,7 @@ void	ft_exec_line(t_data *dt)
 	{
 		ft_args_treatment(cur_cmd->args, dt, 1);
 		if (ft_is_parent_bltn(cur_cmd->args[0]) && !ft_is_in_pipeline(cur_cmd))
-			dt->lst_stat = ft_exec_builtin(dt, cur_cmd);
+			ft_get_status(ft_exec_builtin(dt, cur_cmd), true);
 		else
 		{
 			dt->pid_arr[i] = fork();
@@ -169,7 +171,9 @@ void	ft_exec_line(t_data *dt)
 			i++;
 		}
 		ft_close_cmd_files(cur_cmd);
-		ft_skip_based_on_stat(&cur_cmd, dt->pid_arr[i], &dt->lst_stat);
+		if (ft_get_status(0, false) == 130)
+			break ;
+		ft_skip_based_on_stat(&cur_cmd, dt->pid_arr[i]);
 	}
 	ft_wait_all_pids(dt);
 	ft_cleanup_line(dt);

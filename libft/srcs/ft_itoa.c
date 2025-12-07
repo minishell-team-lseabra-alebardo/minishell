@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:50:17 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/07/10 10:31:19 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/06 00:04:00 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*ft_itoa(int n)
 		return (ft_strdup("-2147483648"));
 	}
 	size = int_size(n);
-	str = malloc((size + 1) * sizeof(char));
+	str = (char *) ft_calloc((size + 1), sizeof(char));
 	if (!str)
 	{
 		return (NULL);

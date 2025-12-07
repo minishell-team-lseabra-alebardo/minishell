@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 11:44:08 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/04 12:53:17 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/05 23:13:44 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,11 +128,11 @@ int	ft_exec_builtin(t_data *dt, t_cmd *cmd)
 	else if (ft_strncmp("export", cmd->args[0], 7) == 0)
 		lst_stat = ft_export(cmd, dt);
 	else if (ft_strncmp("echo", cmd->args[0], 5) == 0)
-		ft_echo(cmd->args);
+		lst_stat = ft_echo(cmd->args);
 	else if (ft_strncmp("unset", cmd->args[0], 6) == 0)
-		ft_unset(dt, cmd->args);
+		lst_stat = ft_unset(dt, cmd->args);
 	else if (ft_strncmp("env", cmd->args[0], 4) == 0)
-		ft_env(dt->ms_envp);
+		lst_stat = ft_env(dt->ms_envp);
 	ft_reset_dup2(cmd);
 	if (ft_is_in_pipeline(cmd))
 		exit(lst_stat);

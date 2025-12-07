@@ -6,32 +6,37 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 21:46:59 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/11/22 18:12:15 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/06 22:26:15 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
 
+unsigned char	ft_get_status(unsigned char last_status, bool flag)
+{
+	static unsigned char	status;
+
+	if (flag)
+		status = last_status;
+	return (status);
+}
+
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_data	*dt;
 
+	dt = 0;
 	if (ft_listener() < 0)
 		ft_close_error(0);
 	if (argc > 1 && !ft_strncmp("minishell", argv[0], 10) && argv[1][0] == '(')
 		return (ft_subshell(argv, envp));
-	dt = (t_data *) ft_calloc(1, sizeof(t_data));
-	if (!dt)
-		return (EXIT_FAILURE);
-	dt->ms_envp = ft_strarr_dup(envp);
-	if (!dt->ms_envp)
-		return (EXIT_FAILURE);
-	dt->prompt = NULL;
-	dt->line = NULL;
-	dt->lst_stat = 0;
-	dt->cmd_ll = NULL;
-	dt->pexit = 1;
-	if (ft_ms_path(dt) < 0 || ft_shlvl(dt) < 0)
-		ft_close_error(dt);
-	ft_read_line(dt);
+	dt = ft_data_init(envp);
+	while (1)
+	{
+		ft_get_status(0, true);
+		dt->prompt = ft_get_ps1(dt->ms_envp);
+		dt->line = readline(dt->prompt);
+		ft_treat_line(dt);
+		ft_free_prompt_line(dt);
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/03 17:20:53 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/06 19:38:26 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,14 @@
 # include <ft_skips.h>
 # include <ft_checks.h>
 # include <ft_expand.h>
-# include <stdbool.h>
+# include <ft_status.h>
 # include <sys/wait.h>
 # include <stdint.h>
 # include <limits.h>
 
 int		ft_listener(void);
-void	ft_read_line(t_data *dt);
+t_data	*ft_data_init(char **envp);
+void	ft_treat_line(t_data *dt);
 char	*ft_get_ps1(char **ms_envp);
 void	ft_parser(t_data *dt);
 char	*ft_search_quotes(t_data *dt, char *arg);
@@ -71,7 +72,8 @@ void	ft_add_arg(t_cmd *cmd, char *new_arg);
 int		ft_init_pipe(t_cmd *cur, t_cmd *prev);
 void	ft_close_error(t_data *dt);
 void	ft_free_strarr(char **strarr);
-void	ft_free_prompt_line(char *prompt, char *line);
+void	ft_free_prompt_line(t_data *dt);
+void	ft_free_prev_line(t_data *dt);
 int		ft_exit(t_data *dt, t_cmd *cmd);
 int		ft_str_to_fd(char *str);
 int		ft_exec_builtin(t_data *dt, t_cmd *cmd);
@@ -86,9 +88,9 @@ int		ft_export_vars(char	**args, t_data *dt, size_t	envp_len);
 int		ft_change_directory(t_data *dt, t_cmd *cmd);
 int		ft_pwd(void);
 int		ft_export(t_cmd *cmd, t_data *dt);
-void	ft_env(char **ms_envp);
-void	ft_echo(char **args);
-void	ft_unset(t_data *dt, char **args);
+int		ft_env(char **ms_envp);
+int		ft_echo(char **args);
+int		ft_unset(t_data *dt, char **args);
 
 //TEST FUNCTIONS
 void	ft_print_cmds(t_data *dt);

@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:46:46 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/06 17:14:13 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/07 17:32:42 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,13 @@ int	ft_subshell(char **argv, char **envp)
 
 	dt = (t_data *) ft_calloc(1, sizeof(t_data));
 	if (!dt)
-		return (EXIT_FAILURE);
+		ft_close_error(0);
 	dt->ms_envp = ft_strarr_dup(envp);
 	if (!dt->ms_envp)
-		return (EXIT_FAILURE);
-	dt->lst_stat = ft_atoi(argv[2]);
+		ft_close_error(dt);
+	dt->last_status = ft_get_status(ft_atoi(argv[2]), true);
 	dt->pexit = 0;
+	dt->prev_line = NULL;
 	dt->line = ft_strdup(argv[1]);
 	if (dt->line[0] == '(')
 		ft_remove_parentheses(dt->line);

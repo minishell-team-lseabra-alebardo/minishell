@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 21:51:58 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/03 16:59:50 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/05 23:16:17 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	ft_remove_variable(t_data *dt, int j)
 	free(temp);
 }
 
-void	ft_unset(t_data *dt, char **args)
+int	ft_unset(t_data *dt, char **args)
 {
 	int		i;
 	int		j;
@@ -47,4 +47,5 @@ void	ft_unset(t_data *dt, char **args)
 		}
 		i++;
 	}
+	return (EXIT_SUCCESS);
 }
