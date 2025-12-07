@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:59:53 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/05 16:23:33 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/07 04:28:20 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	ft_get_lst_stat(int lst_stat, bool flag)
 	if (flag)
 		status = lst_stat;
 	return (status);
-	
 }
 
 static void	ft_signal_handler(int sig)

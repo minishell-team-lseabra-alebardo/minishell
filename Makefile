@@ -6,7 +6,7 @@
 #    By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/12/05 15:49:23 by alebarbo         ###   ########.fr        #
+#    Updated: 2025/12/07 04:29:37 by alebarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,8 +46,10 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_exec_line.c \
 		ft_exec_utils.c \
 		ft_subshell.c \
+		ft_get_names.c \
 		ft_get_ps1.c \
 		ft_is_op.c \
+		ft_match_wildcards.c \
 		ft_ms_path.c \
 		ft_parser_utils.c \
 		ft_parser.c \
@@ -67,8 +69,9 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_str_to_fd.c \
 		ft_strarr_dup.c \
 		ft_shlvl.c \
+		ft_wildcards.c \
+		ft_wildcards_utils.c \
 		test_utils.c \
-		wildcards_test.c \
 )
 
 # Object files

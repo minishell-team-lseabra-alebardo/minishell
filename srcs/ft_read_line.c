@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:08:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/05 16:29:16 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/07 01:19:52 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	ft_read_line(t_data *dt)
 {
 	while (1)
 	{
-		dt->lst_stat = ft_get_lst_stat(0, false);
 		dt->prompt = ft_get_ps1(dt->ms_envp);
 		dt->line = readline(dt->prompt);
 		if (!dt->line)

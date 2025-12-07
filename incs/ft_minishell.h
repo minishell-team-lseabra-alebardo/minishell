@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/05 15:51:54 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/07 04:19:44 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <ft_skips.h>
 # include <ft_checks.h>
 # include <ft_expand.h>
+# include <ft_wildcards.h>
 # include <stdbool.h>
 # include <sys/wait.h>
 # include <stdint.h>
