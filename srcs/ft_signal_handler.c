@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:59:53 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/06 19:07:35 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/07 20:37:29 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	ft_sigint_handler(int sig)
 	{
 		printf("\n");
 		rl_on_new_line();
-		rl_replace_line("", 0);
+		rl_replace_line("", 1);
 		rl_redisplay();
 		ft_get_status(130, true);
 	}

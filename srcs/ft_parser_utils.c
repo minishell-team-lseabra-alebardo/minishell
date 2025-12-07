@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 14:33:46 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/06 15:32:26 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/07 20:06:18 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	ft_exec_heredoc(char *lim)
 	{
 		ft_putstr_fd(HEREDOC_PREFIX, STDOUT_FILENO);
 		line = get_next_line(STDIN_FILENO);
+		if (ft_get_status(0, false) == 130)
+			break ;
 		if (!line)
 		{
 			ft_printf("\n%s: %s (wanted `%s')\n", PGM_NAME, HEREDOC_WARN, lim);
