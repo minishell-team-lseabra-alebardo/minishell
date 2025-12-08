@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_puterror.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 11:54:47 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/25 12:35:17 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/08 02:18:58 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_puterror(char *pgm, char *target, char *message)
 {
+	if (ft_get_status(0, false) == 130)
+		return ;
 	write(STDERR_FILENO, PGM_NAME, ft_strlen(PGM_NAME));
 	write(STDERR_FILENO, ": ", 2);
 	if (pgm)
