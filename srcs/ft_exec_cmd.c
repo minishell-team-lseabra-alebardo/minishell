@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 13:01:44 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/07 19:42:07 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/08 18:28:10 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	ft_exec_cmd(t_cmd *cmd, char **ms_envp, int lst_stat)
 		ft_get_status(ft_resolve_cmd_path(cmd->args[0], &path), true);
 	if (ft_get_status(0, false) != EXIT_SUCCESS)
 	{
+		free(path);
 		ft_handle_path_failure(cmd, ft_get_status(0, false));
 		return (ft_get_status(0, false));
 	}
