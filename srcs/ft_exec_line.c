@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/08 15:52:59 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/08 16:04:00 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,25 +81,17 @@ static void	ft_skip_based_on_stat(t_cmd **cmd, pid_t prev_pid)
 	}
 }
 
-/**
- * @brief Executes a command in a child process.
- *
- * This function handles command execution within a forked child process.
- * It first closes any file descriptors from subsequent commands in the
- * pipeline that are not needed. Then it applies input/output redirections
- * for the current command.
- *
- * If redirections fail, the function cleans up and exits with the error
- * status. If the command is a builtin, it executes the builtin and exits.
- * Otherwise, it proceeds to execute an external command via ft_exec_cmd.
- *
- * This function does not return; it always exits the child process either
- * explicitly or through execve() in ft_exec_cmd.
- *
- * @param dt Pointer to the main data structure containing shell state and
- *           environment.
- * @param cmd Pointer to the command structure to execute.
- */
+void	ft_cleanup_child_exit(t_data *dt, t_cmd *cmd, int status)
+{
+	ft_close_cmd_files(cmd);
+	ft_free_strarr(dt->ms_envp);
+	ft_free_prompt_line(dt);
+	ft_cleanup_line(dt);
+	free(dt->prev_line);
+	free(dt);
+	exit(status);
+}
+
 static void	ft_exec_child(t_data *dt, t_cmd *cmd)
 {
 	int	status;
@@ -107,23 +99,14 @@ static void	ft_exec_child(t_data *dt, t_cmd *cmd)
 	ft_close_unused_fds(cmd->next);
 	status = ft_apply_redirs(cmd);
 	if (status != EXIT_SUCCESS)
-	{
-		ft_close_cmd_files(cmd);
-		exit(status);
-	}
+		ft_cleanup_child_exit(dt, cmd, status);
 	else if (!cmd->args || !cmd->args[0])
-	{
-		dt->pexit = 0;
-		ft_exit(dt, cmd);
-	}
+		ft_cleanup_child_exit(dt, cmd, EXIT_FAILURE);
 	else if (ft_is_builtin(cmd->args[0]))
-	{
 		status = ft_exec_builtin(dt, cmd);
-		ft_close_cmd_files(cmd);
-		exit(status);
-	}
 	else
-		ft_exec_cmd(cmd, dt->ms_envp, ft_get_status(0, false));
+		status = ft_exec_cmd(cmd, dt->ms_envp, ft_get_status(0, false));
+	ft_cleanup_child_exit(dt, cmd, status);
 }
 
 /**

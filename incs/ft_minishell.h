@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/06 19:38:26 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/07 19:13:14 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_puterror(char *pgm, char *target, char *message);
 int		ft_puterror_ret(char *pgm, char *target, char *message, int ret);
 void	ft_puterror_exit(char *pgm, char *target, char *message, int status);
 int		ft_apply_redirs(t_cmd *cmd);
-void	ft_exec_cmd(t_cmd *cmd, char **ms_envp, int lst_stat);
+int		ft_exec_cmd(t_cmd *cmd, char **ms_envp, int lst_stat);
 void	ft_exec_line(t_data *dt);
 void	ft_dup2_close(int oldfd, int newfd);
 void	ft_dup2_backup_close(int oldfd, int newfd, t_cmd *cmd);
