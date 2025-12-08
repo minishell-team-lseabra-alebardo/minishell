@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:37:39 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/06 22:28:14 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/08 16:36:26 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ char	*ft_search_quotes(t_data *dt, char *arg)
 	char	quote;
 
 	i = 0;
+	if (arg[i] == '(')
+		return (arg);
 	while (arg[i])
 	{
 		if (arg[i] == '\'' || arg[i] == '\"')

@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 20:14:48 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/08 16:08:11 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/08 16:41:47 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,10 @@ void	ft_args_treatment(char **args, t_data *dt, int mode)
 	char	**split_line;
 
 	if (mode == 0)
+	{
 		*args = ft_search_variable(dt, *args, mode);
+		*args = ft_wildcards(*args);
+	}
 	else
 	{
 		split_line = dt->split_line;

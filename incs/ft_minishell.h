@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/07 19:13:14 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/08 16:41:25 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,13 @@
 # include <ft_skips.h>
 # include <ft_checks.h>
 # include <ft_expand.h>
+# include <ft_wildcards.h>
 # include <ft_status.h>
 # include <sys/wait.h>
 # include <stdint.h>
 # include <limits.h>
+# include <dirent.h>
+# include <sys/types.h>
 
 int		ft_listener(void);
 t_data	*ft_data_init(char **envp);
@@ -91,6 +94,7 @@ int		ft_export(t_cmd *cmd, t_data *dt);
 int		ft_env(char **ms_envp);
 int		ft_echo(char **args);
 int		ft_unset(t_data *dt, char **args);
+char	*ft_wildcards(char *line);
 
 //TEST FUNCTIONS
 void	ft_print_cmds(t_data *dt);
