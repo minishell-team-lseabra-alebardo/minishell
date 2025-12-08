@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 20:14:48 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/08 15:50:06 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/08 16:08:11 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ char	*ft_expand_variable(char **ms_envp, t_data *dt, char *arg, int *i)
 	new_arg = ft_copy_var_value(*ms_envp, arg, var_size, i);
 	if (!new_arg)
 		return (arg);
+	free(arg);
 	return (new_arg);
 }
 
@@ -114,10 +115,7 @@ void	ft_args_treatment(char **args, t_data *dt, int mode)
 				split_line++;
 			*args = ft_search_quotes(dt, *args);
 			if (ft_strncmp(*split_line, *args, ft_strlen(*args)))
-			{
-				free(*split_line);
 				*split_line = *args;
-			}
 			args++;
 		}
 	}
