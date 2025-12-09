@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:46:46 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/09 03:43:00 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/09 15:12:16 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_subshell(char **argv, char **envp)
 	dt->split_line = ft_split_prompt(dt->line, WS_POSIX);
 	ft_parser(dt);
 	ft_exec_line(dt);
-	return (ft_exit(dt, NULL));
+	return (ft_exit_subshell(dt, NULL));
 }
 
 static char	*ft_get_ms_path(char **ms_envp)

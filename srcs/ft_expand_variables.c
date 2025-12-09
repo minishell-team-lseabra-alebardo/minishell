@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 20:14:48 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/08 16:41:47 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/09 14:21:25 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void	ft_args_treatment(char **args, t_data *dt, int mode)
 
 	if (mode == 0)
 	{
+		*args = ft_prep_lst_stat(*args);
 		*args = ft_search_variable(dt, *args, mode);
 		*args = ft_wildcards(*args);
 	}
