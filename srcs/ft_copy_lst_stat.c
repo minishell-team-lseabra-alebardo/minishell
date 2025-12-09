@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 20:29:40 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/09 15:10:23 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/09 21:22:28 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	ft_count_stat(char *arg)
 		}
 		if (arg[i] == '$' && arg[i + 1] == '?')
 			find++;
-		i++;	
+		i++;
 	}
 	return (find);
 }

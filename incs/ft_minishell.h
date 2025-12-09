@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/09 15:12:39 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/09 21:24:54 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <readline/history.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <signal.h>
 # include <libft.h>
 # include <ft_macros.h>
 # include <ft_types.h>
@@ -27,6 +26,7 @@
 # include <ft_expand.h>
 # include <ft_wildcards.h>
 # include <ft_status.h>
+# include <ft_signal.h>
 # include <sys/wait.h>
 # include <stdint.h>
 # include <limits.h>

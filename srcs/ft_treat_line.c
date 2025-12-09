@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:08:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/09 03:41:40 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/09 21:21:57 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static char	*ft_prev_line(char *line)
 {
 	static char	prev_line[9999];
-	int		i;
+	int			i;
 
 	i = 0;
 	if (line)

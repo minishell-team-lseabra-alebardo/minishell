@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:25:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/09 15:12:04 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/09 21:36:06 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	ft_exit(t_data *dt, t_cmd *cmd)
 	ft_free_prompt_line(dt);
 	ft_cleanup_line(dt);
 	free(dt);
+	rl_clear_history();
 	if (pexit && (!cmd || (cmd && !ft_is_in_pipeline(cmd))))
 		printf("exit\n");
 	if (ft_get_status(0, false) == EXIT_SUCCESS)
