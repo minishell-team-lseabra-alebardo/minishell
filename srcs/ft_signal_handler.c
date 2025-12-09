@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:59:53 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/09 02:59:34 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/09 03:23:19 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ static void	ft_sigint_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
+		ft_get_status(130, true);
 		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-		ft_get_status(130, true);
 	}
 }
 

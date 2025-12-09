@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 21:46:59 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/09 03:14:56 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/09 03:43:14 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,16 @@ int	main(int argc, char *argv[], char *envp[])
 		ft_get_status(0, true);
 		dt->prompt = ft_get_ps1(dt->ms_envp);
 		dt->line = readline(dt->prompt);
+		if (ft_get_status(0, false) == 130)
+		{
+			dt->last_status = ft_get_status(0, false);
+			ft_get_status(0, true);
+		}
 		ft_treat_line(dt);
 		ft_close_unused_fds(dt->cmd_ll);
 		ft_free_strarr(dt->ms_envp);
 		ft_free_prompt_line(dt);
 		ft_cleanup_line(dt);
-		free(dt->prev_line);
 		free(dt);
 	}
 }

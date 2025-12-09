@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 17:27:46 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/09 03:03:36 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/09 03:43:04 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ t_data	*ft_data_init(char **envp)
 	dt->last_status = ft_get_status(0, false);
 	dt->prompt = NULL;
 	dt->line = NULL;
-	dt->prev_line = ft_strdup("");
 	dt->cmd_ll = NULL;
 	dt->pexit = 1;
 	if (ft_ms_path(dt) < 0 || ft_shlvl(dt) < 0)

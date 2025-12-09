@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/09 02:55:42 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/09 03:43:07 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	ft_cleanup_child_exit(t_data *dt, t_cmd *cmd, int status)
 	ft_free_strarr(dt->ms_envp);
 	ft_free_prompt_line(dt);
 	ft_cleanup_line(dt);
-	free(dt->prev_line);
 	free(dt);
 	exit(status);
 }
