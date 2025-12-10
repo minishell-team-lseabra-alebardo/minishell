@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+         #
+#    By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/12/08 16:43:19 by alebarbo         ###   ########.fr        #
+#    Updated: 2025/12/10 15:37:30 by lseabra-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,13 +24,13 @@ RESET	= \033[0m
 #==============================================================================#
 
 # Names
-NAME         = minishell
-PROJECT_NAME = MINISHELL
+NAME			= minishell
+PROJECT_NAME	= MINISHELL
 
 # Paths
-SRC_PATH   = srcs
-INC_PATH   = incs
-BUILD_PATH = .build
+SRC_PATH	= srcs
+INC_PATH	= incs
+BUILD_PATH	= .build
 
 # Source files
 SRC = $(addprefix $(SRC_PATH)/, \
@@ -94,7 +94,7 @@ LIBFT_NAME		= $(LIBFT_PATH)/lib$(LIBFT_LINK).a
 
 # Compiler and Flags
 CC      = cc
-CFLAGS  = -Wall -Wextra -Werror -ggdb -fsanitize=address
+CFLAGS  = -Wall -Wextra -Werror -ggdb
 INC     = -I$(INC_PATH) -I$(LIBFT_INC_PATH)
 LDFLAGS = -L$(LIBFT_PATH) -l$(LIBFT_LINK) -lreadline
 
