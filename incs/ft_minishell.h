@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/08 16:41:25 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/09 21:24:54 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <readline/history.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <signal.h>
 # include <libft.h>
 # include <ft_macros.h>
 # include <ft_types.h>
@@ -27,6 +26,7 @@
 # include <ft_expand.h>
 # include <ft_wildcards.h>
 # include <ft_status.h>
+# include <ft_signal.h>
 # include <sys/wait.h>
 # include <stdint.h>
 # include <limits.h>
@@ -78,6 +78,7 @@ void	ft_free_strarr(char **strarr);
 void	ft_free_prompt_line(t_data *dt);
 void	ft_free_prev_line(t_data *dt);
 int		ft_exit(t_data *dt, t_cmd *cmd);
+int		ft_exit_subshell(t_data *dt, t_cmd *cmd);
 int		ft_str_to_fd(char *str);
 int		ft_exec_builtin(t_data *dt, t_cmd *cmd);
 bool	ft_is_in_pipeline(t_cmd *cmd);

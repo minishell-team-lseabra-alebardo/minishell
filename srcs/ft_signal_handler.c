@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 14:59:53 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/06 19:07:35 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/09 21:26:58 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,27 @@ static void	ft_sigint_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
+		ft_get_status(130, true);
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		printf("\x1B[J");
+	}
+}
+
+static void	ft_sigint_readline_handler(int sig)
+{
+	if (sig == SIGINT)
+	{
+		ft_get_status(130, true);
 		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-		ft_get_status(130, true);
 	}
 }
 
-static int	ft_sigint_listener(void)
+int	ft_sigint_listener(void)
 {
 	sigset_t	sig_set;
 	t_sigaction	sig_action;
@@ -39,7 +51,22 @@ static int	ft_sigint_listener(void)
 	return (SUCCESS);
 }
 
-static int	ft_sigquit_listener(void)
+int	ft_sigint_readline_listener(void)
+{
+	sigset_t	sig_set;
+	t_sigaction	sig_action;
+
+	sigemptyset(&sig_set);
+	sigaddset(&sig_set, SIGINT);
+	sig_action.sa_handler = ft_sigint_readline_handler;
+	sig_action.sa_mask = sig_set;
+	sig_action.sa_flags = 0;
+	if (sigaction(SIGINT, &sig_action, 0))
+		return (ERROR);
+	return (SUCCESS);
+}
+
+int	ft_sigquit_listener(void)
 {
 	sigset_t	sig_set;
 	t_sigaction	sig_action;
@@ -50,13 +77,6 @@ static int	ft_sigquit_listener(void)
 	sig_action.sa_mask = sig_set;
 	sig_action.sa_flags = 0;
 	if (sigaction(SIGQUIT, &sig_action, 0))
-		return (ERROR);
-	return (SUCCESS);
-}
-
-int	ft_listener(void)
-{
-	if (ft_sigquit_listener() < 0 || ft_sigint_listener() < 0)
 		return (ERROR);
 	return (SUCCESS);
 }

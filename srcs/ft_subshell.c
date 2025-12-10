@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_subshell.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:46:46 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/07 17:32:42 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/09 15:12:16 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	ft_subshell(char **argv, char **envp)
 		ft_close_error(dt);
 	dt->last_status = ft_get_status(ft_atoi(argv[2]), true);
 	dt->pexit = 0;
-	dt->prev_line = NULL;
 	dt->line = ft_strdup(argv[1]);
 	if (dt->line[0] == '(')
 		ft_remove_parentheses(dt->line);
@@ -48,7 +47,7 @@ int	ft_subshell(char **argv, char **envp)
 	dt->split_line = ft_split_prompt(dt->line, WS_POSIX);
 	ft_parser(dt);
 	ft_exec_line(dt);
-	return (ft_exit(dt, NULL));
+	return (ft_exit_subshell(dt, NULL));
 }
 
 static char	*ft_get_ms_path(char **ms_envp)
