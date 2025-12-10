@@ -83,6 +83,8 @@ void	ft_dup2_backup_close(int oldfd, int newfd, t_cmd *cmd)
 	int	savefd;
 	int	*backup;
 
+	if (oldfd == newfd)
+		return ;
 	backup = ft_calloc(2, sizeof(int));
 	if (!backup)
 		return ;
