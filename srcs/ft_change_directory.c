@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 16:53:43 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/04 12:25:08 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/11 15:37:08 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_change_directory(t_data *dt, t_cmd *cmd)
 		ft_puterror("cd", cmd->args[1], NULL);
 		return (EXIT_FAILURE);
 	}
-	ft_set_env("OLD_PWD", pwd, dt->ms_envp);
+	ft_set_env("OLDPWD", pwd, dt->ms_envp);
 	free(pwd);
 	pwd = getcwd(0, 0);
 	ft_set_env("PWD", pwd, dt->ms_envp);
