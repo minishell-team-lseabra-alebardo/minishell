@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:08:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/09 21:21:57 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/11 14:38:33 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_treat_line(t_data *dt)
 			add_history(dt->line);
 			ft_prev_line(dt->line);
 		}
-		if (ft_check_syntax(dt->line) < 0)
+		if (ft_get_status(ft_check_syntax(dt->line), true))
 			write(2, ERR_SYNTAX, 13);
 		else
 		{

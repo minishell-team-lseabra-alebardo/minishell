@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_macros.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:46:44 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/03 13:41:50 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/11 14:38:30 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # define PGM_NAME "minishell"
 
 // Colors
-# define ORANGE  "\033[38;5;208m"
-# define BLUE_GULF   "\e[38;5;33m"
-# define WHITE   "\033[38;5;255m"
-# define RESET   "\033[0m"
+# define ORANGE		"\033[38;5;208m"
+# define BLUE_GULF	"\e[38;5;33m"
+# define WHITE		"\033[38;5;255m"
+# define RESET		"\033[0m"
 
 // Internal functions return
 # define ERROR		-1
@@ -55,7 +55,7 @@
 # define ERR_CMD_NOT_FOUND	"command not found\n"
 # define ERR_BAD_FD			"Bad file descriptor\n"
 # define ERR_TOO_MANY_ARGS	"too many arguments\n"
-# define ERR_INV_ID	"not a valid identifier\n"
+# define ERR_INV_ID			"not a valid identifier\n"
 
 // Exit status code
 # define EXIT_CANNOT_EXEC	126
