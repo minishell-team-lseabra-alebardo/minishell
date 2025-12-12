@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 15:10:56 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/11/14 16:46:23 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/12 15:17:18 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,6 @@ static void	ft_handle_operator(size_t *i, char *s, char *seps, size_t *counter)
 		(*counter)++;
 }
 
-/**
- * @brief Counts the number of words in a string, respecting quoted segments.
- *
- * The ft_count_words function parses a string and counts the number of words
- * separated by delimiter characters specified in seps. Quoted segments (using
- * single or double quotes) are treated as single units regardless of delimiters
- * inside them. Leading delimiters are skipped, and the function properly 
- * handles transitions between words and delimiters.
- *
- * @param s Pointer to the null-terminated string to be parsed.
- * @param seps Pointer to a string containing delimiter characters.
- * @return The total number of words found in the string.
- */
 static size_t	ft_count_words(const char *s, char *seps)
 {
 	size_t	counter;
@@ -85,21 +72,6 @@ static size_t	ft_get_world_len(const char *s, char *seps)
 	return (i);
 }
 
-/**
- * @brief Extracts and allocates a single word from the string.
- *
- * The ft_process_word function extracts one word from the current position in 
- * the string, treating quoted segments as single units regardless of delimiters
- * inside them. It allocates memory for the extracted word and advances the
- * string pointer past the processed word. The extraction stops when a delimiter
- * character (not inside quotes) is encountered.
- *
- * @param s Pointer to a pointer to the current position in the string (updated
- *          after extraction).
- * @param seps Pointer to a string containing delimiter characters.
- * @return A newly allocated string containing the extracted word, or NULL if
- *         memory allocation fails.
- */
 static char	*ft_process_word(const char **s, char *seps)
 {
 	size_t	len;
@@ -114,23 +86,6 @@ static char	*ft_process_word(const char **s, char *seps)
 	return (word);
 }
 
-/**
- * @brief Splits a string into an array of words, respecting quoted segments.
- *
- * The ft_split_prompt function parses a string and splits it into an array
- * of words based on delimiter characters specified in seps. Quoted segments
- * (using single or double quotes) are preserved as single words, including
- * the quote characters themselves. Multiple consecutive delimiters are
- * treated as one, and leading/trailing delimiters are ignored. The resulting
- * array is NULL-terminated.
- *
- * @param s Pointer to the null-terminated string to be split.
- * @param seps Pointer to a string containing delimiter characters.
- * @return A newly allocated NULL-terminated array of strings, where each
- *         element is a word from the original string. Returns NULL if
- *         memory allocation fails. The caller is responsible for freeing
- *         the array and its elements.
- */
 char	**ft_split_prompt(const char *s, char *seps)
 {
 	size_t	word_count;
