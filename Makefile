@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+         #
+#    By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/12/12 19:33:25 by alebarbo         ###   ########.fr        #
+#    Updated: 2025/12/12 21:50:40 by lseabra-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_data_init.c \
 		ft_dup2_close.c \
 		ft_exec_builtin.c \
-		ft_exec_cmd.c \
+		ft_exec_child.c \
 		ft_exec_line.c \
 		ft_exec_utils.c \
 		ft_echo.c \
@@ -80,7 +80,6 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_wildcards.c \
 		ft_wildcards_utils.c \
 		ft_unset.c \
-		test_utils.c \
 )
 
 # Object files

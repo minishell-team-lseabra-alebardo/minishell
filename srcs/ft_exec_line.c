@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/12 15:40:59 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/12 21:47:25 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,36 +49,14 @@ static void	ft_skip_based_on_stat(t_cmd **cmd, pid_t prev_pid)
 	}
 }
 
-void	ft_cleanup_child_exit(t_data *dt, t_cmd *cmd, int status)
-{
-	ft_close_cmd_files(cmd);
-	ft_free_strarr(dt->ms_envp);
-	ft_free_prompt_line(dt);
-	ft_cleanup_line(dt);
-	free(dt);
-	exit(status);
-}
-
-static void	ft_exec_child(t_data *dt, t_cmd *cmd, int pid_pos)
+static void	ft_treat_child(t_data *dt, t_cmd *cur_cmd, int	pid_pos)
 {
 	int	status;
 
 	dt->pid_arr[pid_pos] = fork();
 	if (dt->pid_arr[pid_pos] == 0)
-	{
-		ft_close_unused_fds(cmd->next);
-		status = ft_apply_redirs(cmd);
-		if (status != EXIT_SUCCESS)
-			ft_cleanup_child_exit(dt, cmd, status);
-		else if (!cmd->args || !cmd->args[0])
-			ft_cleanup_child_exit(dt, cmd, status);
-		else if (ft_is_builtin(cmd->args[0]))
-			status = ft_exec_builtin(dt, cmd);
-		else
-			status = ft_exec_cmd(cmd, dt->ms_envp, ft_get_status(0, false));
-		ft_cleanup_child_exit(dt, cmd, status);
-	}
-	else if (!cmd->next)
+		ft_exec_child(dt, cur_cmd);
+	else if (!cur_cmd->next)
 	{
 		waitpid(dt->pid_arr[pid_pos], &status, 0);
 		if (WIFEXITED(status))
@@ -101,7 +79,7 @@ void	ft_exec_line(t_data *dt)
 		else
 		{
 			i++;
-			ft_exec_child(dt, cur_cmd, i);
+			ft_treat_child(dt, cur_cmd, i);
 		}
 		ft_close_cmd_files(cur_cmd);
 		if (ft_get_status(0, false) == 130)

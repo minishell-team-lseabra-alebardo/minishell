@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exec_cmd.c                                      :+:      :+:    :+:   */
+/*   ft_exec_child.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 13:01:44 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/08 18:43:00 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/12 21:32:08 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	ft_handle_path_failure(t_cmd *cmd, int status)
 	ft_get_status(status, true);
 }
 
-int	ft_exec_cmd(t_cmd *cmd, char **ms_envp, int lst_stat)
+static int	ft_exec_cmd(t_cmd *cmd, char **ms_envp, int lst_stat)
 {
 	char	*path;
 
@@ -53,4 +53,31 @@ int	ft_exec_cmd(t_cmd *cmd, char **ms_envp, int lst_stat)
 	perror("execve");
 	free(path);
 	return (EXIT_FAILURE);
+}
+
+static void	ft_cleanup_child_exit(t_data *dt, t_cmd *cmd, int status)
+{
+	ft_close_cmd_files(cmd);
+	ft_free_strarr(dt->ms_envp);
+	ft_free_prompt_line(dt);
+	ft_cleanup_line(dt);
+	free(dt);
+	exit(status);
+}
+
+void	ft_exec_child(t_data *dt, t_cmd *cmd)
+{
+	int	status;
+
+	ft_close_unused_fds(cmd->next);
+	status = ft_apply_redirs(cmd);
+	if (status != EXIT_SUCCESS)
+		ft_cleanup_child_exit(dt, cmd, status);
+	else if (!cmd->args || !cmd->args[0])
+		ft_cleanup_child_exit(dt, cmd, status);
+	else if (ft_is_builtin(cmd->args[0]))
+		status = ft_exec_builtin(dt, cmd);
+	else
+		status = ft_exec_cmd(cmd, dt->ms_envp, ft_get_status(0, false));
+	ft_cleanup_child_exit(dt, cmd, status);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/09 21:24:54 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/12 21:49:15 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_puterror(char *pgm, char *target, char *message);
 int		ft_puterror_ret(char *pgm, char *target, char *message, int ret);
 void	ft_puterror_exit(char *pgm, char *target, char *message, int status);
 int		ft_apply_redirs(t_cmd *cmd);
-int		ft_exec_cmd(t_cmd *cmd, char **ms_envp, int lst_stat);
+void	ft_exec_child(t_data *dt, t_cmd *cmd);
 void	ft_exec_line(t_data *dt);
 void	ft_dup2_close(int oldfd, int newfd);
 void	ft_dup2_backup_close(int oldfd, int newfd, t_cmd *cmd);
@@ -76,7 +76,6 @@ int		ft_init_pipe(t_cmd *cur, t_cmd *prev);
 void	ft_close_error(t_data *dt);
 void	ft_free_strarr(char **strarr);
 void	ft_free_prompt_line(t_data *dt);
-void	ft_free_prev_line(t_data *dt);
 int		ft_exit(t_data *dt, t_cmd *cmd);
 int		ft_exit_subshell(t_data *dt, t_cmd *cmd);
 int		ft_str_to_fd(char *str);
@@ -96,8 +95,5 @@ int		ft_env(char **ms_envp);
 int		ft_echo(char **args);
 int		ft_unset(t_data *dt, char **args);
 char	*ft_wildcards(char *line);
-
-//TEST FUNCTIONS
-void	ft_print_cmds(t_data *dt);
 
 #endif
