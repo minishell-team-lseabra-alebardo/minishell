@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+         #
+#    By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/12/10 15:37:30 by lseabra-         ###   ########.fr        #
+#    Updated: 2025/12/12 16:27:28 by alebarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
