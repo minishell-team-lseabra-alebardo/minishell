@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 15:29:12 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/11 14:38:14 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/12 19:32:14 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,17 +89,22 @@ int	ft_check_empty_parentheses(char *line)
 int	ft_check_invalid_parentheses(char *line)
 {
 	char	*temp;
+	char	c;
 
 	temp = ft_skip_open_parentheses(line);
 	while (*temp)
 	{
-		if (*temp == '\'' || *temp == '\"')
+		c = *temp;
+		if (ft_is_whitespace(*temp))
+			while (ft_is_whitespace(*temp))
+				temp++;
+		else if (*temp == '\'' || *temp == '\"')
 			temp = ft_skip_quotes(temp, *temp);
-		if (*temp == '&' && *(temp + 1) == '&')
+		else if (*temp == '&' && *(temp + 1) == '&')
 			temp = ft_skip_and(temp);
 		else if (*temp == '|')
 			temp = ft_skip_pipe_or(temp);
-		else if (*temp == '(')
+		else if (*temp == '(' && c != '&' && c != '|' && c != '(')
 			return (-1);
 		else
 			temp++;
