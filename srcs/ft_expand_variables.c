@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 20:14:48 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/09 14:21:25 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/12 18:19:48 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ static char	*ft_search_variable(t_data *dt, char *arg, int mode)
 void	ft_args_treatment(char **args, t_data *dt, int mode)
 {
 	char	**split_line;
+	char	*copy_line;
 
 	if (mode == 0)
 	{
@@ -117,9 +118,11 @@ void	ft_args_treatment(char **args, t_data *dt, int mode)
 		{
 			while (ft_strncmp(*split_line, *args, ft_strlen(*args)))
 				split_line++;
+			copy_line = ft_strdup(*split_line);
 			*args = ft_search_quotes(dt, *args);
-			if (ft_strncmp(*split_line, *args, ft_strlen(*args)))
+			if (ft_strncmp(copy_line, *args, ft_strlen(*args)))
 				*split_line = *args;
+			free(copy_line);
 			args++;
 		}
 	}

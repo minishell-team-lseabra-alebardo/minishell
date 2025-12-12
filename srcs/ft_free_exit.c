@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:25:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/11 16:41:03 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/12 16:49:02 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ int	ft_exit_subshell(t_data *dt, t_cmd *cmd)
 	int		pexit;
 
 	pexit = dt->pexit;
+	if (pexit && (!cmd || (cmd && !ft_is_in_pipeline(cmd))))
+		printf("exit\n");
 	ft_close_unused_fds(dt->cmd_ll);
 	ft_free_strarr(dt->ms_envp);
 	ft_free_prompt_line(dt);
 	ft_cleanup_line(dt);
 	free(dt);
-	if (pexit && (!cmd || (cmd && !ft_is_in_pipeline(cmd))))
-		printf("exit\n");
 	return (ft_get_status(0, false));
 }
 
@@ -73,11 +73,11 @@ int	ft_exit(t_data *dt, t_cmd *cmd)
 	int		pexit;
 
 	pexit = dt->pexit;
+	if (pexit && (!cmd || (cmd && !ft_is_in_pipeline(cmd))))
+		printf("exit\n");
 	ft_close_unused_fds(dt->cmd_ll);
 	ft_free_strarr(dt->ms_envp);
 	ft_free_prompt_line(dt);
-	if (pexit && (!cmd || (cmd && !ft_is_in_pipeline(cmd))))
-		printf("exit\n");
 	ft_cleanup_line(dt);
 	free(dt);
 	rl_clear_history();
