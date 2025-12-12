@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:46:07 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/10 15:28:03 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/12 15:43:12 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,4 @@ void	ft_wait_all_pids(t_data *dt)
 		i++;
 		cur_pid = dt->pid_arr[i];
 	}
-	if (ft_get_status(0, false) != 130)
-		ft_get_status(WEXITSTATUS(lst_stat), true);
 }
