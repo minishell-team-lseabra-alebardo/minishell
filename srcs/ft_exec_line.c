@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/09 15:04:30 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/12 12:16:30 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void	ft_exec_line(t_data *dt)
 	int		i;
 
 	cur_cmd = dt->cmd_ll;
-	i = 0;
+	i = -1;
 	while (cur_cmd)
 	{
 		ft_args_treatment(cur_cmd->args, dt, 1);
@@ -147,10 +147,10 @@ void	ft_exec_line(t_data *dt)
 			ft_get_status(ft_exec_builtin(dt, cur_cmd), true);
 		else
 		{
+			i++;
 			dt->pid_arr[i] = fork();
 			if (dt->pid_arr[i] == 0)
 				ft_exec_child(dt, cur_cmd);
-			i++;
 		}
 		ft_close_cmd_files(cur_cmd);
 		if (ft_get_status(0, false) == 130)
