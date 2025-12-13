@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:46:46 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/09 15:12:16 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/13 21:12:16 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	ft_remove_parentheses(char *line)
 	line[i - 1] = 0;
 }
 
-int	ft_subshell(char **argv, char **envp)
+int	ft_subshell(char **args, char **envp)
 {
 	t_data	*dt;
 
@@ -38,9 +38,9 @@ int	ft_subshell(char **argv, char **envp)
 	dt->ms_envp = ft_strarr_dup(envp);
 	if (!dt->ms_envp)
 		ft_close_error(dt);
-	dt->last_status = ft_get_status(ft_atoi(argv[2]), true);
+	dt->last_status = ft_get_status(0, false);
 	dt->pexit = 0;
-	dt->line = ft_strdup(argv[1]);
+	dt->line = ft_strdup(args[0]);
 	if (dt->line[0] == '(')
 		ft_remove_parentheses(dt->line);
 	ft_args_treatment(&dt->line, dt, 0);
@@ -48,51 +48,4 @@ int	ft_subshell(char **argv, char **envp)
 	ft_parser(dt);
 	ft_exec_line(dt);
 	return (ft_exit_subshell(dt, NULL));
-}
-
-static char	*ft_get_ms_path(char **ms_envp)
-{
-	int		i;
-
-	i = 0;
-	while (ft_strncmp(ms_envp[i], "MS_PATH=", 8))
-	{
-		i++;
-		if (!ms_envp[i])
-			return (0);
-	}
-	return (ms_envp[i] + 8);
-}
-
-static char	**ft_include_subshell(char **args, int lst_stat)
-{
-	char	**new_args;
-
-	new_args = (char **) ft_calloc(4, sizeof(char *));
-	new_args[0] = ft_strdup("minishell");
-	new_args[1] = args[0];
-	new_args[2] = ft_itoa(lst_stat);
-	free(args);
-	return (new_args);
-}
-
-int	ft_prep_subshell(char **ms_envp, t_cmd *cmd, char **path, int lst_stat)
-{
-	char	*ms_path;
-
-	ms_path = ft_get_ms_path(ms_envp);
-	if (!ms_path || !cmd || !cmd->args || !cmd->args[0] || !path)
-		return (0);
-	if (!ft_strncmp(cmd->args[0], "minishell", 10))
-	{
-		*path = ft_strdup(ms_path);
-		return (1);
-	}
-	if (cmd->args[0][0] == '(')
-	{
-		cmd->args = ft_include_subshell(cmd->args, lst_stat);
-		*path = ft_strdup(ms_path);
-		return (1);
-	}
-	return (0);
 }

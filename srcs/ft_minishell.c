@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 21:46:59 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/11 14:39:27 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/13 21:13:14 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	main(int argc, char *argv[], char *envp[])
 {
 	t_data	*dt;
 
-	if (argc > 1 && !ft_strncmp("minishell", argv[0], 10) && argv[1][0] == '(')
-		return (ft_subshell(argv, envp));
+	(void) argc;
+	(void) argv;
 	ft_sigquit_listener();
 	dt = ft_data_init(envp);
 	while (1)

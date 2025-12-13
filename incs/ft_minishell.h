@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/13 16:45:29 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/13 21:11:46 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ char	*ft_get_ps1(char **ms_envp);
 void	ft_parser(t_data *dt);
 char	*ft_search_quotes(t_data *dt, char *arg);
 void	ft_args_treatment(char **args, t_data *dt, int mode);
-int		ft_ms_path(t_data *dt);
 int		ft_shlvl(t_data *dt);
-int		ft_subshell(char **argv, char **envp);
-int		ft_prep_subshell(char **ms_envp, t_cmd *cmd, char **path, int lst_stat);
+int		ft_subshell(char **args, char **envp);
 bool	ft_is_op(const char *s, const char *op);
 bool	ft_is_logic_or_pipe_op(char *str);
 bool	ft_is_redir_op(char *str);

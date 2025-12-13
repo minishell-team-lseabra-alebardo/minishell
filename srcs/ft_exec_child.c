@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_child.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 13:01:44 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/12 21:32:08 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/13 21:14:17 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,14 @@ static void	ft_handle_path_failure(t_cmd *cmd, int status)
 	ft_get_status(status, true);
 }
 
-static int	ft_exec_cmd(t_cmd *cmd, char **ms_envp, int lst_stat)
+static int	ft_exec_cmd(t_cmd *cmd, char **ms_envp)
 {
 	char	*path;
 
 	path = NULL;
 	ft_dup2_close(cmd->infile, STDIN_FILENO);
 	ft_dup2_close(cmd->outfile, STDOUT_FILENO);
-	if (ft_prep_subshell(ms_envp, cmd, &path, lst_stat))
-		ft_get_status(EXIT_SUCCESS, true);
-	else
-		ft_get_status(ft_resolve_cmd_path(cmd->args[0], &path), true);
+	ft_get_status(ft_resolve_cmd_path(cmd->args[0], &path), true);
 	if (ft_get_status(0, false) != EXIT_SUCCESS)
 	{
 		ft_handle_path_failure(cmd, ft_get_status(0, false));
@@ -78,6 +75,6 @@ void	ft_exec_child(t_data *dt, t_cmd *cmd)
 	else if (ft_is_builtin(cmd->args[0]))
 		status = ft_exec_builtin(dt, cmd);
 	else
-		status = ft_exec_cmd(cmd, dt->ms_envp, ft_get_status(0, false));
+		status = ft_exec_cmd(cmd, dt->ms_envp);
 	ft_cleanup_child_exit(dt, cmd, status);
 }
