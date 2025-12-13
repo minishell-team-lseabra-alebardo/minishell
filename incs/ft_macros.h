@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_macros.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:46:44 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/11 14:38:30 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/13 10:56:25 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@
 # define ERR_BAD_FD			"Bad file descriptor\n"
 # define ERR_TOO_MANY_ARGS	"too many arguments\n"
 # define ERR_INV_ID			"not a valid identifier\n"
+# define ERR_HOME_NT_SET	"HOME not set\n"
 
 // Exit status code
 # define EXIT_CANNOT_EXEC	126
