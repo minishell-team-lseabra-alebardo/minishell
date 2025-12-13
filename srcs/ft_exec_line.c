@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/13 21:48:48 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/13 22:27:50 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,14 @@ static void	ft_treat_child(t_data *dt, t_cmd *cur_cmd, int pid_pos)
 {
 	int	status;
 
+	status = 0;
 	dt->pid_arr[pid_pos] = fork();
 	if (dt->pid_arr[pid_pos] == 0)
 		ft_exec_child(dt, cur_cmd);
 	else if (!cur_cmd->next)
 	{
 		waitpid(dt->pid_arr[pid_pos], &status, 0);
-		if (WIFEXITED(status))
+		if (WIFEXITED(status) && ft_get_status(0, false) != 130)
 			ft_get_status((unsigned char)WEXITSTATUS(status), true);
 	}
 }

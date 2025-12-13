@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 13:01:44 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/13 21:14:17 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/13 22:26:18 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_exec_child(t_data *dt, t_cmd *cmd)
 
 	ft_close_unused_fds(cmd->next);
 	status = ft_apply_redirs(cmd);
-	if (status != EXIT_SUCCESS)
+	if (status != EXIT_SUCCESS || ft_get_status(0, false) == 130)
 		ft_cleanup_child_exit(dt, cmd, status);
 	else if (!cmd->args || !cmd->args[0])
 		ft_cleanup_child_exit(dt, cmd, status);
