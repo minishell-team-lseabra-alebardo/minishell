@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/13 21:11:19 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/13 21:24:41 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ static void	ft_skip_pipeline(t_cmd **cmd)
 
 static void	ft_skip_based_on_stat(t_cmd **cmd, pid_t prev_pid)
 {
-	pid_t	lst_proc_st;
+	int		lst_proc_st;
 
+	lst_proc_st = 0;
 	if (!(*cmd))
 		return ;
 	else if (!(*cmd)->next || ft_is_op((*cmd)->next->prev_op, CMD_PIPE))
