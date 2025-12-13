@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 11:44:08 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/12 15:15:06 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/13 21:48:24 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ bool	ft_is_in_pipeline(t_cmd *cmd)
 		return (false);
 }
 
-bool	ft_is_parent_bltn(char *cmd)
+bool	ft_is_pbtin(char *cmd)
 {
 	if (!cmd)
 		return (false);
@@ -44,7 +44,7 @@ bool	ft_is_builtin(char *cmd)
 {
 	if (!cmd)
 		return (false);
-	else if (ft_is_parent_bltn(cmd))
+	else if (ft_is_pbtin(cmd))
 		return (true);
 	else if (ft_strncmp("pwd", cmd, 4) == 0)
 		return (true);

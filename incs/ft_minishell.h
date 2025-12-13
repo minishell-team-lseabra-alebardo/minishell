@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/13 21:11:46 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/13 21:47:55 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int		ft_str_to_fd(char *str);
 int		ft_exec_builtin(t_data *dt, t_cmd *cmd);
 bool	ft_is_in_pipeline(t_cmd *cmd);
 bool	ft_is_builtin(char *cmd);
-bool	ft_is_parent_bltn(char *cmd);
+bool	ft_is_pbtin(char *cmd);
 char	**ft_getenv_addr(char *name, char **ms_envp);
 char	*ft_getenv(char *name, char **ms_envp);
 void	ft_set_env(char *name, char *value, char **ms_envp);
