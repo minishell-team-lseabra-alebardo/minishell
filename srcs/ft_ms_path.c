@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 14:15:30 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/04 17:41:40 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/13 17:56:45 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ static char	*ft_get_pwd(char **ms_envp)
 	int		i;
 
 	i = 0;
-	while (ft_strncmp(ms_envp[i], "PWD=", 4))
+	while (ms_envp[i] && ft_strncmp(ms_envp[i], "PWD=", 4))
 		i++;
+	if (!ms_envp[i])
+		return (0);
 	return (ms_envp[i] + 4);
 }
 
@@ -69,6 +71,12 @@ int	ft_ms_path(t_data *dt)
 	if (!dt->ms_envp)
 		return (ERROR);
 	pwd = ft_get_pwd(dt->ms_envp);
+	if (!pwd)
+	{
+		printf("PWD is not set. Set PWD to minishell's main folder\n");
+		errno = 1;
+		return (ERROR);
+	}
 	while (dt->ms_envp[i])
 		i++;
 	dt->ms_envp[i] = (char *) ft_calloc(ft_strlen(pwd) + 19, 1);
