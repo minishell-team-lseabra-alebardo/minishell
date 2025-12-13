@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 14:23:25 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/12 15:14:47 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/13 15:28:44 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,29 +48,41 @@ char	*ft_getenv(char *name, char **ms_envp)
 		return (NULL);
 }
 
+static char	*ft_get_name_with_equal(char **env_addr)
+{
+	size_t	name_len;
+
+	if (!env_addr || !*env_addr)
+		return (0);
+	name_len = 0;
+	while ((*env_addr)[name_len] && (*env_addr)[name_len] != '=')
+		name_len++;
+	if ((*env_addr)[name_len] == '=')
+		name_len++;
+	return (ft_substr(*env_addr, 0, name_len));
+}
+
 void	ft_set_env(char *name, char *value, char **ms_envp)
 {
 	char	*res;
 	char	*tmp;
 	char	**env_addr;
-	size_t	name_len;
 
 	if (!name || !value || !ms_envp || !*ms_envp)
 		return ;
-	name_len = 0;
 	env_addr = ft_getenv_addr(name, ms_envp);
 	if (!env_addr)
-		return ;
-	while ((*env_addr)[name_len] && (*env_addr)[name_len] != '=')
-		name_len++;
-	if ((*env_addr)[name_len] == '=')
-		name_len++;
+	{
+		env_addr = ft_expand_envp(ms_envp);
+		while (*env_addr)
+			env_addr++;
+		tmp = ft_strjoin(name, "=");
+	}
 	else
-		return ;
-	tmp = ft_substr(*env_addr, 0, name_len);
-	res = ft_strjoin(tmp, value);
-	free(tmp);
+		tmp = ft_get_name_with_equal(env_addr);
+	res = ft_strjoin_free(tmp, true, value, false);
 	tmp = *env_addr;
 	*env_addr = res;
-	free(tmp);
+	if (tmp)
+		free(tmp);
 }

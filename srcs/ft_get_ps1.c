@@ -6,13 +6,13 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:03:27 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/03 13:48:17 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/13 11:36:41 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minishell.h"
 
-static char	*ft_strjoin_free(char *s1, bool free_s1, char *s2, bool free_s2)
+char	*ft_strjoin_free(char *s1, bool free_s1, char *s2, bool free_s2)
 {
 	char	*res;
 

@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/12 21:49:15 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/13 16:45:29 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 int		ft_listener(void);
 t_data	*ft_data_init(char **envp);
 void	ft_treat_line(t_data *dt);
+char	*ft_strjoin_free(char *s1, bool free_s1, char *s2, bool free_s2);
 char	*ft_get_ps1(char **ms_envp);
 void	ft_parser(t_data *dt);
 char	*ft_search_quotes(t_data *dt, char *arg);
