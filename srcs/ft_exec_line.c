@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/12 21:47:25 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/14 15:53:27 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	ft_skip_based_on_stat(t_cmd **cmd, pid_t prev_pid)
 	}
 }
 
-static void	ft_treat_child(t_data *dt, t_cmd *cur_cmd, int	pid_pos)
+static void	ft_treat_child(t_data *dt, t_cmd *cur_cmd, int pid_pos)
 {
 	int	status;
 
