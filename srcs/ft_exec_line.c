@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/14 20:20:13 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/14 22:17:38 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ static void	ft_skip_based_on_stat(t_cmd **cmd, pid_t prev_pid)
 		*cmd = (*cmd)->next;
 		return ;
 	}
-	if (!ft_is_pbtin((*cmd)->args[0]))
+	if (!ft_is_pbtin((*cmd)->args[0])
+		&& (*cmd)->args[0] && (*cmd)->args[0][0] != '(')
 	{
 		waitpid(prev_pid, &lst_proc_st, 0);
 		if (WIFEXITED(lst_proc_st))
