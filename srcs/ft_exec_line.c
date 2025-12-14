@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/14 16:44:34 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/14 20:20:13 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_exec_line(t_data *dt)
 	while (cur_cmd && i < MAX_PROCESSES)
 	{
 		ft_args_treatment(cur_cmd->args, dt, 1);
-		if (cur_cmd->args[0][0] == '(')
+		if (cur_cmd->args[0] && cur_cmd->args[0][0] == '(')
 			ft_get_status(ft_subshell(cur_cmd->args, dt->ms_envp), true);
 		else if (ft_is_pbtin(cur_cmd->args[0]) && !ft_is_in_pipeline(cur_cmd))
 			ft_get_status(ft_exec_builtin(dt, cur_cmd), true);
