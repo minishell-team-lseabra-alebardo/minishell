@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/13 16:45:29 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/14 15:48:50 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ bool	ft_is_builtin(char *cmd);
 bool	ft_is_parent_bltn(char *cmd);
 char	**ft_getenv_addr(char *name, char **ms_envp);
 char	*ft_getenv(char *name, char **ms_envp);
-void	ft_set_env(char *name, char *value, char **ms_envp);
+void	ft_set_env(t_data *dt, char *name, char *value);
 int		ft_print_ordered_exp(char **strarr);
 int		ft_export_vars(char	**args, t_data *dt, size_t	envp_len);
 int		ft_change_directory(t_data *dt, t_cmd *cmd);

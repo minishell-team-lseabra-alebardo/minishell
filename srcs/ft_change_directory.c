@@ -6,18 +6,18 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 16:53:43 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/13 10:56:42 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/14 15:49:38 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
 
-static void	ft_set_pwds(char **ms_envp, char *pwd)
+static void	ft_set_pwds(t_data *dt, char *pwd)
 {
-	ft_set_env("OLDPWD", pwd, ms_envp);
+	ft_set_env(dt, "OLDPWD", pwd);
 	free(pwd);
 	pwd = getcwd(NULL, 0);
-	ft_set_env("PWD", pwd, ms_envp);
+	ft_set_env(dt, "PWD", pwd);
 	free(pwd);
 }
 
@@ -46,6 +46,6 @@ int	ft_change_directory(t_data *dt, t_cmd *cmd)
 		ft_puterror("cd", cmd->args[1], NULL);
 		return (EXIT_FAILURE);
 	}
-	ft_set_pwds(dt->ms_envp, pwd);
+	ft_set_pwds(dt, pwd);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 14:23:25 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/13 15:28:44 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/14 15:46:51 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,19 @@ static char	*ft_get_name_with_equal(char **env_addr)
 	return (ft_substr(*env_addr, 0, name_len));
 }
 
-void	ft_set_env(char *name, char *value, char **ms_envp)
+void	ft_set_env(t_data *dt, char *name, char *value)
 {
 	char	*res;
 	char	*tmp;
 	char	**env_addr;
 
-	if (!name || !value || !ms_envp || !*ms_envp)
+	if (!name || !value || !dt || !dt->ms_envp)
 		return ;
-	env_addr = ft_getenv_addr(name, ms_envp);
+	env_addr = ft_getenv_addr(name, dt->ms_envp);
 	if (!env_addr)
 	{
-		env_addr = ft_expand_envp(ms_envp);
+		dt->ms_envp = ft_expand_envp(dt->ms_envp);
+		env_addr = dt->ms_envp;
 		while (*env_addr)
 			env_addr++;
 		tmp = ft_strjoin(name, "=");
