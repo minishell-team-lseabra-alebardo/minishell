@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_data_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 17:27:46 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/13 21:05:54 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/14 17:14:55 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
+
+static void	ft_init_pwd(t_data *dt)
+{
+	char	*pwd;
+
+	pwd = getcwd(NULL, 0);
+	ft_set_env(dt, "PWD", pwd);
+	free(pwd);
+}
 
 t_data	*ft_data_init(char **envp)
 {
@@ -22,6 +31,7 @@ t_data	*ft_data_init(char **envp)
 	dt->ms_envp = ft_strarr_dup(envp);
 	if (!dt->ms_envp)
 		ft_close_error(dt);
+	ft_init_pwd(dt);
 	dt->last_status = ft_get_status(0, false);
 	dt->prompt = NULL;
 	dt->line = NULL;
