@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_child.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 13:01:44 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/13 22:26:18 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/14 18:55:48 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static void	ft_handle_path_failure(t_cmd *cmd, int status)
 		target = NULL;
 	if (status == EXIT_NOT_FOUND)
 		message = ERR_CMD_NOT_FOUND;
+	else if (status == EXIT_CANNOT_EXEC && ft_is_directory(cmd->args[0]))
+		message = ERR_IS_DIR;
 	else if (status == EXIT_CANNOT_EXEC)
 		message = ERR_NO_PERMISSION;
 	else

@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/14 16:44:25 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/14 18:55:09 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <ft_status.h>
 # include <ft_signal.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 # include <stdint.h>
 # include <limits.h>
 # include <dirent.h>
@@ -66,6 +67,7 @@ void	ft_dup2_backup_close(int oldfd, int newfd, t_cmd *cmd);
 void	ft_reset_dup2(t_cmd *cmd);
 void	ft_close_unused_fds(t_cmd *cmd);
 void	ft_close_cmd_files(t_cmd *cmd);
+bool	ft_is_directory(char *path);
 int		ft_resolve_cmd_path(char *cmd, char **path_addr);
 void	ft_wait_all_pids(t_data *dt);
 void	ft_cleanup_line(t_data *dt);

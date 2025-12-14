@@ -3,17 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_resolve_cmd_path.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 12:45:27 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/08 18:40:29 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/14 19:10:18 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
 
+bool	ft_is_directory(char *path)
+{
+	struct stat	path_stat;
+
+	if (access(path, F_OK) == ERROR)
+		return (false);
+	if (stat(path, &path_stat) == ERROR)
+		return (ft_puterror_ret("stat", NULL, NULL, false));
+	if (S_ISDIR(path_stat.st_mode) == 1)
+		return (true);
+	else
+		return (false);
+}
+
 static int	ft_check_abs_path(char *cmd, char **path_addr)
 {
+	if (ft_is_directory(cmd))
+		return (EXIT_CANNOT_EXEC);
 	if (access(cmd, F_OK | X_OK) == 0)
 	{
 		*path_addr = ft_strdup(cmd);
