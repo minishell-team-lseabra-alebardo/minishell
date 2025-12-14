@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 11:44:08 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/13 21:48:24 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/14 20:17:11 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,26 @@ bool	ft_is_builtin(char *cmd)
 		return (false);
 }
 
+static int	ft_setup_builtin_redirs(t_cmd *cmd, int	*lst_stat)
+{
+	if (ft_is_pbtin(cmd->args[0]))
+	{
+		*lst_stat = ft_apply_redirs(cmd);
+		if (*lst_stat != EXIT_SUCCESS)
+			return (ERROR);
+	}
+	ft_dup2_backup_close(cmd->infile, STDIN_FILENO, cmd);
+	ft_dup2_backup_close(cmd->outfile, STDOUT_FILENO, cmd);
+	return (SUCCESS);
+}
+
 int	ft_exec_builtin(t_data *dt, t_cmd *cmd)
 {
 	int	lst_stat;
 
-	lst_stat = ft_apply_redirs(cmd);
-	if (lst_stat != EXIT_SUCCESS)
+	lst_stat = EXIT_SUCCESS;
+	if (ft_setup_builtin_redirs(cmd, &lst_stat) == ERROR)
 		return (lst_stat);
-	ft_dup2_backup_close(cmd->infile, STDIN_FILENO, cmd);
-	ft_dup2_backup_close(cmd->outfile, STDOUT_FILENO, cmd);
 	if (ft_strncmp("cd", cmd->args[0], 3) == 0)
 		lst_stat = ft_change_directory(dt, cmd);
 	else if (ft_strncmp("exit", cmd->args[0], 5) == 0)
