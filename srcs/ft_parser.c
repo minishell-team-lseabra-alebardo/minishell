@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:13:51 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/15 14:52:57 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/15 16:55:50 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	ft_init_redir(t_data *dt, t_cmd *cmd, char ***s_arr, char *redir)
 	}
 	new_redir->type = redir;
 	if (ft_is_op(new_redir->type, CMD_HEREDOC))
-		new_redir->fd_to = ft_exec_heredoc(*(++*s_arr));
+		new_redir->fd_to = ft_exec_heredoc(ft_sq_hdoc(*(++*s_arr)));
 	else
 		new_redir->filename = ft_search_quotes(dt, *(++*s_arr));
 	*s_arr += 1;

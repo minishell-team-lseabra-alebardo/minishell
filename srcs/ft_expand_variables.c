@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 20:14:48 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/12 18:19:48 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/15 17:02:54 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,11 @@ static char	*ft_search_variable(t_data *dt, char *arg, int mode)
 			while (arg[i] != ')')
 				i++;
 		}
+		if (arg[i] == '<' && arg[i + 1] == '<')
+			i = ft_avoid_heredoc(arg, i);
 		if (arg[i] == '$' && !ft_is_whitespace(arg[i + 1]))
 			arg = ft_expand_variable(dt->ms_envp, dt, arg, &i);
-		else
+		else if (arg[i])
 			i++;
 	}
 	return (arg);

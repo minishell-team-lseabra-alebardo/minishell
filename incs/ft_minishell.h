@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_minishell.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/14 18:55:09 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/15 16:55:30 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ char	*ft_strjoin_free(char *s1, bool free_s1, char *s2, bool free_s2);
 char	*ft_get_ps1(char **ms_envp);
 void	ft_parser(t_data *dt);
 char	*ft_search_quotes(t_data *dt, char *arg);
+char	*ft_sq_hdoc(char *arg);
 void	ft_args_treatment(char **args, t_data *dt, int mode);
 int		ft_shlvl(t_data *dt);
 int		ft_subshell(char **args, char **envp);

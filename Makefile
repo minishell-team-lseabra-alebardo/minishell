@@ -6,7 +6,7 @@
 #    By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/12/15 15:33:05 by alebarbo         ###   ########.fr        #
+#    Updated: 2025/12/15 16:53:54 by alebarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_env_utils.c \
 		ft_exit.c \
 		ft_expand_envp.c \
+		ft_expand_heredoc.c \
 		ft_expand_variables_utils.c \
 		ft_expand_variables.c \
 		ft_export_vars.c \
