@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:46:46 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/15 17:43:18 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/15 18:33:07 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,5 @@ int	ft_subshell(char **args, char **envp)
 	dt->split_line = ft_split_prompt(dt->line, WS_POSIX);
 	ft_parser(dt);
 	ft_exec_line(dt);
-	return (ft_cleanup_subshell(dt, NULL));
+	return (ft_cleanup_subshell(dt));
 }

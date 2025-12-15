@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:31:53 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/15 18:29:29 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/15 18:32:44 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,8 @@ bool	ft_is_subexit(t_data *dt, t_cmd *cmd)
 	return (false);
 }
 
-int	ft_cleanup_subshell(t_data *dt, t_cmd *cmd)
+int	ft_cleanup_subshell(t_data *dt)
 {
-	if (cmd && cmd->args[1])
-		ft_get_status(ft_exit_args(cmd), true);
 	ft_close_unused_fds(dt->cmd_ll);
 	ft_free_strarr(dt->ms_envp);
 	ft_free_prompt_line(dt);
@@ -54,13 +52,10 @@ int	ft_cleanup_subshell(t_data *dt, t_cmd *cmd)
 
 int	ft_exit(t_data *dt, t_cmd *cmd)
 {
-
+	if (cmd && cmd->args[1])
+		ft_get_status(ft_exit_args(cmd), true);
 	if (dt->subshell)
-	{
-		if (cmd && cmd->args[1])
-			ft_get_status(ft_exit_args(cmd), true);
 		return (ft_get_status(0, false));
-	}
 	if (!cmd || (cmd && !ft_is_in_pipeline(cmd)))
 		printf("exit\n");
 	ft_close_unused_fds(dt->cmd_ll);
