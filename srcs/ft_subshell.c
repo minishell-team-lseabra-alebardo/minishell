@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:46:46 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/15 18:33:07 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/15 20:52:38 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,20 @@ static void	ft_remove_parentheses(char *line)
 	line[i - 1] = 0;
 }
 
-int	ft_subshell(char **args, char **envp)
+int	ft_ss(t_data **dt_arr, char **args, char **envp)
 {
 	t_data	*dt;
 
 	dt = (t_data *) ft_calloc(1, sizeof(t_data));
 	if (!dt)
-		ft_close_error(0);
+		return (ft_cleanup_subshell(0));
 	dt->subshell = 1;
+	dt->dt_arr = ft_expand_dt(dt_arr, dt);
+	if (!dt->dt_arr)
+		return (ft_cleanup_subshell(dt));
 	dt->ms_envp = ft_strarr_dup(envp);
 	if (!dt->ms_envp)
-		ft_close_error(dt);
+		return (ft_cleanup_subshell(dt));
 	dt->last_status = ft_get_status(0, false);
 	dt->line = ft_strdup(args[0]);
 	if (dt->line[0] == '(')

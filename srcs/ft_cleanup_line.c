@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 16:07:52 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/15 17:57:09 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/15 20:24:45 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,19 @@ void	ft_cleanup_line(t_data *dt)
 	ft_free_strarr(dt->split_line);
 	dt->split_line = NULL;
 	ft_bzero(dt->pid_arr, MAX_PROCESSES);
+}
+
+void	ft_cleanup_old_dt(t_data **dt_arr)
+{
+	int		i;
+
+	i = 0;
+	while (dt_arr && dt_arr[i + 1])
+	{
+		ft_free_strarr(dt_arr[i]->ms_envp);
+		ft_free_prompt_line(dt_arr[i]);
+		ft_cleanup_line(dt_arr[i]);
+		free(dt_arr[i]);
+		i++;
+	}
 }

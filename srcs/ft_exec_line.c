@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 16:48:00 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/15 17:54:55 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/15 20:00:42 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ static void	ft_treat_child(t_data *dt, t_cmd *cur_cmd, int pid_pos)
 	status = 0;
 	dt->pid_arr[pid_pos] = fork();
 	if (dt->pid_arr[pid_pos] == 0)
+	{
+		ft_cleanup_old_dt(dt->dt_arr);
 		ft_exec_child(dt, cur_cmd);
+	}
 	else if (!cur_cmd->next)
 	{
 		waitpid(dt->pid_arr[pid_pos], &status, 0);
@@ -78,7 +81,7 @@ void	ft_exec_line(t_data *dt)
 	{
 		ft_args_treatment(cur_cmd->args, dt, 1);
 		if (cur_cmd->args[0] && cur_cmd->args[0][0] == '(')
-			ft_get_status(ft_subshell(cur_cmd->args, dt->ms_envp), true);
+			ft_get_status(ft_ss(dt->dt_arr, cur_cmd->args, dt->ms_envp), true);
 		else if (ft_is_pbtin(cur_cmd->args[0]) && !ft_is_in_pipeline(cur_cmd))
 			ft_get_status(ft_exec_builtin(dt, cur_cmd), true);
 		else

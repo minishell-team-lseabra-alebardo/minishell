@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:31:53 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/15 18:32:44 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/15 20:50:34 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	ft_cleanup_subshell(t_data *dt)
 	ft_free_strarr(dt->ms_envp);
 	ft_free_prompt_line(dt);
 	ft_cleanup_line(dt);
+	// free(dt->dt_arr);
 	free(dt);
 	return (ft_get_status(0, false));
 }
@@ -62,6 +63,7 @@ int	ft_exit(t_data *dt, t_cmd *cmd)
 	ft_free_strarr(dt->ms_envp);
 	ft_free_prompt_line(dt);
 	ft_cleanup_line(dt);
+	free(dt->dt_arr);
 	free(dt);
 	rl_clear_history();
 	exit(ft_get_status(0, false));

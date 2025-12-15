@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_child.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 13:01:44 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/15 16:02:17 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/15 20:35:08 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static void	ft_cleanup_child_exit(t_data *dt, t_cmd *cmd, int status)
 	ft_free_strarr(dt->ms_envp);
 	ft_free_prompt_line(dt);
 	ft_cleanup_line(dt);
+	// free(dt->dt_arr);
 	free(dt);
 	exit(status);
 }

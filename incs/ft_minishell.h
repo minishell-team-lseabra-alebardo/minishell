@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/15 18:32:55 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/15 20:52:33 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*ft_search_quotes(t_data *dt, char *arg);
 char	*ft_sq_hdoc(char *arg);
 void	ft_args_treatment(char **args, t_data *dt, int mode);
 int		ft_shlvl(t_data *dt);
-int		ft_subshell(char **args, char **envp);
+int		ft_ss(t_data **dt_arr, char **args, char **envp);
 bool	ft_is_op(const char *s, const char *op);
 bool	ft_is_logic_or_pipe_op(char *str);
 bool	ft_is_redir_op(char *str);
@@ -72,6 +72,7 @@ bool	ft_is_directory(char *path);
 int		ft_resolve_cmd_path(char *cmd, char **path_addr);
 void	ft_wait_all_pids(t_data *dt);
 void	ft_cleanup_line(t_data *dt);
+void	ft_cleanup_old_dt(t_data **dt_arr);
 int		ft_exec_heredoc(char *lim);
 void	ft_add_arg(t_cmd *cmd, char *new_arg);
 int		ft_init_pipe(t_cmd *cur, t_cmd *prev);
@@ -98,5 +99,6 @@ int		ft_env(char **ms_envp);
 int		ft_echo(char **args);
 int		ft_unset(t_data *dt, char **args);
 char	*ft_wildcards(char *line);
+t_data	**ft_expand_dt(t_data **dt_arr, t_data *dt);
 
 #endif
