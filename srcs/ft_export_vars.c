@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 17:20:27 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/03 17:26:18 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/15 13:44:19 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static bool	ft_validate_var(char *var)
 	i = 0;
 	while (var[i] && ft_isalpha(var[i]))
 		i++;
-	if (!ft_isalpha(var[i]) && (i == 0 || var[i] != '='))
+	if (!ft_isalpha(var[i]) && (i == 0 || (var[i] != '=' && var[i] != '\0')))
 		return (false);
 	else
 		return (true);
