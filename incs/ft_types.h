@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:56:36 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/15 20:52:54 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/15 21:05:08 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,5 @@ typedef struct s_data
 	char			**split_line;
 	t_cmd			*cmd_ll;
 	pid_t			pid_arr[MAX_PROCESSES];
-	struct s_data	**dt_arr;
 }					t_data;
 #endif

@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/15 20:52:33 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/15 22:37:44 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 
 int		ft_listener(void);
 t_data	*ft_data_init(char **envp);
-void	ft_treat_line(t_data *dt);
+void	ft_treat_line(t_data **dt_arr, t_data *dt);
 char	*ft_strjoin_free(char *s1, bool free_s1, char *s2, bool free_s2);
 char	*ft_get_ps1(char **ms_envp);
 void	ft_parser(t_data *dt);
@@ -61,8 +61,8 @@ void	ft_puterror(char *pgm, char *target, char *message);
 int		ft_puterror_ret(char *pgm, char *target, char *message, int ret);
 void	ft_puterror_exit(char *pgm, char *target, char *message, int status);
 int		ft_apply_redirs(t_cmd *cmd);
-void	ft_exec_child(t_data *dt, t_cmd *cmd);
-void	ft_exec_line(t_data *dt);
+void	ft_exec_child(t_data **dt_arr, t_data *dt, t_cmd *cmd);
+void	ft_exec_line(t_data **dt_arr, t_data *dt);
 void	ft_dup2_close(int oldfd, int newfd);
 void	ft_dup2_backup_close(int oldfd, int newfd, t_cmd *cmd);
 void	ft_reset_dup2(t_cmd *cmd);
@@ -79,11 +79,11 @@ int		ft_init_pipe(t_cmd *cur, t_cmd *prev);
 void	ft_close_error(t_data *dt);
 void	ft_free_strarr(char **strarr);
 void	ft_free_prompt_line(t_data *dt);
-int		ft_exit(t_data *dt, t_cmd *cmd);
+int		ft_exit(t_data **dt_arr, t_data *dt, t_cmd *cmd);
 bool	ft_is_subexit(t_data *dt, t_cmd *cmd);
 int		ft_cleanup_subshell(t_data *dt);
 int		ft_str_to_fd(char *str);
-int		ft_exec_builtin(t_data *dt, t_cmd *cmd);
+int		ft_exec_builtin(t_data **dt_arr, t_data *dt, t_cmd *cmd);
 bool	ft_is_in_pipeline(t_cmd *cmd);
 bool	ft_is_builtin(char *cmd);
 bool	ft_is_pbtin(char *cmd);
@@ -99,6 +99,7 @@ int		ft_env(char **ms_envp);
 int		ft_echo(char **args);
 int		ft_unset(t_data *dt, char **args);
 char	*ft_wildcards(char *line);
-t_data	**ft_expand_dt(t_data **dt_arr, t_data *dt);
+t_data	**ft_create_dt_arr(t_data *dt);
+void	ft_expand_dt_arr(t_data **dt_arr, t_data *dt);
 
 #endif

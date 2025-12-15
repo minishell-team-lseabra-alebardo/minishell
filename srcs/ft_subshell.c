@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:46:46 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/15 20:52:38 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/15 22:20:02 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ int	ft_ss(t_data **dt_arr, char **args, char **envp)
 	if (!dt)
 		return (ft_cleanup_subshell(0));
 	dt->subshell = 1;
-	dt->dt_arr = ft_expand_dt(dt_arr, dt);
-	if (!dt->dt_arr)
-		return (ft_cleanup_subshell(dt));
+	ft_expand_dt_arr(dt_arr, dt);
 	dt->ms_envp = ft_strarr_dup(envp);
 	if (!dt->ms_envp)
 		return (ft_cleanup_subshell(dt));
@@ -49,6 +47,6 @@ int	ft_ss(t_data **dt_arr, char **args, char **envp)
 	ft_args_treatment(&dt->line, dt, 0);
 	dt->split_line = ft_split_prompt(dt->line, WS_POSIX);
 	ft_parser(dt);
-	ft_exec_line(dt);
+	ft_exec_line(dt_arr, dt);
 	return (ft_cleanup_subshell(dt));
 }

@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 13:01:44 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/15 20:35:08 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/15 22:37:21 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,11 @@ static void	ft_cleanup_child_exit(t_data *dt, t_cmd *cmd, int status)
 	ft_free_strarr(dt->ms_envp);
 	ft_free_prompt_line(dt);
 	ft_cleanup_line(dt);
-	// free(dt->dt_arr);
 	free(dt);
 	exit(status);
 }
 
-void	ft_exec_child(t_data *dt, t_cmd *cmd)
+void	ft_exec_child(t_data **dt_arr, t_data *dt, t_cmd *cmd)
 {
 	int	status;
 
@@ -77,7 +76,7 @@ void	ft_exec_child(t_data *dt, t_cmd *cmd)
 	else if (!cmd->args || !cmd->args[0])
 		ft_cleanup_child_exit(dt, cmd, status);
 	else if (ft_is_builtin(cmd->args[0]))
-		status = ft_exec_builtin(dt, cmd);
+		status = ft_exec_builtin(dt_arr, dt, cmd);
 	else
 		status = ft_exec_cmd(cmd, dt->ms_envp);
 	ft_cleanup_child_exit(dt, cmd, status);

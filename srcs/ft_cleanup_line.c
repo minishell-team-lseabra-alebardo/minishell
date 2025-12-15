@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 16:07:52 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/15 20:24:45 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/15 22:37:01 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void	ft_cleanup_old_dt(t_data **dt_arr)
 		ft_free_prompt_line(dt_arr[i]);
 		ft_cleanup_line(dt_arr[i]);
 		free(dt_arr[i]);
+		dt_arr[i] = NULL;
 		i++;
 	}
+	free(dt_arr);
 }

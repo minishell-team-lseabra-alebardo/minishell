@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 11:44:08 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/15 18:07:05 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/15 22:28:43 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	ft_setup_builtin_redirs(t_cmd *cmd, int	*lst_stat)
 	return (SUCCESS);
 }
 
-int	ft_exec_builtin(t_data *dt, t_cmd *cmd)
+int	ft_exec_builtin(t_data **dt_arr, t_data *dt, t_cmd *cmd)
 {
 	int	lst_stat;
 
@@ -84,7 +84,7 @@ int	ft_exec_builtin(t_data *dt, t_cmd *cmd)
 	if (ft_strncmp("cd", cmd->args[0], 3) == 0)
 		lst_stat = ft_change_directory(dt, cmd);
 	else if (ft_strncmp("exit", cmd->args[0], 5) == 0)
-		lst_stat = ft_exit(dt, cmd);
+		lst_stat = ft_exit(dt_arr, dt, cmd);
 	else if (ft_strncmp("pwd", cmd->args[0], 4) == 0)
 		lst_stat = ft_pwd();
 	else if (ft_strncmp("export", cmd->args[0], 7) == 0)
