@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 11:44:08 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/14 20:17:11 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/15 15:30:32 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,14 @@ static int	ft_setup_builtin_redirs(t_cmd *cmd, int	*lst_stat)
 		*lst_stat = ft_apply_redirs(cmd);
 		if (*lst_stat != EXIT_SUCCESS)
 			return (ERROR);
+		ft_dup2_backup_close(cmd->infile, STDIN_FILENO, cmd);
+		ft_dup2_backup_close(cmd->outfile, STDOUT_FILENO, cmd);
 	}
-	ft_dup2_backup_close(cmd->infile, STDIN_FILENO, cmd);
-	ft_dup2_backup_close(cmd->outfile, STDOUT_FILENO, cmd);
+	else
+	{
+		ft_dup2_close(cmd->infile, STDIN_FILENO);
+		ft_dup2_close(cmd->outfile, STDOUT_FILENO);
+	}
 	return (SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 16:26:42 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/12 15:14:22 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/15 15:40:35 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_dup2_close(int oldfd, int newfd)
 		close(oldfd);
 }
 
-static int	ft_add_to_backup(int *backup, t_cmd *cmd)
+static void	ft_add_to_backup(int savefd, int newfd, t_cmd *cmd)
 {
 	int		**new_dup2_backup;
 	size_t	i;
@@ -32,38 +32,32 @@ static int	ft_add_to_backup(int *backup, t_cmd *cmd)
 		i++;
 	new_dup2_backup = ft_calloc((i + 2), sizeof(int *));
 	if (!new_dup2_backup)
-		return (ERROR);
-	if (!cmd->dup2_backup)
-		*new_dup2_backup = backup;
-	else
+		return ;
+	if (cmd->dup2_backup)
 	{
 		ft_memcpy(new_dup2_backup, cmd->dup2_backup, i * sizeof(int *));
-		new_dup2_backup[i] = backup;
 		free(cmd->dup2_backup);
 	}
 	cmd->dup2_backup = new_dup2_backup;
-	return (SUCCESS);
+	cmd->dup2_backup[i] = ft_calloc(2, sizeof(int));
+	if (!cmd->dup2_backup[i])
+	{
+		close(savefd);
+		return ;
+	}
+	cmd->dup2_backup[i][0] = savefd;
+	cmd->dup2_backup[i][1] = newfd;
 }
 
 void	ft_dup2_backup_close(int oldfd, int newfd, t_cmd *cmd)
 {
 	int	savefd;
-	int	*backup;
 
 	if (oldfd == newfd)
 		return ;
-	backup = ft_calloc(2, sizeof(int));
-	if (!backup)
-		return ;
 	savefd = dup(newfd);
 	ft_dup2_close(oldfd, newfd);
-	backup[0] = savefd;
-	backup[1] = newfd;
-	if (ft_add_to_backup(backup, cmd) == ERROR)
-	{
-		close(savefd);
-		free(backup);
-	}
+	ft_add_to_backup(savefd, newfd, cmd);
 }
 
 void	ft_reset_dup2(t_cmd *cmd)
