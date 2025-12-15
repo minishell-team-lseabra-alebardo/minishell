@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 22:46:46 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/15 22:20:02 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/15 23:50:28 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ int	ft_ss(t_data **dt_arr, char **args, char **envp)
 
 	dt = (t_data *) ft_calloc(1, sizeof(t_data));
 	if (!dt)
-		return (ft_cleanup_subshell(0));
+		return (ft_cleanup_subshell(dt_arr, 0));
 	dt->subshell = 1;
 	ft_expand_dt_arr(dt_arr, dt);
 	dt->ms_envp = ft_strarr_dup(envp);
 	if (!dt->ms_envp)
-		return (ft_cleanup_subshell(dt));
+		return (ft_cleanup_subshell(dt_arr, dt));
 	dt->last_status = ft_get_status(0, false);
 	dt->line = ft_strdup(args[0]);
 	if (dt->line[0] == '(')
@@ -48,5 +48,5 @@ int	ft_ss(t_data **dt_arr, char **args, char **envp)
 	dt->split_line = ft_split_prompt(dt->line, WS_POSIX);
 	ft_parser(dt);
 	ft_exec_line(dt_arr, dt);
-	return (ft_cleanup_subshell(dt));
+	return (ft_cleanup_subshell(dt_arr, dt));
 }

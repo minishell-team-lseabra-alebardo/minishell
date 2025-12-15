@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:31:53 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/15 22:29:02 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/15 23:50:23 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,18 @@ bool	ft_is_subexit(t_data *dt, t_cmd *cmd)
 	return (false);
 }
 
-int	ft_cleanup_subshell(t_data *dt)
+int	ft_cleanup_subshell(t_data **dt_arr, t_data *dt)
 {
+	int		i;
+
+	i = 0;
 	ft_close_unused_fds(dt->cmd_ll);
 	ft_free_strarr(dt->ms_envp);
 	ft_free_prompt_line(dt);
 	ft_cleanup_line(dt);
-	// free(dt->dt_arr);
+	while (dt && dt_arr[i] != dt)
+		i++;
+	dt_arr[i] = NULL;
 	free(dt);
 	return (ft_get_status(0, false));
 }
