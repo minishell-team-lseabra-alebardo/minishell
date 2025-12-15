@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 17:27:46 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/15 22:41:08 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/15 23:53:55 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	ft_init_pwd(t_data *dt)
 
 t_data	**ft_create_dt_arr(t_data *dt)
 {
-	t_data **dt_arr;
+	t_data	**dt_arr;
 
 	dt_arr = (t_data **) ft_calloc(100, sizeof(t_data *));
 	if (!dt_arr)
