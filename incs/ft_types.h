@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:56:36 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/09 03:43:40 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/15 17:43:27 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ typedef struct s_cmd
 typedef struct s_data
 {
 	char			**ms_envp;
-	int				pexit;
+	int				subshell;
 	char			*prompt;
 	char			*line;
 	unsigned char	last_status;

@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:31:53 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/15 16:29:29 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/15 17:57:11 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,42 @@ static unsigned char	ft_exit_args(t_cmd *cmd)
 	return (0);
 }
 
-int	ft_exit(t_data *dt, t_cmd *cmd)
+bool	ft_is_subexit(t_data *dt, t_cmd *cmd)
 {
-	int				pexit;
+	if (dt->subshell && !ft_strncmp(cmd->args[0], "exit", 5))
+		return (true);
+	return (false);
+}
+
+int	ft_cleanup_subshell(t_data *dt, t_cmd *cmd)
+{
 	unsigned char	code;
 
 	if (cmd)
 		code = ft_exit_args(cmd);
-	pexit = dt->pexit;
-	if (pexit && (!cmd || (cmd && !ft_is_in_pipeline(cmd))))
+	ft_close_unused_fds(dt->cmd_ll);
+	ft_free_strarr(dt->ms_envp);
+	ft_free_prompt_line(dt);
+	ft_cleanup_line(dt);
+	free(dt);
+	if (cmd && cmd->args[1])
+		return (code);
+	return (ft_get_status(0, false));
+}
+
+int	ft_exit(t_data *dt, t_cmd *cmd)
+{
+	unsigned char	code;
+
+	if (cmd)
+		code = ft_exit_args(cmd);
+	if (dt->subshell)
+	{
+		if (cmd && cmd->args[1])
+			return (code);
+		return (ft_get_status(0, false));
+	}
+	if (!cmd || (cmd && !ft_is_in_pipeline(cmd)))
 		printf("exit\n");
 	ft_close_unused_fds(dt->cmd_ll);
 	ft_free_strarr(dt->ms_envp);
@@ -51,7 +78,5 @@ int	ft_exit(t_data *dt, t_cmd *cmd)
 	rl_clear_history();
 	if (cmd && cmd->args[1])
 		exit(code);
-	if (ft_get_status(0, false) == EXIT_SUCCESS)
-		exit(EXIT_SUCCESS);
-	exit(EXIT_FAILURE);
+	exit(ft_get_status(0, false));
 }

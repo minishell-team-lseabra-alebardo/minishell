@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 11:44:08 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/15 15:30:32 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/15 18:00:43 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	ft_exec_builtin(t_data *dt, t_cmd *cmd)
 	if (ft_strncmp("cd", cmd->args[0], 3) == 0)
 		lst_stat = ft_change_directory(dt, cmd);
 	else if (ft_strncmp("exit", cmd->args[0], 5) == 0)
-		ft_exit(dt, cmd);
+		lst_stat = ft_exit(dt, cmd);
 	else if (ft_strncmp("pwd", cmd->args[0], 4) == 0)
 		lst_stat = ft_pwd();
 	else if (ft_strncmp("export", cmd->args[0], 7) == 0)
@@ -96,7 +96,5 @@ int	ft_exec_builtin(t_data *dt, t_cmd *cmd)
 	else if (ft_strncmp("env", cmd->args[0], 4) == 0)
 		lst_stat = ft_env(dt->ms_envp);
 	ft_reset_dup2(cmd);
-	if (ft_is_in_pipeline(cmd))
-		exit(lst_stat);
 	return (lst_stat);
 }

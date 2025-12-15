@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/15 16:55:30 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/15 17:55:00 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ void	ft_close_error(t_data *dt);
 void	ft_free_strarr(char **strarr);
 void	ft_free_prompt_line(t_data *dt);
 int		ft_exit(t_data *dt, t_cmd *cmd);
-int		ft_exit_subshell(t_data *dt, t_cmd *cmd);
+bool	ft_is_subexit(t_data *dt, t_cmd *cmd);
+int		ft_cleanup_subshell(t_data *dt, t_cmd *cmd);
 int		ft_str_to_fd(char *str);
 int		ft_exec_builtin(t_data *dt, t_cmd *cmd);
 bool	ft_is_in_pipeline(t_cmd *cmd);
