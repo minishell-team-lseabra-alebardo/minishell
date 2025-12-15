@@ -60,3 +60,4 @@ dkms.conf
 
 # Project miscellaneous
 build/
+minishell_tester/
