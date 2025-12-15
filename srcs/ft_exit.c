@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:31:53 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/15 15:33:51 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/15 16:29:29 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int	ft_exit(t_data *dt, t_cmd *cmd)
 	int				pexit;
 	unsigned char	code;
 
-	code = ft_exit_args(cmd);
+	if (cmd)
+		code = ft_exit_args(cmd);
 	pexit = dt->pexit;
 	if (pexit && (!cmd || (cmd && !ft_is_in_pipeline(cmd))))
 		printf("exit\n");
@@ -48,7 +49,7 @@ int	ft_exit(t_data *dt, t_cmd *cmd)
 	ft_cleanup_line(dt);
 	free(dt);
 	rl_clear_history();
-	if (cmd->args[1])
+	if (cmd && cmd->args[1])
 		exit(code);
 	if (ft_get_status(0, false) == EXIT_SUCCESS)
 		exit(EXIT_SUCCESS);
