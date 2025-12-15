@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 11:44:08 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/15 15:30:32 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/15 17:48:49 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,5 @@ int	ft_exec_builtin(t_data *dt, t_cmd *cmd)
 	else if (ft_strncmp("env", cmd->args[0], 4) == 0)
 		lst_stat = ft_env(dt->ms_envp);
 	ft_reset_dup2(cmd);
-	if (ft_is_in_pipeline(cmd))
-		exit(lst_stat);
 	return (lst_stat);
 }
