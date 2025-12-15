@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:13:51 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/06 16:06:39 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/15 14:52:57 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char	*ft_get_str_fd(char *redir)
 	return (str_fd);
 }
 
-static void	ft_init_redir(t_cmd *cmd, char ***s_arr, char *redir)
+static void	ft_init_redir(t_data *dt, t_cmd *cmd, char ***s_arr, char *redir)
 {
 	t_redir	*new_redir;
 	t_redir	*cur_redir;
@@ -42,7 +42,7 @@ static void	ft_init_redir(t_cmd *cmd, char ***s_arr, char *redir)
 	if (ft_is_op(new_redir->type, CMD_HEREDOC))
 		new_redir->fd_to = ft_exec_heredoc(*(++*s_arr));
 	else
-		new_redir->filename = *(++*s_arr);
+		new_redir->filename = ft_search_quotes(dt, *(++*s_arr));
 	*s_arr += 1;
 	while (cmd->redir_ll && cmd->redir_ll->next)
 		cmd->redir_ll = cmd->redir_ll->next;
@@ -53,14 +53,14 @@ static void	ft_init_redir(t_cmd *cmd, char ***s_arr, char *redir)
 		cur_redir->next = new_redir;
 }
 
-static void	ft_parse_cmd_tokens(char ***split_arr, t_cmd *cmd)
+static void	ft_parse_cmd_tokens(char ***split_arr, t_data *dt, t_cmd *cmd)
 {
 	while (**split_arr)
 	{
 		if (ft_is_logic_or_pipe_op(**split_arr))
 			break ;
 		else if (ft_is_redir_op(**split_arr))
-			ft_init_redir(cmd, split_arr, **split_arr);
+			ft_init_redir(dt, cmd, split_arr, **split_arr);
 		else
 		{
 			ft_add_arg(cmd, **split_arr);
@@ -94,7 +94,7 @@ static t_cmd	*ft_init_cmd(char ***split_arr, t_cmd *prev, t_data *dt)
 		if (ft_init_pipe(cur, prev) < 0)
 			return (NULL);
 	}
-	ft_parse_cmd_tokens(split_arr, cur);
+	ft_parse_cmd_tokens(split_arr, dt, cur);
 	return (cur);
 }
 
