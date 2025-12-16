@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+         #
+#    By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/29 20:54:21 by alebarbo          #+#    #+#              #
-#    Updated: 2025/12/15 16:53:54 by alebarbo         ###   ########.fr        #
+#    Updated: 2025/12/16 18:41:11 by lseabra-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,14 @@ RESET	= \033[0m
 
 # Names
 NAME			= minishell
+NAME_BONUS		= minishell_bonus
 PROJECT_NAME	= MINISHELL
 
 # Paths
-SRC_PATH	= srcs
-INC_PATH	= incs
-BUILD_PATH	= .build
+SRC_PATH		= srcs
+SRC_PATH_BONUS	= srcs_bonus
+INC_PATH		= incs
+BUILD_PATH		= .build
 
 # Source files
 SRC = $(addprefix $(SRC_PATH)/, \
@@ -83,9 +85,12 @@ SRC = $(addprefix $(SRC_PATH)/, \
 		ft_wildcards_utils.c \
 		ft_unset.c \
 )
+SRC_BONUS = $(filter-out $(SRC_PATH)/ft_minishell.c, $(SRC)) \
+	$(addprefix $(SRC_PATH_BONUS)/, ft_minishell_bonus.c)
 
 # Object files
 OBJ = $(addprefix $(BUILD_PATH)/, $(notdir $(SRC:.c=.o)))
+OBJ_BONUS = $(addprefix $(BUILD_PATH)/, $(notdir $(SRC_BONUS:.c=.o)))
 
 # LIBFT
 LIBFT_PATH		= libft
@@ -95,10 +100,10 @@ LIBFT_NAME		= $(LIBFT_PATH)/lib$(LIBFT_LINK).a
 
 # Compiler and Flags
 # MAKEFLAGS += -s
-CC      = cc
-CFLAGS  = -Wall -Wextra -Werror -ggdb
-INC     = -I$(INC_PATH) -I$(LIBFT_INC_PATH)
-LDFLAGS = -L$(LIBFT_PATH) -l$(LIBFT_LINK) -lreadline
+CC		= cc
+CFLAGS	= -Wall -Wextra -Werror -ggdb
+INC		= -I$(INC_PATH) -I$(LIBFT_INC_PATH)
+LDFLAGS	= -L$(LIBFT_PATH) -l$(LIBFT_LINK) -lreadline
 
 # Utility Commands
 RM		= rm -f
@@ -106,11 +111,12 @@ MKDIR_P	= mkdir -p
 RMDIR	= $(RM) -r
 MAKE	= make --no-print-directory
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus
 
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT_NAME)
+	@$(RM) $(NAME_BONUS)
 	@$(CC) $(CFLAGS) $(INC) $(OBJ) $(LDFLAGS) -o $@
 	@echo "$(GREEN)[$(PROJECT_NAME)] Executable compiled: $(NAME).$(RESET)"
 
@@ -130,8 +136,18 @@ clean:
 	@echo "$(RED)[$(PROJECT_NAME)] Clean: Cleaned object files.$(RESET)"
 
 fclean: clean
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) $(NAME_BONUS)
 	@$(MAKE) -C $(LIBFT_PATH) fclean
-	@echo "$(RED)[$(PROJECT_NAME)] Full Clean: executable $(NAME) removed.$(RESET)"
+	@echo "$(RED)[$(PROJECT_NAME)] Full Clean: executables $(NAME) $(NAME_BONUS) removed.$(RESET)"
 
 re: fclean all
+
+bonus: $(NAME_BONUS)
+
+$(NAME_BONUS): $(OBJ_BONUS) $(LIBFT_NAME)
+	@$(RM) $(NAME)
+	@$(CC) $(CFLAGS) $(INC) $(OBJ_BONUS) $(LDFLAGS) -o $@
+	@echo "$(GREEN)[$(PROJECT_NAME)] Executable compiled: $(NAME_BONUS).$(RESET)"
+
+$(BUILD_PATH)/%.o: $(SRC_PATH_BONUS)/%.c | $(BUILD_PATH)
+	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
