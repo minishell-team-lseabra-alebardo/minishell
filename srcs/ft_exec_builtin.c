@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 11:44:08 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/15 22:28:43 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/17 15:13:36 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ bool	ft_is_builtin(char *cmd)
 
 static int	ft_setup_builtin_redirs(t_cmd *cmd, int	*lst_stat)
 {
-	if (ft_is_pbtin(cmd->args[0]))
+	if (ft_is_pbtin(cmd->args[0]) && !ft_is_in_pipeline(cmd))
 	{
 		*lst_stat = ft_apply_redirs(cmd);
 		if (*lst_stat != EXIT_SUCCESS)
