@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:13:51 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/15 16:55:50 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/18 16:12:09 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ static t_cmd	*ft_init_cmd(char ***split_arr, t_cmd *prev, t_data *dt)
 	cur->args = ft_calloc(1, sizeof(char *));
 	if (!cur->args)
 		return (NULL);
-	cur->ms_envp = dt->ms_envp;
 	cur->infile = STDIN_FILENO;
 	cur->outfile = STDOUT_FILENO;
 	if (ft_is_logic_or_pipe_op(**split_arr))
