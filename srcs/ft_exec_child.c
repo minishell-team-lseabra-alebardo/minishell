@@ -3,39 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_child.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 13:01:44 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/18 16:02:51 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/18 16:45:28 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_minishell.h>
-
-static void	ft_handle_path_failure(t_cmd *cmd, int status)
-{
-	char	*message;
-	char	*target;
-
-	if (cmd && cmd->args && cmd->args[0] && !cmd->args[0][0])
-		target = "\"\"";
-	else if (cmd && cmd->args)
-		target = cmd->args[0];
-	else
-		target = NULL;
-	if (status == EXIT_NOT_FOUND && ft_strchr(cmd->args[0], '/'))
-		message = ERR_NO_FILE_DIR;
-	else if (status == EXIT_NOT_FOUND)
-		message = ERR_CMD_NOT_FOUND;
-	else if (status == EXIT_CANNOT_EXEC && ft_is_directory(cmd->args[0]))
-		message = ERR_IS_DIR;
-	else if (status == EXIT_CANNOT_EXEC)
-		message = ERR_NO_PERMISSION;
-	else
-		message = ERR_GENERIC;
-	ft_puterror(NULL, target, message);
-	ft_get_status(status, true);
-}
 
 static int	ft_exec_cmd(t_cmd *cmd, char **ms_envp)
 {
@@ -46,10 +21,7 @@ static int	ft_exec_cmd(t_cmd *cmd, char **ms_envp)
 	ft_dup2_close(cmd->outfile, STDOUT_FILENO);
 	ft_get_status(ft_resolve_cmd_path(cmd->args[0], ms_envp, &path), true);
 	if (ft_get_status(0, false) != EXIT_SUCCESS)
-	{
-		ft_handle_path_failure(cmd, ft_get_status(0, false));
 		return (ft_get_status(0, false));
-	}
 	execve(path, cmd->args, ms_envp);
 	perror("execve");
 	free(path);
