@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:46:44 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/18 11:41:58 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/18 14:26:14 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@
 # define ERR_NO_PERMISSION	"Permission denied\n"
 # define ERR_IS_DIR			"Is a directory\n"
 # define ERR_CMD_NOT_FOUND	"command not found\n"
+# define ERR_NO_FILE_DIR	"No such file or directory\n"
 # define ERR_BAD_FD			"Bad file descriptor\n"
 # define ERR_TOO_MANY_ARGS	"too many arguments\n"
 # define ERR_INV_ID			"not a valid identifier\n"
