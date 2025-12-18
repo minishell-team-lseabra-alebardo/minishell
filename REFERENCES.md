@@ -1,5 +1,8 @@
 # Project References
 
+### Bash
++ **[Bash GNU Documentation](https://www.gnu.org/software/bash/manual/bash.html)**
+
 ### Readline Library
 + **[Programming with GNU Readline](https://web.mit.edu/gnu/doc/html/rlman_2.html)**
 + **[GNU Readline Library](https://tiswww.case.edu/php/chet/readline/readline.html)**

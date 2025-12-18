@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:46:44 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/14 18:41:23 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/18 11:41:58 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,10 @@
 # define ERR_TOO_MANY_ARGS	"too many arguments\n"
 # define ERR_INV_ID			"not a valid identifier\n"
 # define ERR_HOME_NT_SET	"HOME not set\n"
+# define ERR_NUM_ARG_REQ	"numeric argument required\n"
 
 // Exit status code
+# define EXIT_MISUSE		2
 # define EXIT_CANNOT_EXEC	126
 # define EXIT_NOT_FOUND		127
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:31:53 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/15 23:50:23 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/18 13:26:44 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,30 @@
 
 static unsigned char	ft_exit_args(t_cmd *cmd)
 {
-	int				i;
+	int	i;
 
-	if (cmd->args[1] && cmd->args[2])
-		return (1);
-	else if (cmd->args[1])
+	if (cmd->args[1])
 	{
 		i = 0;
-		while (cmd->args[1][i])
-		{
-			if (cmd->args[1][0] != '+' && cmd->args[1][0] != '-'
-				&& !ft_isdigit(cmd->args[1][i]))
-				return (2);
+		if ((cmd->args[1][0] == '+' || cmd->args[1][0] == '-')
+			&& ft_isdigit(cmd->args[1][1]))
 			i++;
+		while (cmd->args[1][i] && ft_isdigit(cmd->args[1][i]))
+			i++;
+		if (cmd->args[1][i] && !ft_isdigit(cmd->args[1][i]))
+		{
+			ft_puterror("exit", cmd->args[1], ERR_NUM_ARG_REQ);
+			return (EXIT_MISUSE);
+		}
+		else if (cmd->args[2])
+		{
+			ft_puterror("exit", NULL, ERR_TOO_MANY_ARGS);
+			return (EXIT_FAILURE);
 		}
 		return ((unsigned char) ft_atoi(cmd->args[1]));
 	}
-	return (0);
+	else
+		return (EXIT_SUCCESS);
 }
 
 bool	ft_is_subexit(t_data *dt, t_cmd *cmd)
@@ -58,12 +65,12 @@ int	ft_cleanup_subshell(t_data **dt_arr, t_data *dt)
 
 int	ft_exit(t_data **dt_arr, t_data *dt, t_cmd *cmd)
 {
-	if (cmd && cmd->args[1])
-		ft_get_status(ft_exit_args(cmd), true);
 	if (dt->subshell)
 		return (ft_get_status(0, false));
 	if (!cmd || (cmd && !ft_is_in_pipeline(cmd)))
-		printf("exit\n");
+		write(STDOUT_FILENO, "exit\n", 5);
+	if (cmd && cmd->args[1])
+		ft_get_status(ft_exit_args(cmd), true);
 	ft_close_unused_fds(dt->cmd_ll);
 	ft_free_strarr(dt->ms_envp);
 	ft_free_prompt_line(dt);
