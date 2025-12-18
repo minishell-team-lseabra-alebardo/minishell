@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 01:44:19 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/15 23:49:44 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/18 16:04:01 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_reset_dup2(t_cmd *cmd);
 void	ft_close_unused_fds(t_cmd *cmd);
 void	ft_close_cmd_files(t_cmd *cmd);
 bool	ft_is_directory(char *path);
-int		ft_resolve_cmd_path(char *cmd, char **path_addr);
+int		ft_resolve_cmd_path(char *cmd, char **ms_envp, char **path_addr);
 void	ft_wait_all_pids(t_data *dt);
 void	ft_cleanup_line(t_data *dt);
 void	ft_cleanup_old_dt(t_data **dt_arr);

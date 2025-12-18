@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_child.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 13:01:44 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/18 14:26:25 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/18 16:02:51 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	ft_exec_cmd(t_cmd *cmd, char **ms_envp)
 	path = NULL;
 	ft_dup2_close(cmd->infile, STDIN_FILENO);
 	ft_dup2_close(cmd->outfile, STDOUT_FILENO);
-	ft_get_status(ft_resolve_cmd_path(cmd->args[0], &path), true);
+	ft_get_status(ft_resolve_cmd_path(cmd->args[0], ms_envp, &path), true);
 	if (ft_get_status(0, false) != EXIT_SUCCESS)
 	{
 		ft_handle_path_failure(cmd, ft_get_status(0, false));

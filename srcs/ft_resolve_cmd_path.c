@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_resolve_cmd_path.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 12:45:27 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/14 19:10:18 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/18 16:03:07 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,14 @@ static int	ft_search_in_path(char *cmd, char **path_addr, char **path_arr)
 	return (status);
 }
 
-int	ft_resolve_cmd_path(char *cmd, char **path_addr)
+int	ft_resolve_cmd_path(char *cmd, char **ms_envp, char **path_addr)
 {
 	char	**path_arr;
 	int		status;
 
 	if (ft_strchr(cmd, '/'))
 		return (ft_check_abs_path(cmd, path_addr));
-	path_arr = ft_split(getenv("PATH"), ':');
+	path_arr = ft_split(ft_getenv("PATH", ms_envp), ':');
 	status = ft_search_in_path(cmd, path_addr, path_arr);
 	ft_free_strarr(path_arr);
 	return (status);

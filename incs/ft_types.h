@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:56:36 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/15 21:05:08 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/18 16:01:55 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ typedef struct s_redir
 
 typedef struct s_cmd
 {
-	char			**ms_envp;
 	char			*prev_op;
 	char			**args;
 	int				infile;
