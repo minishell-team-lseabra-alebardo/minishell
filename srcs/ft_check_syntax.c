@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 15:29:12 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/12 19:32:14 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/22 10:25:04 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,7 @@ int	ft_check_invalid_parentheses(char *line)
 
 int	ft_check_syntax(char *line)
 {
-	if (ft_check_empty_line(line) < 0
-		|| ft_check_unclosed(line) < 0
+	if (ft_check_unclosed(line) < 0
 		|| ft_check_operators(line) < 0
 		|| ft_check_empty_parentheses(line) < 0
 		|| ft_check_invalid_parentheses(line) < 0

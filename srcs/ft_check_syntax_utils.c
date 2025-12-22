@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:48:27 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/12 19:30:35 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/22 10:27:20 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,6 @@ int	ft_check_empty_line(char *line)
 
 	temp = ft_skip_whitespaces(line);
 	if (!*temp)
-		return (-1);
+		return (1);
 	return (0);
 }

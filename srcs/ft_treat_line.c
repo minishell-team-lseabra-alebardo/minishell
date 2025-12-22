@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 03:08:09 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/15 22:34:03 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/22 10:27:44 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_treat_line(t_data **dt_arr, t_data *dt)
 {
 	if (!dt->line)
 		ft_exit(dt_arr, dt, NULL);
-	if (dt->line && *dt->line)
+	if (dt->line && *dt->line && !ft_check_empty_line(dt->line))
 	{
 		if (ft_strncmp(dt->line, ft_prev_line(0), ft_strlen(dt->line)))
 		{
