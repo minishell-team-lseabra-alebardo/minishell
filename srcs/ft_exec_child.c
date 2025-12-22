@@ -6,7 +6,7 @@
 /*   By: alebarbo <alebarbo@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 13:01:44 by lseabra-          #+#    #+#             */
-/*   Updated: 2025/12/18 16:02:51 by alebarbo         ###   ########.fr       */
+/*   Updated: 2025/12/22 16:59:26 by alebarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,11 @@ static int	ft_exec_cmd(t_cmd *cmd, char **ms_envp)
 		ft_handle_path_failure(cmd, ft_get_status(0, false));
 		return (ft_get_status(0, false));
 	}
+	ft_sigquit_default();
+	ft_sigint_default();
 	execve(path, cmd->args, ms_envp);
+	ft_sigint_listener();
+	ft_sigquit_listener();
 	perror("execve");
 	free(path);
 	return (EXIT_FAILURE);
