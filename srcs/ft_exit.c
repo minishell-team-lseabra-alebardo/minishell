@@ -6,7 +6,7 @@
 /*   By: lseabra- <lseabra-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 15:31:53 by alebarbo          #+#    #+#             */
-/*   Updated: 2025/12/18 13:26:44 by lseabra-         ###   ########.fr       */
+/*   Updated: 2025/12/22 18:02:54 by lseabra-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ int	ft_cleanup_subshell(t_data **dt_arr, t_data *dt)
 
 int	ft_exit(t_data **dt_arr, t_data *dt, t_cmd *cmd)
 {
-	if (dt->subshell)
+	if (dt->subshell && cmd && cmd->args[1])
+		return (ft_get_status(ft_exit_args(cmd), true));
+	else if (dt->subshell)
 		return (ft_get_status(0, false));
 	if (!cmd || (cmd && !ft_is_in_pipeline(cmd)))
 		write(STDOUT_FILENO, "exit\n", 5);
